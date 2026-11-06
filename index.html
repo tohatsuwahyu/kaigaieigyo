@@ -202,6 +202,7 @@ const DEFAULT_GAS = 'https://script.google.com/macros/s/AKfycbwq3p3eiZgWdsOMiAsl
 /* ========== Paper (document) CSS – shared by screen preview, print and exported file ========== */
 const PAPER_CSS = `
 .paper{width:var(--pw,210mm);min-height:var(--ph,297mm);background:#fff;color:#000;padding:var(--pad,12mm);padding-bottom:calc(var(--pad,12mm) + 7mm);box-sizing:border-box;font-family:Arial,"Hiragino Sans","Yu Gothic",sans-serif;font-size:calc(9.2pt*var(--k,1));line-height:1.35;margin:0 auto 14px;box-shadow:0 2px 12px #0003;position:relative;overflow:hidden}
+.paper table.sr{width:100%;border-collapse:collapse;font-size:.88em;margin:.3em 0 1em}.paper table.sr th{background:var(--acc-soft,#eef);text-align:left;padding:.35em .5em;border-bottom:1.5px solid var(--acc,#16233f);font-weight:700}.paper table.sr td{padding:.28em .5em;border-bottom:.5px solid #cfcfcf}.paper table.sr .r{text-align:right;white-space:nowrap}.paper table.sr tr.tot td{font-weight:700;border-top:1.5px solid #000;border-bottom:0}.paper h4.sr{margin:1.1em 0 .3em;color:var(--acc,#16233f);font-size:1.05em}.paper .srk{display:flex;gap:.8em;margin:.2em 0 .6em}.paper .srk div{flex:1;border:1px solid #ccc;padding:.5em .7em}.paper .srk small{display:block;color:#555;font-size:.8em}.paper .srk b{font-size:1.25em}
 .paper small.ja{display:block;font-size:.76em;color:#555;font-weight:400;letter-spacing:0}
 .paper .dhead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;border-bottom:2.5px solid var(--acc,#16233f);padding-bottom:.75em;margin-bottom:1em}
 .paper .hl{display:flex;gap:10px;align-items:center}
@@ -319,7 +320,7 @@ const J={
 'Cloud sync (Google Sheets)':'クラウド同期（Googleスプレッドシート）','Web app URL':'ウェブアプリURL','Secret token':'秘密トークン','Auto-sync':'自動同期','Connect & sync now':'接続して今すぐ同期','Set URL and token first':'先にURLとトークンを入力してください','Server already has data. Replace local data with it?':'サーバーにデータがあります。ローカルをサーバーのデータで置き換えますか？','Synced':'同期済み','Syncing…':'同期中…','Not connected':'未接続','Sync error':'同期エラー','Cloud updated – data refreshed':'クラウドの更新を反映しました',
 'Reminder rules':'リマインダー設定','Send reminders to (e-mail)':'送信先メール','ETD – days before':'ETD：何日前','Payment due – days before':'入金期日：何日前','L/C expiry – days before':'L/C期限：何日前','Quotation expiry – days before':'見積期限：何日前','ETA – days before':'ETA：何日前','Warn about missing documents – days before ETD':'書類未完了の警告：ETDの何日前','Daily time (JST, hour)':'毎日の実行時刻（JST・時）','Add to Google Calendar':'Googleカレンダーに登録','Browser notification when opening the app':'アプリを開いた時にブラウザ通知','Save & install daily trigger':'保存して毎日の自動実行を設定','Send test e-mail':'テストメール送信','Sync calendar now':'カレンダーを今すぐ同期','Done':'完了','Test e-mail sent':'テストメールを送信しました','Calendar events created: {0}':'カレンダー登録数：{0}','Daily trigger installed':'毎日の自動実行を設定しました','The server sends the digest every day, even when the app is closed. Overdue items are repeated daily.':'サーバーが毎日ダイジェストを送信します（アプリを閉じていても動作）。遅延項目は毎日再送されます。'
 };
-Object.assign(J,{'Preview':'プレビュー','Edit':'編集','Print all':'すべて印刷','Print settings':'印刷設定','Details':'詳細','Packing':'梱包','Payments':'入金','PO received':'注文書受領','Register PO':'注文を登録','Customer':'顧客','Items (optional)':'明細（任意）','PO date':'注文日','Requested ship date (ETD)':'希望出荷日(ETD)','Search':'検索','Administrator':'管理者向け','Server connection (Google Sheets)':'サーバー接続(Google Sheets)','Copy connect link for another PC':'他のPC用の接続リンクをコピー','Sample data':'サンプルデータ','Save & activate':'保存して有効化','Next step':'次の作業','Mark as':'次へ進める：'});
+Object.assign(J,{'Print report':'レポート印刷','Report file':'レポートファイル','EXPORT SALES REPORT':'輸出売上報告書','Preview':'プレビュー','Edit':'編集','Print all':'すべて印刷','Print settings':'印刷設定','Details':'詳細','Packing':'梱包','Payments':'入金','PO received':'注文書受領','Register PO':'注文を登録','Customer':'顧客','Items (optional)':'明細（任意）','PO date':'注文日','Requested ship date (ETD)':'希望出荷日(ETD)','Search':'検索','Administrator':'管理者向け','Server connection (Google Sheets)':'サーバー接続(Google Sheets)','Copy connect link for another PC':'他のPC用の接続リンクをコピー','Sample data':'サンプルデータ','Save & activate':'保存して有効化','Next step':'次の作業','Mark as':'次へ進める：'});
 Object.assign(J,{"Click the document to edit its contents.":"書類をクリックすると内容を編集できます。","Not synced – saved on this PC (click to retry)":"未同期（このPCに保存済み・クリックで再試行）","Waiting for the customer's order. When the PO arrives, register it here.":"お客様の注文待ちです。注文書が届いたらここで登録してください。","PO registered. Send the Order Confirmation to the customer, then start production.":"注文を登録しました。注文請書を送付し、生産を開始してください。","In production. When the goods are ready, enter the cases and prepare the shipping documents.":"生産中です。出来上がったら梱包情報を入力し、船積書類を準備します。","Shipped. Send the Commercial Invoice and watch for payment.":"出荷済み。インボイスを送付し、入金を確認します。","Payment received. This shipment is complete.":"入金済み。この案件は完了です。","Open Order Confirmation":"注文請書を開く","Open Packing List":"梱包明細書を開く","Open Commercial Invoice":"インボイスを開く","Register the customer's purchase order for this shipment.":"この案件のお客様注文書を登録します。","Register a purchase order from a customer. A new shipment is created at the \"Order\" stage.":"お客様の注文書を登録します。「受注」段階で新しい案件が作成されます。","Choose from customer master":"顧客マスタから選択","Enter the PO number":"注文番号を入力してください","PO registered.":"注文を登録しました。","Enter the web app URL and token first":"先にURLとトークンを入力してください","Link copied. Open it on the other PC (share privately).":"リンクをコピーしました。他のPCで開いてください（他人に共有しないでください）。","E-mail reminders need the server connection. Ask the administrator to connect it (Settings → Administrator).":"メール通知にはサーバー接続が必要です。管理者に接続を依頼してください（設定→管理者向け）。"});
 function t(s,...a){let j=J[s];let e=s;if(a.length){a.forEach((x,i)=>{e=e.split('{'+i+'}').join(x);if(j)j=j.split('{'+i+'}').join(x)})}
   if(S.lang==='en'||!j)return esc(e);if(S.lang==='ja')return esc(j);return esc(e)+'<span class="jp">'+esc(j)+'</span>'}
@@ -380,7 +381,7 @@ let memOnly=false;
 function load(){try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r);if(o&&o.shipments&&o.settings)return migrate(o)}}catch(e){memOnly=true}return null}
 let S=load()||seed();
 let view='dash',tab='info',docTab='ci',mtab='cust',saveTimer=null,filter='',fyView=null,cmdIdx=0;
-function cur(){return S.shipments.find(s=>s.id===S.cur)||S.shipments[0]}
+function cur(){if(!S.shipments.length){const b=blankShipment();S.settings.nextNo=num(S.settings.nextNo)+1;S.shipments.push(b);S.cur=b.id}return S.shipments.find(s=>s.id===S.cur)||S.shipments[0]}
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(S));memOnly=false}catch(e){memOnly=true}}
 function save(){clearTimeout(saveTimer);saveTimer=setTimeout(()=>{if(S.sync.url)stampAll();persist();stamp();scheduleSync()},250)}
 function stamp(){const e=$('#saved');if(!e)return;const d=new Date();e.textContent=memOnly?tt('Not persisted in this browser. Please use Backup.'):tt('Saved')+' '+pad2(d.getHours())+':'+pad2(d.getMinutes())}
@@ -468,7 +469,7 @@ function vDash(){
   const fys=[...new Set([fy0,...S.shipments.map(s=>fiscal(s.date)).filter(Boolean)])].sort((a,b)=>b-a);
   const fyData=S.shipments.filter(s=>s.status!=='quote'&&s.date).map(s=>fiscal(s.date));
   const fyDef=fyData.includes(fy0)?fy0:(fyData.length?Math.max(...fyData):fy0);
-  const fy=fyView&&fys.includes(fyView)?fyView:fyDef;
+  const fy=fyView&&fys.includes(fyView)?fyView:fyDef;repFY=fy;
   const mine=S.shipments.filter(s=>fiscal(s.date)===fy&&s.status!=='quote');
   const sales={};mine.forEach(s=>{sales[s.currency]=(sales[s.currency]||0)+totals(s).total});
   const open={};S.shipments.filter(s=>['order','production','shipped'].includes(s.status)).forEach(s=>{const b=balance(s);if(b>0)open[s.currency]=(open[s.currency]||0)+b});
@@ -493,7 +494,7 @@ function vDash(){
    <div class="card kpi"><small>${t('Outstanding (unpaid)')}</small><b>${money(open)}</b>${late.length?`<div class="note" style="color:var(--err)">⚠ ${late.length} ${t('Payment due')}</div>`:''}</div>
    <div class="card kpi"><small>${t('Next sailing')}</small><b>${(ev.find(e=>e.k==='ETD'&&e.d>=now)||{d:'—'}).d}</b></div>
   </div>
-  <div class="gdash"><div class="card"><h2>${t('Monthly sales (≈ JPY at your rates)')} · FY${fy}</h2>${svg}</div>
+  <div class="gdash"><div class="card"><div class="row" style="justify-content:space-between"><h2>${t('Monthly sales (≈ JPY at your rates)')} · FY${fy}</h2><div class="row"><button class="ghost sm" data-a="srPrint">${t('Print report')}</button><button class="ghost sm" data-a="srFile">${t('Report file')}</button><button class="ghost sm" data-a="srCsv">CSV</button></div></div>${svg}</div>
    <div><div class="card"><h2>${t('Coming up')}</h2>${ev.slice(0,7).map(e=>{const dd=diffDays(e.d,now);return `<div class="ev ${dd<0&&e.k==='Payment due'?'late':''}"><span class="d">${e.d.slice(5)}</span><span class="k">${esc(e.k)}</span><span>${esc(e.s.invoiceNo)}</span><span class="grow"></span><span class="note">${dd<0?dd:'+'+dd}d</span></div>`}).join('')||`<div class="note">${t('Nothing scheduled')}</div>`}</div>
    <div class="card"><h2>${t('Top customers')}</h2>${top.map(([n,v])=>`<div class="hbar"><span>${esc(n)}</span><div class="bar"><i style="width:${v/tm*100}%"></i></div><em>¥${fmt(v/1e6,2)}M</em></div>`).join('')||'—'}</div></div></div>
   <div class="card"><div class="row" style="margin-bottom:10px"><input id="flt" style="max-width:280px" placeholder="${esc(tt('Search'))}" value="${esc(filter)}" data-a-input="flt"></div>
@@ -623,6 +624,7 @@ function tVerify(){const r=runChecks(cur());const ord={err:0,warn:1,ok:2,info:3}
 
 /* ---- Documents ---- */
 const DOCS=[['ci','Commercial Invoice'],['pl','Packing List'],['si','Shipping Instruction'],['cm','Case Marks'],['qt','Quotation'],['pi','Proforma Invoice'],['oc','Order Confirmation']];
+let repFY=null;
 let docMode='view',edTab='info';
 function vDocs(){const p=S.print,sh=cur(),edit=docMode==='edit';
   const etabs=[['info','Details'],['items','Items'],['pack','Packing'],['pay','Payments']];
@@ -727,7 +729,40 @@ function docSI(){
   </tbody></table>${signBlock()}${paperClose('SHIPPING INSTRUCTION',sh.invoiceNo)}`;
 }
 function docCM(){const sh=cur();return `${paperOpen('lblpage')}${sh.cases.map(c=>`<div class="lb"><pre>${esc(marksFor(sh,c))}</pre></div>`).join('')}</div>`}
-function renderDoc(k){return ({ci:()=>docInvoice('ci'),qt:()=>docInvoice('qt'),pi:()=>docInvoice('pi'),oc:()=>docInvoice('oc'),pl:docPL,si:docSI,cm:docCM})[k]()}
+
+function salesData(fy){
+  const mine=S.shipments.filter(x=>x.date&&fiscal(x.date)===fy&&x.status!=='quote').sort((a,b)=>a.date<b.date?-1:1);
+  const mo=Array.from({length:12},(_,i)=>{const mi=(5+i)%12;return {m:mi,y:fy+(mi>=5?0:1),n:0,v:0}});
+  mine.forEach(x=>{const m=+x.date.slice(5,7);const o=mo[m>=6?m-6:m+6];o.n++;o.v+=jpyOf(x)});
+  const byC={};mine.forEach(x=>{const k=x.cust.name||'—';const o=byC[k]||(byC[k]={n:k,c:x.cust.country||'',cnt:0,v:0});o.cnt++;o.v+=jpyOf(x)});
+  const cust=Object.values(byC).sort((a,b)=>b.v-a.v);
+  const total=mine.reduce((a,x)=>a+jpyOf(x),0);
+  const out=S.shipments.filter(x=>['order','production','shipped'].includes(x.status)&&balance(x)>0).reduce((a,x)=>a+balance(x)*rate(x.currency),0);
+  const pipe=S.shipments.filter(x=>['order','production'].includes(x.status)).reduce((a,x)=>a+jpyOf(x),0);
+  const cur2={};mine.forEach(x=>{cur2[x.currency]=(cur2[x.currency]||0)+totals(x).total});
+  return {mine,mo,cust,total,out,pipe,cur2}}
+function docSales(){const fy=repFY||fiscal(todayISO()),D=salesData(fy),y=n=>'¥'+fmt(n,0);
+  const mx=Math.max(...D.mo.map(o=>o.v),1),W=640,H=120,bw=W/12;let cum=0;
+  const svg=`<svg viewBox="0 0 ${W} ${H+18}" width="100%">${D.mo.map((o,i)=>{const h=o.v/mx*(H-14);return `<rect x="${i*bw+7}" y="${H-h}" width="${bw-14}" height="${Math.max(h,o.v?1.5:0)}" fill="var(--acc,#16233f)"/><text x="${i*bw+bw/2}" y="${H+13}" font-size="9" text-anchor="middle">${MONTHS[o.m].slice(0,3)}</text>`}).join('')}<line x1="0" x2="${W}" y1="${H}" y2="${H}" stroke="#999" stroke-width=".6"/></svg>`;
+  return `${paperOpen()}${head('EXPORT SALES REPORT')}
+  <div style="display:flex;justify-content:space-between;margin-bottom:.5em"><div><b>FY${fy}</b> (Jun ${fy} – May ${fy+1})</div><div>${esc(dLong(todayISO()))}</div></div>
+  <div class="srk"><div><small>${L('Sales this fiscal year')} (JPY)</small><b>${y(D.total)}</b></div><div><small>${L('Shipments')}</small><b>${D.mine.length}</b></div><div><small>${L('Outstanding (unpaid)')} (JPY)</small><b>${y(D.out)}</b></div><div><small>Pipeline (order/production)</small><b>${y(D.pipe)}</b></div></div>
+  <h4 class="sr">Monthly sales / 月別売上</h4>${svg}
+  <table class="sr"><thead><tr><th>Month</th><th class="r">Shipments</th><th class="r">Sales (JPY)</th><th class="r">Cumulative (JPY)</th></tr></thead><tbody>
+  ${D.mo.map(o=>{cum+=o.v;return `<tr><td>${MONTHS[o.m].slice(0,3)} ${o.y}</td><td class="r">${o.n||'—'}</td><td class="r">${o.v?fmt(o.v,0):'—'}</td><td class="r">${cum?fmt(cum,0):'—'}</td></tr>`}).join('')}
+  <tr class="tot"><td>Total</td><td class="r">${D.mine.length}</td><td class="r">${fmt(D.total,0)}</td><td></td></tr></tbody></table>
+  <h4 class="sr">By customer / 顧客別</h4>
+  <table class="sr"><thead><tr><th>Customer</th><th>Country</th><th class="r">Shipments</th><th class="r">Sales (JPY)</th><th class="r">Share</th></tr></thead><tbody>
+  ${D.cust.map(c=>`<tr><td>${esc(c.n)}</td><td>${esc(c.c)}</td><td class="r">${c.cnt}</td><td class="r">${fmt(c.v,0)}</td><td class="r">${D.total?fmt(c.v/D.total*100,1)+'%':'—'}</td></tr>`).join('')||'<tr><td colspan="5">—</td></tr>'}</tbody></table>
+  <h4 class="sr">Shipments / 案件一覧</h4>
+  <table class="sr"><thead><tr><th>Invoice</th><th>Customer</th><th>Date</th><th class="r">Amount</th><th class="r">JPY</th><th>Status</th></tr></thead><tbody>
+  ${D.mine.map(x=>`<tr><td>${esc(x.invoiceNo)}</td><td>${esc(x.cust.name)}</td><td>${esc(x.date)}</td><td class="r">${esc(sym(x.currency))}${fmt(totals(x).total)}</td><td class="r">${fmt(jpyOf(x),0)}</td><td>${esc(STL[x.status]||x.status)}</td></tr>`).join('')||'<tr><td colspan="6">—</td></tr>'}</tbody></table>
+  <div style="font-size:.8em;color:#555">Converted to JPY at: ${Object.keys(D.cur2).map(c=>`${c} ${rate(c)}`).join(' · ')||'—'}. Quotations are excluded. Sales are counted by invoice date.</div>
+  ${paperClose('EXPORT SALES REPORT','FY'+fy)}`}
+function salesCsv(){const fy=repFY||fiscal(todayISO()),D=salesData(fy);const q=r=>r.map(x=>`"${String(x).replace(/"/g,'""')}"`).join(',');
+  const rows=[['Export sales report FY'+fy],[],['Month','Shipments','Sales JPY'],...D.mo.map(o=>[MONTHS[o.m].slice(0,3)+' '+o.y,o.n,Math.round(o.v)]),['Total',D.mine.length,Math.round(D.total)],[],['Customer','Country','Shipments','Sales JPY'],...D.cust.map(c=>[c.n,c.c,c.cnt,Math.round(c.v)]),[],['Invoice','Customer','Date','Currency','Amount','JPY','Status'],...D.mine.map(x=>[x.invoiceNo,x.cust.name,x.date,x.currency,totals(x).total,Math.round(jpyOf(x)),STL[x.status]||x.status])];
+  dl('sales-report-FY'+fy+'.csv','text/csv','\ufeff'+rows.map(q).join('\n'))}
+function renderDoc(k){return ({ci:()=>docInvoice('ci'),qt:()=>docInvoice('qt'),pi:()=>docInvoice('pi'),oc:()=>docInvoice('oc'),pl:docPL,si:docSI,cm:docCM,sr:docSales})[k]()}
 
 /* ---- Masters ---- */
 function custStats(c){let n=0,v=0;S.shipments.forEach(s=>{if(s.cust.name===c.name&&s.status!=='quote'){n++;v+=jpyOf(s)}});return {n,v}}
@@ -909,8 +944,8 @@ function fitPapers(root,on,ph){if(!on)return;[].forEach.call(root.querySelectorA
 const pagePx=()=>S.print.size==='Letter'?1056:1122;
 function printDocs(list){const pa=$('#printArea');pa.innerHTML=list.map(renderDoc).join('');pa.style.cssText='display:block;position:absolute;left:-99999px;top:0';fitPapers(pa,S.print.fit,pagePx());pa.style.cssText='';try{window.print()}catch(e){toast(tt('Printing is blocked here. Use "Printable file".'))}}
 function themeVars(){const cs=getComputedStyle(document.documentElement),n=cs.getPropertyValue('--navy').trim();return `:root{--acc:${n};--acc-soft:color-mix(in srgb,${n} 8%,#fff)}`}
-function downloadPrintable(list){const l=S.print.size==='Letter';const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>${esc(cur().invoiceNo)}</title><style>${themeVars()}@page{size:${l?'letter':'A4'};margin:0}body{background:#e5e1d6;margin:0;padding:12px}${PAPER_CSS}@media print{body{background:#fff;padding:0}}</style></head><body>${list.map(renderDoc).join('')}<script>(${fitPapers.toString()})(document,${!!S.print.fit},${pagePx()})<\/script></body></html>`;
-  const b=new Blob([html],{type:'text/html'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`${cur().invoiceNo}-documents.html`;document.body.appendChild(a);a.click();a.remove()}
+function downloadPrintable(list){const l=S.print.size==='Letter';const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>${esc(list[0]==='sr'?'Sales report FY'+repFY:cur().invoiceNo)}</title><style>${themeVars()}@page{size:${l?'letter':'A4'};margin:0}body{background:#e5e1d6;margin:0;padding:12px}${PAPER_CSS}@media print{body{background:#fff;padding:0}}</style></head><body>${list.map(renderDoc).join('')}<script>(${fitPapers.toString()})(document,${!!S.print.fit},${pagePx()})<\/script></body></html>`;
+  const b=new Blob([html],{type:'text/html'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=list[0]==='sr'?`sales-report-FY${repFY}.html`:`${cur().invoiceNo}-documents.html`;document.body.appendChild(a);a.click();a.remove()}
 function parsePaste(txt){const out=[];txt.split(/\r?\n/).forEach(line=>{if(!line.trim())return;let c=line.split('\t');if(c.length<2)c=line.split(/[;,](?=\s*[\d€$])/);c=c.map(x=>x.trim());
   if(c.length>=4&&/^\d+\.?$/.test(c[0]))c.shift();if(c.length<2)return;out.push({desc:c[0],qty:num(c[1]),price:num(c[2]||0),hs:c[3]||'',unit:'pcs',cost:0,cs:1})});return out}
 function icsFor(list){const ev=[];const stamp=new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z';
@@ -929,7 +964,7 @@ function poDlg(mode){const d=$('#dlg'),isNew=mode==='new',sh=isNew?null:cur();
   <div class="grid g2" style="margin-top:10px">
    ${isNew?`<label class="f"><span>${t('Customer')}</span><select id="po_c"><option value="">${esc(tt('Choose from customer master'))}</option>${S.customers.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select></label>`:`<div class="note" style="align-self:end">${esc(sh.cust.name)}</div>`}
    <label class="f"><span>${t("Customer's Order No.")}</span><input id="po_no" value="${esc(sh?sh.custPO:'')}"></label>
-   <label class="f"><span>${t('PO date')}</span><input type="date" id="po_d" value="${todayISO()}"></label>
+   <label class="f"><span>${t('PO date')}</span><input type="date" id="po_d" value="${sh&&sh.poDate?esc(sh.poDate):todayISO()}"></label>
    <label class="f"><span>${t('Requested ship date (ETD)')}</span><input type="date" id="po_e" value="${sh?esc(sh.etd||''):''}"></label></div>
   ${isNew?`<label class="f" style="margin-top:10px"><span>${t('Items (optional)')}</span><textarea id="po_i" rows="7" style="font-family:monospace" placeholder="WING BEND Plus WBP120 L=500mm\t5\t994.65"></textarea></label><p class="note">${esc(tt('Paste rows copied from Excel. Columns: Description, Qty, Unit price (optional: HS code).'))}</p>`:''}
   <div class="row" style="margin-top:12px;justify-content:flex-end"><button class="ghost" data-a="dlgClose">${t('Cancel')}</button><button data-a="poGo" data-v="${mode}">${t('Register PO')}</button></div>`;d.showModal()}
@@ -950,7 +985,7 @@ const A={
  gasCal:async()=>{try{await syncNow(true);const r=await gas('syncCalendar');toast(tt('Calendar events created: {0}').replace('{0}',r.events))}catch(e){toast(e.message)}},
  nav:d=>{view=d.v;render()},tab:d=>{tab=d.v;render()},doc:d=>{docTab=d.v;if(docMode==='edit')edTab=(d.v==='pl'||d.v==='cm')?'pack':'info';render()},dmode:d=>{docMode=d.v;render()},etab:d=>{edTab=d.v;render()},
  goDoc:d=>{view='docs';docTab=d.v;docMode='view';render()},advance:()=>{const sh=cur(),nx=STATUS[STATUS.indexOf(sh.status)+1];if(nx){sh.status=nx;save();render()}},
- poNew:()=>poDlg('new'),poFor:()=>poDlg('cur'),poGo:poGo,connLink:connLink,mtab:d=>{mtab=d.v;render()},lang:d=>{S.lang=d.v;save();render()},
+ poNew:()=>poDlg('new'),srPrint:()=>printDocs(['sr']),srFile:()=>downloadPrintable(['sr']),srCsv:()=>salesCsv(),poFor:()=>poDlg('cur'),poGo:poGo,connLink:connLink,mtab:d=>{mtab=d.v;render()},lang:d=>{S.lang=d.v;save();render()},
  theme:d=>{S.settings.theme=d.v;save();render()},cmd:()=>cmdOpen(),
  setStatus:d=>{cur().status=d.v;save();render()},
  open:d=>{S.cur=d.id;view='ship';tab='info';save();render()},
