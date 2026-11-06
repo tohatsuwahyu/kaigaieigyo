@@ -31,3 +31,12 @@ docs/SETUP.md         langkah setup
 
 ## Catatan HS code
 Daftar HS di aplikasi hanya referensi. Konfirmasi klasifikasi dengan customs broker / 輸出許可書 (mis. 8207.20 vs 8207.30 untuk press-brake tooling).
+
+
+## Added later
+- Edit documents in place (Documents → Edit) with live preview
+- PO intake (Dashboard → PO received), incl. reading pasted PO text
+- Next-step guidance per shipment stage
+- Sales report (print / file / CSV) with year-over-year and margin
+- Certificate of Origin, price history and price-change checks
+- Mobile layout; languages: EN/日本語, EN, 日本語, Indonesian
