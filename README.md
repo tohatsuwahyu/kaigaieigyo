@@ -14,6 +14,18 @@ Single-file HTML app for overseas sales documents, bilingual EN/JA, print-ready.
 ## Fitur
 Dashboard (grafik penjualan per tahun fiskal Jun–Mei, jadwal ETD / jatuh tempo, ekspor kalender .ics) · master customer / produk / **HS code** (per-item HS, ringkasan HS di dokumen) · tempel dari Excel · pemeriksa konsistensi dokumen · pelacak pembayaran · checklist 18 langkah · margin & laba (internal) · riwayat harga per customer · kalkulator harga / CBM / Incoterms 2020 · template email · pencarian cepat **Ctrl+K** · 4 tema warna.
 
+
+## ☁ Backend & Reminder (opsional) / バックエンド
+Sinkron multi-perangkat lewat **Google Sheets + Apps Script**, plus reminder harian (email 日本語/English + Google Calendar) untuk ETD, jatuh tempo pembayaran, L/C, quotation, ETA, dan dokumen yang belum lengkap.
+→ Panduan: [`docs/SETUP.md`](docs/SETUP.md) · Kode server: [`apps-script/Code.gs`](apps-script/Code.gs)
+
+```
+index.html            aplikasi (single file)
+apps-script/Code.gs   backend Google Apps Script
+apps-script/appsscript.json
+docs/SETUP.md         langkah setup
+```
+
 ## ⚠ Keamanan data
 `index.html` berisi data contoh (rekening bank & customer TSH-30099). **Gunakan repo *Private*** atau kosongkan data lewat *Settings → Start clean* lalu isi ulang di browser sebelum membuat repo publik.
 

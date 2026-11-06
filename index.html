@@ -36,6 +36,9 @@ main{flex:1;min-width:0}
 .seg button.on{background:var(--navy);color:#fff}
 .grow{flex:1}
 #saved{font-size:12px;color:var(--mut)}
+.syncst{font-size:12px;cursor:pointer;color:var(--mut);padding:3px 8px;border:1px solid var(--line);border-radius:99px;background:#fff}.syncst.err{color:var(--err);border-color:#e3b9bc}.syncst.ok{color:var(--ok)}
+.badge{display:inline-block;min-width:18px;padding:0 5px;border-radius:99px;background:var(--gold);color:#fff;font-size:11px;text-align:center;margin-left:6px}
+.rem{display:flex;gap:10px;align-items:center;padding:7px 4px;border-bottom:1px solid #eee9dc;cursor:pointer;font-size:13px}.rem:hover{background:#faf6ea}.rem i{width:10px;height:10px;border-radius:50%;flex-shrink:0}.rem.late i{background:var(--err)}.rem.today i{background:#e08a1e}.rem.soon i{background:#d8b73a}
 .bkwarn{background:#fdf1d8;color:#8a5a00;border:1px solid #ecd49b;border-radius:99px;padding:3px 11px;font-size:12px;cursor:pointer}
 #view{padding:24px 26px 70px;max-width:1320px}
 h1{font-family:Georgia,"Hiragino Mincho ProN","Yu Mincho",serif;font-size:25px;margin:0 0 4px;color:var(--navy);letter-spacing:.2px}
@@ -270,7 +273,9 @@ const J={
 'Missing: {0}':'未入力：{0}','No line items.':'明細がありません。','Line {0}: quantity or unit price is zero.':'明細{0}：数量または単価が0です。','Line {0}: description is empty.':'明細{0}：品名が空です。','No cases defined in Packing tab.':'梱包タブにケースがありません。','Case {0}: gross weight is lower than net weight.':'ケース{0}：総重量が正味重量より小さいです。','Case {0}: dimensions missing.':'ケース{0}：寸法が未入力です。','Line {0} is not assigned to a valid case.':'明細{0}が有効なケースに割り当てられていません。','HS code is missing (needed for customs).':'HSコードが未入力です（通関で必要）。','HS code "{0}" has an unusual format (expected like 8207.20).':'HSコード「{0}」の形式が不自然です（例：8207.20）。','Several HS codes in use ({0}): HS column and summary are printed.':'複数のHSコードを使用中（{0}）：HS列と集計を印字します。','Sailing date is earlier than the invoice date.':'出港日が請求書日付より前です。','Invoice No. {0} is also used by another shipment.':'請求書番号{0}が他の案件と重複しています。','Payment due {0} ({1} days after invoice date).':'支払期日 {0}（請求書日付から{1}日）。','Payment is overdue by {0} days.':'入金が{0}日遅延しています。','Incoterm {0} needs a named place.':'{0} には指定場所が必要です。','Port of loading ({0}) differs from the Incoterm place ({1}). Make sure all documents agree.':'積込港（{0}）とインコターム指定場所（{1}）が異なります。全書類で一致しているか確認してください。','Customer order number is empty.':'客先注文番号が空です。','Destination is in the EU: customers often ask for the non-Russian iron & steel statement.':'EU向けです。非ロシア産鉄鋼の証明文を求められることがあります。','Weights: net {0} kg / gross {1} kg / {2} m³ across {3} case(s).':'重量：正味{0}kg／総重量{1}kg／{2}m³（{3}ケース）。','Balance outstanding: {0}.':'未入金残高：{0}。','All checks passed. Documents are generated from one data source, so Invoice and Packing List always agree.':'全項目OK。書類は同一データから生成されるため、インボイスとパッキングリストは常に一致します。',
 'Saved':'保存済み','Copied':'コピーしました','Printing is blocked here. Use "Printable file".':'この画面では印刷できません。「印刷用ファイル」を使ってください。','Not persisted in this browser. Please use Backup.':'このブラウザに保存できません。バックアップを使ってください。','Restored':'復元しました','Invalid backup file':'バックアップファイルが不正です','Added to product master':'製品マスタに追加しました','Delete this shipment?':'この案件を削除しますか？','Reset everything to sample data?':'サンプルデータに初期化しますか？','Remove all sample shipments, customers and products?':'サンプルの案件・顧客・製品をすべて削除しますか？','Updated':'更新しました',
 'Paste rows copied from Excel. Columns: Description, Qty, Unit price (optional: HS code).':'Excelからコピーした行を貼り付けてください。列：品名、数量、単価（任意：HSコード）。',
-'Sample data: invoice TSH-30099 (UKB-Uwe Krumm GmbH).':'サンプル：TSH-30099（UKB-Uwe Krumm GmbH）','Data is stored only in this browser. Make backups regularly.':'データはこのブラウザ内のみに保存。定期的にバックアップを。','Go to':'移動'
+'Sample data: invoice TSH-30099 (UKB-Uwe Krumm GmbH).':'サンプル：TSH-30099（UKB-Uwe Krumm GmbH）','Data is stored only in this browser. Make backups regularly.':'データはこのブラウザ内のみに保存。定期的にバックアップを。','Go to':'移動','Reminders':'リマインダー','No reminders':'リマインダーなし','ETD in {0} day(s)':'ETDまであと{0}日','ETD passed {0} day(s) ago – not marked as shipped':'ETDを{0}日過ぎていますが「出荷済」ではありません','Before shipment, missing: {0}':'出荷前に未完了：{0}','Arrival (ETA) in {0} day(s)':'到着予定まであと{0}日','Payment overdue {0} day(s)':'入金が{0}日遅延','Payment due in {0} day(s)':'入金期日まであと{0}日','L/C expires in {0} day(s)':'L/C期限まであと{0}日','Quotation expires in {0} day(s)':'見積の有効期限まであと{0}日',
+'Cloud sync (Google Sheets)':'クラウド同期（Googleスプレッドシート）','Web app URL':'ウェブアプリURL','Secret token':'秘密トークン','Auto-sync':'自動同期','Connect & sync now':'接続して今すぐ同期','Set URL and token first':'先にURLとトークンを入力してください','Server already has data. Replace local data with it?':'サーバーにデータがあります。ローカルをサーバーのデータで置き換えますか？','Synced':'同期済み','Syncing…':'同期中…','Not connected':'未接続','Sync error':'同期エラー','Cloud updated – data refreshed':'クラウドの更新を反映しました',
+'Reminder rules':'リマインダー設定','Send reminders to (e-mail)':'送信先メール','ETD – days before':'ETD：何日前','Payment due – days before':'入金期日：何日前','L/C expiry – days before':'L/C期限：何日前','Quotation expiry – days before':'見積期限：何日前','ETA – days before':'ETA：何日前','Warn about missing documents – days before ETD':'書類未完了の警告：ETDの何日前','Daily time (JST, hour)':'毎日の実行時刻（JST・時）','Add to Google Calendar':'Googleカレンダーに登録','Browser notification when opening the app':'アプリを開いた時にブラウザ通知','Save & install daily trigger':'保存して毎日の自動実行を設定','Send test e-mail':'テストメール送信','Sync calendar now':'カレンダーを今すぐ同期','Done':'完了','Test e-mail sent':'テストメールを送信しました','Calendar events created: {0}':'カレンダー登録数：{0}','Daily trigger installed':'毎日の自動実行を設定しました','The server sends the digest every day, even when the app is closed. Overdue items are repeated daily.':'サーバーが毎日ダイジェストを送信します（アプリを閉じていても動作）。遅延項目は毎日再送されます。'
 };
 function t(s,...a){let j=J[s];let e=s;if(a.length){a.forEach((x,i)=>{e=e.split('{'+i+'}').join(x);if(j)j=j.split('{'+i+'}').join(x)})}
   if(S.lang==='en'||!j)return esc(e);if(S.lang==='ja')return esc(j);return esc(e)+'<span class="jp">'+esc(j)+'</span>'}
@@ -282,7 +287,7 @@ function seedHS(){return [
  {code:'8207.20',en:'Dies for drawing or extruding metal, and parts thereof',ja:'金属の引抜き用又は押出し用のダイス',jp:'',note:'Used on invoice TSH-30099. Some sources list interchangeable press-brake tooling under 8207.30 – please confirm with your customs broker / past 輸出許可書.'},
  {code:'8207.30',en:'Tools for pressing, stamping or punching, and parts thereof',ja:'プレス用・型打ち用・打抜き用の工具',jp:'',note:'Reference only – verify.'},
  {code:'7320.20',en:'Helical springs of iron or steel',ja:'つる巻ばね',jp:'',note:'Reference only – verify.'},
- {code:'7318.15',en:'Threaded screws and bolts (other), with or without nuts/washers',ja:'ねじ及びボルト（その他）',jp:'',note:'Reference only – verify.'}]}
+ {code:'7318.15',en:'Threaded screws and bolts (other), with or without nuts/washers',ja:'ねじ及びボルト（その他）',jp:'',note:'Reference only – verify.'}].map(h=>({id:uid(),...h}))}
 function seed(){
   const raw=[
 ['WING BEND Plus WBP120 L=500mm',5,994.65],['WING BEND Plus WBP120 L=200mm',5,513],['WING BEND Plus WBP120 L=100mm',5,368.6],['WING BEND Plus WBP120 L=50mm',5,201.4],['WING BEND Plus WBP120 90mm set',5,780.9],
@@ -302,7 +307,9 @@ function seed(){
     items:raw.map(r=>({desc:r[0],hs:'',qty:r[1],unit:'pcs',price:r[2],cost:0,cs:1})),
     cases:[{no:1,l:327,w:57,h:92,nw:610,gw:680}],adds:[],payments:[],checks:{}};
   ['Quotation sent','Customer PO received','Order confirmation sent','Production completed','Packing done','Booking with forwarder','Commercial invoice issued','Packing list issued','Shipping instruction sent','Export declaration / permit','B/L or sea waybill received','Shipping advice + docs sent to customer','Payment received'].forEach(k=>sh.checks[k]=true);
-  return {v:2,lang:'bi',cur:sh.id,lastBackup:'',ui:{cost:false},
+  return {v:2,lang:'bi',cur:sh.id,lastBackup:'',ui:{cost:false},deleted:[],
+    sync:{url:'',token:'',auto:true,last:'',h:{},ids:{},setU:0,notifyDay:''},
+    reminders:{email:'',etd:'7,3,1',due:'7,3,0',lc:'14,7',quote:'3',eta:'1',checkEtd:3,hour:8,calendar:true,browser:false},
     print:{size:'A4',scale:100,margin:12,density:'normal',logo:true,logoH:14,wm:'',copy:'',footer:true,bank:true,sig:true,hsSum:true,docJa:false,fit:true},
     settings:{company:{name:'TOKYO SEIMITSU HATSUJO CO.,LTD.',addr:'134, Higashikata-Cho, Tsuzuki-Ku, Yokohama-City, Kanagawa-Pref.,',post:'224-0045',tel:'+81-(0)45-624-9841',fax:'+81-(0)45-624-9840',signer:'Masakazu Tsukamoto'},
       bank:{name:'MUFG BANK LTD.',branch:'JIYUGAOKA EKIMAE BRANCH',addr:'1-30-3, Jiyugaoka, Meguro-Ku, Tokyo-Pref., 152-0035 JAPAN',swift:'BOTKJPJT',acct:'No.9005229',type:'Checking Account',benef:'Tokyo Seimitsu Hatsujo Co.,Ltd.',benefAddr:'134,Higashikata-Cho,Tsuzuki-Ku, Yokohama-City,Kanagawa-Pref., 224-0045, Japan'},
@@ -313,7 +320,7 @@ function seed(){
     products:raw.map(r=>({id:uid(),desc:r[0],hs:'8207.20',unit:'pcs',price:r[2],cost:0,wt:0})),
     shipments:[sh]};
 }
-function migrate(o){const d=seed();o.v=2;o.print=Object.assign({},d.print,o.print||{});o.ui=o.ui||{cost:false};o.hsList=o.hsList||d.hsList;o.rates=o.rates||d.rates;o.lastBackup=o.lastBackup||'';
+function migrate(o){const d=seed();o.v=2;o.print=Object.assign({},d.print,o.print||{});o.ui=o.ui||{cost:false};o.hsList=o.hsList||d.hsList;o.rates=o.rates||d.rates;o.lastBackup=o.lastBackup||'';o.sync=Object.assign({},d.sync,o.sync||{});o.deleted=o.deleted||[];o.reminders=Object.assign({},d.reminders,o.reminders||{});o.hsList.forEach(h=>{if(!h.id)h.id=uid()});
   o.settings.theme=o.settings.theme||'navy';o.settings.logo=o.settings.logo||'';
   o.shipments.forEach(s=>{s.payments=s.payments||[];s.adds=s.adds||[];s.checks=s.checks||{};s.items.forEach(i=>{if(i.cost==null)i.cost=0})});
   o.customers.forEach(c=>{if(c.steel==null)c.steel=false;c.remarks=c.remarks||''});return o}
@@ -330,7 +337,8 @@ function load(){try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r
 let S=load()||seed();
 let view='dash',tab='info',docTab='ci',mtab='cust',saveTimer=null,filter='',fyView=null,cmdIdx=0;
 function cur(){return S.shipments.find(s=>s.id===S.cur)||S.shipments[0]}
-function save(){clearTimeout(saveTimer);saveTimer=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(S));memOnly=false}catch(e){memOnly=true}stamp()},250)}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(S));memOnly=false}catch(e){memOnly=true}}
+function save(){clearTimeout(saveTimer);saveTimer=setTimeout(()=>{if(S.sync.url)stampAll();persist();stamp();scheduleSync()},250)}
 function stamp(){const e=$('#saved');if(!e)return;const d=new Date();e.textContent=memOnly?tt('Not persisted in this browser. Please use Backup.'):tt('Saved')+' '+pad2(d.getHours())+':'+pad2(d.getMinutes())}
 function toast(m){const e=$('#toast');e.textContent=m;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),2200)}
 function ref(path){const p=path.split('.');let o;if(p[0]==='cur'){o=cur();p.shift()}else o=S;while(p.length>1)o=o[p.shift()];return [o,p[0]]}
@@ -381,12 +389,12 @@ function C(label,path,re){return `<label class="chk"><input type="checkbox" data
 const NAV=[['dash','Dashboard'],['ship','Shipment'],['docs','Documents'],['masters','Masters'],['tools','Tools'],['set','Settings']];
 function renderChrome(){
   $('#brand').innerHTML=`<div class="logoplate"><img src="${esc(logoSrc())}" alt="TSH" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="mono" style="display:none">TSH</div></div><div><b>Export Desk</b><small>海外営業デスク</small></div>`;
-  $('#nav').innerHTML=NAV.map(([k,l])=>`<button data-a="nav" data-v="${k}" class="${view===k?'on':''}">${t(l)}</button>`).join('');
+  const rn=remList().length;$('#nav').innerHTML=NAV.map(([k,l])=>`<button data-a="nav" data-v="${k}" class="${view===k?'on':''}">${t(l)}${k==='dash'&&rn?`<span class="badge">${rn}</span>`:''}</button>`).join('');
   $('#sidefoot').innerHTML=`<span class="kbd">Ctrl</span>+<span class="kbd">K</span> ${esc(tt('Search'))}<br>${esc(tt('Data is stored only in this browser. Make backups regularly.'))}`;
   const sh=cur();const old=!S.lastBackup||diffDays(todayISO(),S.lastBackup)>14;
   $('#top').innerHTML=`<select id="shSel" data-a-change="selship">${S.shipments.map(s=>`<option value="${s.id}" ${s.id===sh.id?'selected':''}>${esc(s.invoiceNo)} · ${esc(s.cust.name||'—')}</option>`).join('')}</select>
    <button class="ghost" data-a="newShip">+ ${t('New')}</button><button class="ghost" data-a="dupShip">${t('Duplicate')}</button><button class="ghost" data-a="cmd">🔍</button>
-   <span class="grow"></span>${old?`<span class="bkwarn" data-a="backup" title="${esc(S.lastBackup||tt('never'))}">⚠ ${esc(tt('Backup recommended'))}</span>`:''}<span id="saved"></span>
+   <span class="grow"></span>${S.sync.url?`<span id="syncst" class="syncst ${syncUI.s}" data-a="sync">${esc(syncLabel())}</span>`:''}${old?`<span class="bkwarn" data-a="backup" title="${esc(S.lastBackup||tt('never'))}">⚠ ${esc(tt('Backup recommended'))}</span>`:''}<span id="saved"></span>
    <button class="ghost" data-a="backup">${t('Backup')}</button>
    <div class="seg">${[['bi','EN/日本語'],['en','EN'],['ja','日本語']].map(([k,l])=>`<button data-a="lang" data-v="${k}" class="${S.lang===k?'on':''}">${l}</button>`).join('')}</div>`;
   stamp();
@@ -434,6 +442,7 @@ function vDash(){
   return `<h1>${t('Dashboard')}</h1><p class="sub">${t('Overview of all shipments')}</p>
   <div class="row" style="margin-bottom:14px"><button data-a="newShip">+ ${t('New')}</button><button class="ghost" data-a="cmd">🔍 ${t('Search everything')}</button><button class="ghost" data-a="ics">📅 ${t('Export calendar (.ics)')}</button>
    <span class="grow"></span><select style="width:auto" data-a-change="fy">${fys.map(y=>`<option value="${y}" ${y===fy?'selected':''}>FY${y} (Jun ${y} – May ${y+1})</option>`).join('')}</select></div>
+  ${(()=>{const rl=remList();return rl.length?`<div class="card"><h2>${t('Reminders')} · ${rl.length}</h2>${rl.slice(0,8).map(r=>`<div class="rem ${r.lvl}" data-a="open" data-id="${r.id}"><i></i><b>${esc(r.who)}</b><span>${esc(r.msg)}</span></div>`).join('')}</div>`:''})()}
   <div class="grid g4" style="margin-bottom:16px">
    <div class="card kpi"><small>${t('Shipments')}</small><b>${S.shipments.length}</b></div>
    <div class="card kpi"><small>${t('Sales this fiscal year')} · FY${fy}</small><b>${money(sales)}</b></div>
@@ -718,6 +727,13 @@ function vSet(){const s=S.settings;
    <div><span class="note">${t('Signature / stamp image')}</span><div class="row"><input type="file" id="sigIn" accept="image/*" style="max-width:260px">${s.sigImg?`<img src="${s.sigImg}" style="height:42px;border:1px solid var(--line)"><button class="danger sm" data-a="rmSig">${t('Remove image')}</button>`:''}</div></div></div></div>
   <div class="card"><h2>${t('Bank (beneficiary)')}</h2><div class="grid g3">${F('Bank name','settings.bank.name')}${F('Branch','settings.bank.branch')}${F('Bank address','settings.bank.addr')}${F('SWIFT BIC','settings.bank.swift')}${F('Account No.','settings.bank.acct')}${F('Account type','settings.bank.type')}${F('Beneficiary','settings.bank.benef')}${F('Beneficiary address','settings.bank.benefAddr',{cls:'span2'})}</div></div>
   <div class="card"><h2>${t('Numbering')}</h2><div class="grid g4">${F('Invoice prefix','settings.prefix')}${F('Next number','settings.nextNo',{type:'number',n:1})}</div></div>
+  <div class="card"><h2>${t('Cloud sync (Google Sheets)')}</h2><div class="grid g3">${F('Web app URL','sync.url',{cls:'span2',ph:'https://script.google.com/macros/s/…/exec'})}${F('Secret token','sync.token',{type:'password'})}</div>
+   <div class="row" style="margin-top:12px"><button data-a="sync">${t('Connect & sync now')}</button>${C('Auto-sync','sync.auto')}<span class="note" id="syncStatus">${esc(syncLabel())}</span></div></div>
+  <div class="card"><h2>${t('Reminder rules')}</h2><div class="grid g4">${F('Send reminders to (e-mail)','reminders.email',{type:'email',cls:'span2'})}${F('Daily time (JST, hour)','reminders.hour',{type:'number',n:1,min:0,max:23})}${F('Warn about missing documents – days before ETD','reminders.checkEtd',{type:'number',n:1})}
+   ${F('ETD – days before','reminders.etd')}${F('Payment due – days before','reminders.due')}${F('L/C expiry – days before','reminders.lc')}${F('Quotation expiry – days before','reminders.quote')}${F('ETA – days before','reminders.eta')}</div>
+   <div class="row" style="margin-top:12px">${C('Add to Google Calendar','reminders.calendar')}${C('Browser notification when opening the app','reminders.browser')}</div>
+   <div class="row" style="margin-top:12px"><button data-a="gasInstall">${t('Save & install daily trigger')}</button><button class="ghost" data-a="gasTest">${t('Send test e-mail')}</button><button class="ghost" data-a="gasCal">${t('Sync calendar now')}</button></div>
+   <p class="note">${esc(tt('The server sends the digest every day, even when the app is closed. Overdue items are repeated daily.'))}</p></div>
   <div class="card"><h2>${t('Data')}</h2><div class="row"><button data-a="backup">${t('Download backup (.json)')}</button><button class="ghost" data-a="copyBackup">${t('Copy')} JSON</button><button class="ghost" data-a="restore">${t('Restore from backup')}</button><button class="danger" data-a="clean">${t('Start clean (remove sample data)')}</button><button class="danger" data-a="reset">${t('Reset to sample data')}</button></div><p class="note">${esc(tt('Sample data: invoice TSH-30099 (UKB-Uwe Krumm GmbH).'))}</p></div>`}
 
 /* ---- Command palette ---- */
@@ -735,6 +751,70 @@ function cmdRender(){const q=$('#cmdIn').value;const it=cmdItems(q);cmdIdx=Math.
   $('#cmdList').innerHTML=it.map((x,i)=>`<div class="${i===cmdIdx?'on':''}" data-cmd="${i}"><span>${esc(x.t)}</span><small>${esc(x.s)}</small></div>`).join('')||'<div><small>—</small></div>';cmdRender.items=it}
 function cmdOpen(){const d=$('#cmd');if(!d.open)d.showModal();$('#cmdIn').value='';cmdIdx=0;cmdRender();setTimeout(()=>$('#cmdIn').focus(),0)}
 function cmdRun(i){const x=(cmdRender.items||[])[i];if(!x)return;$('#cmd').close();x.f()}
+
+/* ========== Cloud sync (Google Sheets via Apps Script) ========== */
+let syncing=false,syncTimer=null,lastSyncMs=0,syncUI={s:'off',m:''};
+const hash=s=>{let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return h+''};
+const RK=()=>[['shipments',S.shipments],['customers',S.customers],['products',S.products],['hs',S.hsList]];
+const hashRec=r=>hash(JSON.stringify(r,(k,v)=>k==='u'?undefined:v));
+const setRec=()=>({company:S.settings.company,bank:S.settings.bank,prefix:S.settings.prefix,nextNo:S.settings.nextNo,rates:S.rates,reminders:S.reminders,print:S.print});
+const KEYMISS=['Booking with forwarder','Commercial invoice issued','Packing list issued','Shipping instruction sent','Export declaration / permit'];
+function flatOf(k,r){
+  if(k==='shipments'){const T=totals(r);return {name:r.invoiceNo,invoiceNo:r.invoiceNo,customer:r.cust.name,date:r.date,etd:r.etd,eta:r.eta,due:dueDate(r),status:r.status,currency:r.currency,total:T.total,balance:balance(r),progress:progress(r),lcExpiry:r.lcExpiry||'',quoteEnd:r.quoteDate&&r.validity?addDays(r.quoteDate,r.validity):'',missing:KEYMISS.filter(x=>!r.checks[x]).join(', ')}}
+  return {name:k==='products'?r.desc:k==='hs'?r.code:r.name}}
+function stampAll(){const sy=S.sync,H=sy.h;
+  RK().forEach(([k,arr])=>{arr.forEach(r=>{if(!r.id)r.id=uid();const key=k+':'+r.id,h=hashRec(r);if(H[key]===undefined){H[key]=h;if(r.u==null)r.u=0}else if(H[key]!==h){H[key]=h;r.u=Date.now()}});
+    (sy.ids[k]||[]).forEach(id=>{if(!arr.some(r=>r.id===id)&&!S.deleted.some(d=>d.k===k&&d.id===id))S.deleted.push({k,id,u:Date.now()})});sy.ids[k]=arr.map(r=>r.id)});
+  const sh=hash(JSON.stringify(setRec()));if(H['settings:main']===undefined)H['settings:main']=sh;else if(H['settings:main']!==sh){H['settings:main']=sh;sy.setU=Date.now()}}
+async function gas(action,payload){const sy=S.sync;const ctl=new AbortController();const to=setTimeout(()=>ctl.abort(),40000);
+  try{const r=await fetch(sy.url,{method:'POST',body:JSON.stringify(Object.assign({action,token:sy.token},payload||{})),redirect:'follow',signal:ctl.signal});const j=await r.json();if(!j.ok)throw new Error(j.error||'error');return j}finally{clearTimeout(to)}}
+function syncLabel(){return syncUI.s==='busy'?'☁ '+tt('Syncing…'):syncUI.s==='ok'?'☁ '+tt('Synced')+' '+(syncUI.t||''):syncUI.s==='err'?'☁ '+tt('Sync error')+(syncUI.m?': '+syncUI.m:''):'☁ '+tt('Not connected')}
+function setSyncUI(s,m){syncUI={s,m:m||'',t:s==='ok'?pad2(new Date().getHours())+':'+pad2(new Date().getMinutes()):''};['#syncst','#syncStatus'].forEach(q=>{const e=$(q);if(e){e.textContent=syncLabel();if(q==='#syncst')e.className='syncst '+s}})}
+function askAsync(msg){return new Promise(res=>{const d=$('#dlg');d.innerHTML=`<h2>${esc(msg)}</h2><div class="row" style="margin-top:14px;justify-content:flex-end"><button class="ghost" id="askNo">${t('Cancel')}</button><button id="askYes">OK</button></div>`;d.addEventListener('close',()=>res(false),{once:true});d.showModal();$('#askYes').onclick=()=>{res(true);d.close()};$('#askNo').onclick=()=>{res(false);d.close()}})}
+function mergeRemote(recs){let changed=false;const sy=S.sync,map={shipments:S.shipments,customers:S.customers,products:S.products,hs:S.hsList};
+  recs.forEach(rc=>{
+    if(rc.k==='settings'){if(rc.u>(sy.setU||0)&&!rc.del){const o=JSON.parse(rc.json);S.settings.company=o.company||S.settings.company;S.settings.bank=o.bank||S.settings.bank;S.settings.prefix=o.prefix||S.settings.prefix;S.settings.nextNo=Math.max(num(o.nextNo),num(S.settings.nextNo));S.rates=o.rates||S.rates;S.reminders=Object.assign({},S.reminders,o.reminders||{});S.print=Object.assign({},S.print,o.print||{});sy.setU=rc.u;sy.h['settings:main']=hash(JSON.stringify(setRec()));changed=true}return}
+    const arr=map[rc.k];if(!arr)return;const i=arr.findIndex(x=>x.id===rc.id),loc=arr[i];
+    if(rc.del){if(loc&&(loc.u||0)<=rc.u){arr.splice(i,1);changed=true}return}
+    if(!loc||rc.u>(loc.u||0)){const o=JSON.parse(rc.json);o.u=rc.u;if(loc)arr[i]=o;else arr.push(o);sy.h[rc.k+':'+rc.id]=hashRec(o);changed=true}});
+  RK().forEach(([k,arr])=>{sy.ids[k]=arr.map(r=>r.id)});
+  if(!S.shipments.length){const b=blankShipment();S.shipments.push(b)}
+  if(!S.shipments.some(s=>s.id===S.cur))S.cur=S.shipments[0].id;
+  return changed}
+async function syncNow(manual){const sy=S.sync;
+  if(!sy.url||!sy.token){if(manual)toast(tt('Set URL and token first'));return}
+  if(syncing)return;syncing=true;setSyncUI('busy');
+  try{
+    stampAll();const pr=await gas('pull');const recs=pr.records;
+    if(!sy.last&&recs.some(r=>r.k==='shipments'&&!r.del)){
+      if(!await askAsync(tt('Server already has data. Replace local data with it?'))){syncing=false;setSyncUI('off');return}
+      S.shipments=[];S.customers=[];S.products=[];S.hsList=[];sy.h={};sy.ids={};S.deleted=[];sy.setU=0}
+    const changed=mergeRemote(recs);stampAll();
+    const sm={};recs.forEach(r=>{sm[r.k+':'+r.id]=r.u});const out=[];
+    RK().forEach(([k,arr])=>arr.forEach(r=>{const su=sm[k+':'+r.id];if(su===undefined||(r.u||0)>su)out.push({k,id:r.id,u:r.u||0,flat:flatOf(k,r),json:JSON.stringify(r)})}));
+    S.deleted.forEach(d=>{const su=sm[d.k+':'+d.id];if(su===undefined||d.u>su)out.push({k:d.k,id:d.id,u:d.u,del:true})});
+    const ssu=sm['settings:main'];if(ssu===undefined||(sy.setU||0)>ssu)out.push({k:'settings',id:'main',u:sy.setU||Date.now(),flat:{name:'settings'},json:JSON.stringify(setRec())});
+    if(out.length)await gas('push',{records:out});
+    S.deleted=[];sy.last=new Date().toISOString();lastSyncMs=Date.now();persist();setSyncUI('ok');
+    if(changed){const ae=document.activeElement;if(ae&&/INPUT|TEXTAREA|SELECT/.test(ae.tagName))toast(tt('Cloud updated – data refreshed'));else{render();toast(tt('Cloud updated – data refreshed'))}}
+  }catch(e){setSyncUI('err',e.name==='AbortError'?'timeout':e.message)}finally{syncing=false}}
+function scheduleSync(){const sy=S.sync;if(!sy.auto||!sy.url||!sy.token||!sy.last)return;clearTimeout(syncTimer);syncTimer=setTimeout(()=>syncNow(false),3000)}
+window.addEventListener('focus',()=>{if(S.sync.auto&&S.sync.url&&S.sync.last&&Date.now()-lastSyncMs>60000)syncNow(false)});
+
+/* ========== Reminders (in-app; the same rules run daily on the server) ========== */
+function remList(){const R=S.reminders,L=s=>String(s==null?'':s).split(/[,\s]+/).filter(Boolean).map(Number),mx=a=>a.length?Math.max(...a):0,t0=todayISO(),out=[];
+  const tp=(s,...a)=>{let x=tt(s);a.forEach((v,i)=>{x=x.split('{'+i+'}').join(v)});return x};
+  S.shipments.forEach(sh=>{if(sh.status==='paid')return;const who=sh.invoiceNo+' · '+(sh.cust.name||'');const add=(lvl,m)=>out.push({lvl,id:sh.id,who,msg:m});
+    if(sh.etd&&['quote','order','production'].includes(sh.status)){const d=diffDays(sh.etd,t0);
+      if(d<0)add('late',tp('ETD passed {0} day(s) ago – not marked as shipped',-d));else if(d<=mx(L(R.etd)))add(d===0?'today':'soon',tp('ETD in {0} day(s)',d));
+      const miss=KEYMISS.filter(x=>!sh.checks[x]);if(d>=0&&d<=num(R.checkEtd)&&miss.length)add('soon',tp('Before shipment, missing: {0}',miss.map(k=>S.lang==='ja'?(J[k]||k):k).join(', ')))}
+    if(sh.eta&&sh.status==='shipped'){const d=diffDays(sh.eta,t0);if(d>=0&&d<=mx(L(R.eta)))add('soon',tp('Arrival (ETA) in {0} day(s)',d))}
+    const du=dueDate(sh);if(du&&['order','production','shipped'].includes(sh.status)&&balance(sh)>0){const d=diffDays(du,t0),amt=' '+sym(sh.currency)+' '+fmt(balance(sh));
+      if(d<0)add('late',tp('Payment overdue {0} day(s)',-d)+amt);else if(d<=mx(L(R.due)))add(d===0?'today':'soon',tp('Payment due in {0} day(s)',d)+amt)}
+    if(sh.lcExpiry){const d=diffDays(sh.lcExpiry,t0);if(d>=0&&d<=mx(L(R.lc)))add('soon',tp('L/C expires in {0} day(s)',d))}
+    if(sh.status==='quote'&&sh.quoteDate&&sh.validity){const d=diffDays(addDays(sh.quoteDate,sh.validity),t0);if(d>=0&&d<=mx(L(R.quote)))add('soon',tp('Quotation expires in {0} day(s)',d))}});
+  const rk={late:0,today:1,soon:2};return out.sort((a,b)=>rk[a.lvl]-rk[b.lvl])}
+function maybeNotify(){try{const n=remList().length;if(!n||!S.reminders.browser||typeof Notification==='undefined'||Notification.permission!=='granted')return;const d=todayISO();if(S.sync.notifyDay===d)return;S.sync.notifyDay=d;persist();new Notification('TSH Export Desk',{body:n+' '+tt('Reminders')})}catch(e){}}
 
 /* ========== Events ========== */
 function refreshDerived(){const sh=cur();
@@ -757,6 +837,7 @@ document.addEventListener('change',e=>{const el=e.target;
         S.settings[isLogo?'logo':'sigImg']=cv.toDataURL('image/png');save();render()};img.onerror=()=>{S.settings[isLogo?'logo':'sigImg']=rd.result;save();render()};img.src=rd.result};rd.readAsDataURL(f);return}
   if(el.dataset.chk){cur().checks[el.dataset.chk]=el.checked;save();render();return}
   const p=el.dataset.p;if(!p)return;
+  if(p==='reminders.browser'&&el.checked&&typeof Notification!=='undefined'&&Notification.permission==='default'){try{Notification.requestPermission()}catch(e){}}
   if(el.type==='checkbox'){setv(p,el.checked);save();if(el.dataset.r)render();else refreshDerived();return}
   if(el.tagName==='SELECT')setv(p,el.dataset.n?parseFloat(el.value):el.value);
   if(el.dataset.desc){const i=+p.split('.')[2];const pr=prodOf(el.value);const it=cur().items[i];if(pr&&it){if(!num(it.price))it.price=pr.price;if(!num(it.cost))it.cost=pr.cost||0;if(!it.hs&&pr.hs&&pr.hs!==cur().hs)it.hs=pr.hs;if(pr.unit)it.unit=pr.unit;save();render();return}}
@@ -764,8 +845,8 @@ document.addEventListener('change',e=>{const el=e.target;
   if(p==='cur.invoiceNo'||p==='cur.cust.name'){save();renderChrome()}
   if(p.startsWith('cur.items.')&&p.endsWith('.hs')){save()}
 });
-function doBackup(){S.lastBackup=todayISO();save();const b=new Blob([JSON.stringify(S,null,1)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`tsh-export-desk-${todayISO()}.json`;document.body.appendChild(a);a.click();a.remove();toast(tt('Backup'));renderChrome()}
-function doRestore(f){if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const o=JSON.parse(rd.result);if(!o.shipments||!o.settings)throw 0;S=migrate(o);save();render();toast(tt('Restored'))}catch(e){toast(tt('Invalid backup file'))}};rd.readAsText(f)}
+function doBackup(){S.lastBackup=todayISO();save();const b=new Blob([JSON.stringify(S,(k,v)=>k==='sync'?undefined:v,1)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`tsh-export-desk-${todayISO()}.json`;document.body.appendChild(a);a.click();a.remove();toast(tt('Backup'));renderChrome()}
+function doRestore(f){if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const o=JSON.parse(rd.result);if(!o.shipments||!o.settings)throw 0;const keep=S.sync;S=migrate(o);S.sync=keep;save();render();toast(tt('Restored'))}catch(e){toast(tt('Invalid backup file'))}};rd.readAsText(f)}
 function fitPapers(root,on,ph){if(!on)return;[].forEach.call(root.querySelectorAll('.paper:not(.lblpage)'),function(p){var k=parseFloat(getComputedStyle(p).getPropertyValue('--k'))||1,n=0;while(p.scrollHeight>ph+2&&k>0.68&&n<30){k=Math.round((k-0.02)*100)/100;p.style.setProperty('--k',k);n++}})}
 const pagePx=()=>S.print.size==='Letter'?1056:1122;
 function printDocs(list){const pa=$('#printArea');pa.innerHTML=list.map(renderDoc).join('');pa.style.cssText='display:block;position:absolute;left:-99999px;top:0';fitPapers(pa,S.print.fit,pagePx());pa.style.cssText='';try{window.print()}catch(e){toast(tt('Printing is blocked here. Use "Printable file".'))}}
@@ -781,6 +862,10 @@ function icsFor(list){const ev=[];const stamp=new Date().toISOString().replace(/
 function dl(name,mime,data){const b=new Blob([data],{type:mime});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();a.remove()}
 function ask(msg,fn){const d=$('#dlg');d.innerHTML=`<h2>${esc(msg)}</h2><div class="row" style="margin-top:14px;justify-content:flex-end"><button class="ghost" data-a="dlgClose">${t('Cancel')}</button><button class="danger" id="askOk">OK</button></div>`;d.showModal();$('#askOk').onclick=()=>{d.close();fn()}}
 const A={
+ sync:()=>syncNow(true),
+ gasInstall:async()=>{try{await syncNow(true);await gas('install',{hour:num(S.reminders.hour)||8});toast(tt('Daily trigger installed'))}catch(e){toast(e.message)}},
+ gasTest:async()=>{try{await syncNow(true);await gas('testDigest');toast(tt('Test e-mail sent'))}catch(e){toast(e.message)}},
+ gasCal:async()=>{try{await syncNow(true);const r=await gas('syncCalendar');toast(tt('Calendar events created: {0}').replace('{0}',r.events))}catch(e){toast(e.message)}},
  nav:d=>{view=d.v;render()},tab:d=>{tab=d.v;render()},doc:d=>{docTab=d.v;render()},mtab:d=>{mtab=d.v;render()},lang:d=>{S.lang=d.v;save();render()},
  theme:d=>{S.settings.theme=d.v;save();render()},cmd:()=>cmdOpen(),
  setStatus:d=>{cur().status=d.v;save();render()},
@@ -814,13 +899,13 @@ const A={
  delCust:d=>{S.customers.splice(+d.i,1);save();render()},
  addProd:()=>{S.products.push({id:uid(),desc:'',hs:'',unit:'pcs',price:0,cost:0,wt:0});save();render()},
  delProd:d=>{S.products.splice(+d.i,1);save();render()},
- addHS:()=>{S.hsList.push({code:'',en:'',ja:'',jp:'',note:''});save();render()},delHS:d=>{S.hsList.splice(+d.i,1);save();render()},
+ addHS:()=>{S.hsList.push({id:uid(),code:'',en:'',ja:'',jp:'',note:''});save();render()},delHS:d=>{S.hsList.splice(+d.i,1);save();render()},
  printOne:()=>printDocs([docTab]),printAll:()=>printDocs(['ci','pl','si','cm']),
  dlPrintable:()=>downloadPrintable(['ci','pl','si','cm']),
  backup:doBackup,restore:()=>$('#fileIn').click(),
  reset:()=>ask(tt('Reset everything to sample data?'),()=>{const keep=S.settings.theme;S=seed();S.settings.theme=keep;save();view='dash';render()}),
  clean:()=>ask(tt('Remove all sample shipments, customers and products?'),()=>{const b=blankShipment();S.shipments=[b];S.cur=b.id;S.customers=[];S.products=[];S.settings.nextNo=num(S.settings.nextNo)+1;save();view='dash';render()}),
- copyBackup:()=>{const tx=document.createElement('textarea');tx.value=JSON.stringify(S);document.body.appendChild(tx);tx.select();try{document.execCommand('copy')}catch(e){}try{navigator.clipboard.writeText(tx.value)}catch(e){}tx.remove();toast(tt('Copied'))},
+ copyBackup:()=>{const tx=document.createElement('textarea');tx.value=JSON.stringify(S,(k,v)=>k==='sync'?undefined:v);document.body.appendChild(tx);tx.select();try{document.execCommand('copy')}catch(e){}try{navigator.clipboard.writeText(tx.value)}catch(e){}tx.remove();toast(tt('Copied'))},
  rmSig:()=>{S.settings.sigImg='';save();render()},rmLogo:()=>{S.settings.logo='';save();render()},
  mail:d=>{$('#mailTx').value=mailText(d.v)},
  copyMail:()=>{const tx=$('#mailTx');tx.select();try{document.execCommand('copy')}catch(e){}try{navigator.clipboard.writeText(tx.value)}catch(e){}toast(tt('Copied'))}
@@ -836,6 +921,8 @@ document.addEventListener('keydown',e=>{
     else if(e.key==='ArrowUp'){e.preventDefault();cmdIdx=(cmdIdx-1+n)%Math.max(n,1);cmdRender()}
     else if(e.key==='Enter'){e.preventDefault();cmdRun(cmdIdx)}}});
 render();
+maybeNotify();
+if(S.sync.url&&S.sync.token&&S.sync.last&&S.sync.auto)syncNow(false);
 </script>
 </body>
 </html>
