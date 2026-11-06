@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="navy">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TSH 海外営業デスク · Export Desk</title>
+<style>
+:root,html[data-theme=navy]{--navy:#16233f;--navy2:#22335a;--gold:#b8935a;--gold2:#dcc9a3;--bg:#f4f1ea}
+html[data-theme=forest]{--navy:#173a2e;--navy2:#24533f;--gold:#b59a5a;--gold2:#d9ccab;--bg:#f1f1e9}
+html[data-theme=bordeaux]{--navy:#44202e;--navy2:#5e3042;--gold:#c2977f;--gold2:#e4cdbf;--bg:#f6f0ed}
+html[data-theme=slate]{--navy:#272b33;--navy2:#3a404b;--gold:#b97a52;--gold2:#e0c3ae;--bg:#f1f0ee}
+:root{--acc:var(--navy);--acc-soft:color-mix(in srgb,var(--navy) 8%,#fff);--ink:#1c2230;--mut:#6b7385;--card:#fff;--line:#e4dfd2;--ok:#2f7d57;--warn:#b7791f;--err:#b4373d}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:"Hiragino Sans","Yu Gothic UI","Noto Sans JP","Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+#app{display:flex;min-height:100vh}
+#side{width:228px;background:linear-gradient(180deg,var(--navy),color-mix(in srgb,var(--navy) 78%,#000));color:#e9e6dd;display:flex;flex-direction:column;padding:16px 12px;position:sticky;top:0;height:100vh;flex-shrink:0}
+.brand{display:flex;gap:10px;align-items:center;padding:0 4px 16px;border-bottom:1px solid #ffffff24;margin-bottom:12px}
+.logoplate{background:#fff;border-radius:8px;padding:5px 7px;display:flex;align-items:center;justify-content:center;min-width:52px;height:42px}
+.logoplate img{max-height:32px;max-width:78px;display:block}
+.mono{width:38px;height:32px;display:grid;place-items:center;font-family:Georgia,serif;font-weight:700;letter-spacing:1px;font-size:13px;color:var(--navy)}
+.brand b{font-family:Georgia,"Hiragino Mincho ProN","Yu Mincho",serif;font-size:15px;display:block;line-height:1.2;color:#fff}
+.brand small{color:var(--gold2);font-size:11px}
+.nav button{display:block;width:100%;text-align:left;background:none;border:0;color:#cfd3de;padding:10px 12px;border-radius:7px;cursor:pointer;font:inherit;margin-bottom:2px}
+.nav button:hover{background:#ffffff14}
+.nav button.on{background:#ffffff1f;color:#fff;box-shadow:inset 3px 0 0 var(--gold)}
+.nav .jp{font-size:10.5px;opacity:.65}
+.sidefoot{margin-top:auto;font-size:11px;color:#a5adc0;padding:8px 6px;line-height:1.6}
+.kbd{display:inline-block;border:1px solid #ffffff44;border-radius:4px;padding:0 5px;font-size:10px;margin:0 2px}
+main{flex:1;min-width:0}
+#top{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:11px 24px;background:#fffdf9ee;backdrop-filter:blur(6px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+#top select{max-width:300px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+.seg button{border:0;background:#fff;color:var(--ink);padding:6px 10px;cursor:pointer;font:inherit;font-size:12px;border-radius:0}
+.seg button:hover{background:#f4f0e4}
+.seg button.on{background:var(--navy);color:#fff}
+.grow{flex:1}
+#saved{font-size:12px;color:var(--mut)}
+.bkwarn{background:#fdf1d8;color:#8a5a00;border:1px solid #ecd49b;border-radius:99px;padding:3px 11px;font-size:12px;cursor:pointer}
+#view{padding:24px 26px 70px;max-width:1320px}
+h1{font-family:Georgia,"Hiragino Mincho ProN","Yu Mincho",serif;font-size:25px;margin:0 0 4px;color:var(--navy);letter-spacing:.2px}
+h2{font-family:Georgia,"Hiragino Mincho ProN",serif;font-size:16.5px;margin:0 0 12px;color:var(--navy)}
+h2:after{content:"";display:block;width:34px;height:2px;background:var(--gold);margin-top:5px}
+.sub{color:var(--mut);margin:0 0 18px}
+.jp{display:block;font-size:.78em;opacity:.7;font-weight:400}
+button .jp,.btn .jp,.tabs .jp,option .jp{display:inline;margin-left:.45em}
+h1 .jp,h2 .jp{color:var(--mut)}
+h1 .jp{font-size:.52em;margin-top:2px}h2 .jp{font-size:.7em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:16px;box-shadow:0 1px 2px #0001,0 6px 18px -12px #0003}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g5{grid-template-columns:repeat(5,1fr)}
+.gdash{display:grid;grid-template-columns:1.7fr 1fr;gap:16px}
+@media(max-width:1000px){.gdash{grid-template-columns:1fr}.g5{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){#app{flex-direction:column}#side{width:100%;height:auto;position:static;flex-direction:row;flex-wrap:wrap;gap:4px}.brand{border:0;padding:0;margin:0}.nav{display:flex;flex-wrap:wrap}.nav button{width:auto}.sidefoot{display:none}.g2,.g3,.g4{grid-template-columns:1fr}}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--mut)}
+label.f>span .jp{display:inline;margin-left:.4em}
+input,select,textarea{font:inherit;font-size:13.5px;color:var(--ink);border:1px solid #d9d3c4;border-radius:7px;padding:7px 9px;background:#fff;width:100%}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--gold2);border-color:var(--gold)}
+input[type=range]{padding:0;accent-color:var(--navy)}
+textarea{resize:vertical}
+.span2{grid-column:span 2}.span3{grid-column:span 3}.span4{grid-column:1/-1}
+.chk{display:flex;gap:8px;align-items:center;font-size:13.5px;color:var(--ink);cursor:pointer}
+.chk input{width:auto;accent-color:var(--navy)}
+button,.btn{font:inherit;font-size:13px;border:1px solid var(--navy);background:var(--navy);color:#fff;padding:7px 14px;border-radius:7px;cursor:pointer;transition:.15s}
+button:hover{background:var(--navy2)}
+button.ghost{background:#fff;color:var(--navy)}button.ghost:hover{background:#f4f0e4}
+button.gold{background:var(--gold);border-color:var(--gold)}button.gold:hover{filter:brightness(.92)}
+button.danger{background:#fff;color:var(--err);border-color:#e3b9bc}
+button.sm{padding:3px 8px;font-size:12px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin-bottom:16px;flex-wrap:wrap}
+.tabs button{background:none;color:var(--mut);border:0;border-bottom:2px solid transparent;border-radius:0;padding:9px 14px}
+.tabs button.on{color:var(--navy);border-color:var(--gold);font-weight:600}
+.tabs button:hover{background:#0000000a}
+.steps{display:flex;gap:0;margin:0 0 16px;flex-wrap:wrap}
+.steps button{background:#fff;color:var(--mut);border:1px solid var(--line);border-radius:0;padding:7px 16px;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,0 100%,10px 50%);margin-left:-8px;min-width:112px}
+.steps button:first-child{margin-left:0;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,0 100%)}
+.steps button.done{background:color-mix(in srgb,var(--gold) 22%,#fff);color:var(--navy)}
+.steps button.on{background:var(--navy);color:#fff}
+table.t{width:100%;border-collapse:collapse;font-size:13px}
+table.t th{background:var(--acc-soft);color:var(--navy);text-align:left;padding:8px 6px;font-weight:600;border-bottom:1px solid var(--line);font-size:12px;white-space:nowrap}
+table.t td{padding:4px;border-bottom:1px solid #eee9dc;vertical-align:middle}
+table.t td input,table.t td select,table.t td textarea{padding:5px 6px;font-size:13px}
+table.t td.r,table.t th.r{text-align:right}
+table.t tr.click{cursor:pointer}table.t tr.click:hover td{background:#faf6ea}
+.kpi{border-left:3px solid var(--gold);margin:0}
+.kpi small{color:var(--mut);display:block}
+.kpi b{font-family:Georgia,serif;font-size:21px;color:var(--navy)}
+.pill{display:inline-block;padding:2px 9px;border-radius:99px;font-size:11.5px;background:#eee;color:#444}
+.pill.quote{background:#e8eefb;color:#2c4c9a}.pill.order{background:#fdf0d5;color:#8a5a00}.pill.production{background:#f3e5f7;color:#6b2b86}.pill.shipped{background:#dff1e6;color:#1d6a43}.pill.paid{background:var(--navy);color:#fff}
+.bar{height:6px;background:#eee9dc;border-radius:9px;overflow:hidden;min-width:60px}.bar i{display:block;height:100%;background:var(--gold)}
+.hbar{display:flex;align-items:center;gap:8px;margin:7px 0;font-size:12.5px}.hbar span{width:44%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.hbar .bar{flex:1;height:9px}.hbar em{font-style:normal;color:var(--mut);width:84px;text-align:right}
+.chkrow{display:flex;justify-content:space-between;align-items:center;padding:8px 4px;border-bottom:1px solid #eee9dc}
+.chkrow.done span{color:var(--mut);text-decoration:line-through}
+.msg{padding:9px 12px;border-radius:8px;margin-bottom:7px;font-size:13.5px;border-left:4px solid}
+.msg.err{background:#fbeceb;border-color:var(--err)}.msg.warn{background:#fdf5e3;border-color:var(--warn)}.msg.ok{background:#e9f5ee;border-color:var(--ok)}.msg.info{background:#eaf0fb;border-color:#3b64b8}
+.totbox{display:flex;gap:26px;flex-wrap:wrap;justify-content:flex-end;padding:12px 6px;font-size:13px;color:var(--mut)}
+.totbox b{display:block;color:var(--navy);font-size:17px;font-family:Georgia,serif}
+.ev{display:flex;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid #eee9dc;font-size:13px}
+.ev .d{width:56px;font-weight:600;color:var(--navy)}.ev .k{font-size:11px;padding:1px 7px;border-radius:99px;background:var(--acc-soft);color:var(--navy)}
+.ev.late .d,.ev.late{color:var(--err)}
+.hint{font-size:10.5px;color:var(--mut);margin-top:1px}.hint.up{color:var(--err)}.hint.dn{color:var(--ok)}
+.docs{display:flex;gap:18px;align-items:flex-start}
+.doclist{width:236px;flex-shrink:0;position:sticky;top:70px;max-height:calc(100vh - 84px);overflow:auto;padding-right:2px}
+.doclist>button{display:block;width:100%;text-align:left;margin-bottom:5px;background:#fff;color:var(--ink);border:1px solid var(--line)}
+.doclist>button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.doclist .card{padding:12px 14px;margin:10px 0}
+.doclist details summary{cursor:pointer;font-weight:600;color:var(--navy);margin-bottom:8px}
+.doclist .grid{gap:8px}
+.pvwrap{flex:1;min-width:0;overflow:auto;background:#d9d4c7;padding:20px;border-radius:12px}
+.pv{width:fit-content;margin:0 auto}
+@media(max-width:900px){.docs{flex-direction:column}.doclist{width:100%;position:static;max-height:none}}
+textarea.mail{min-height:240px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px}
+.note{font-size:12px;color:var(--mut)}
+.swatches{display:flex;gap:10px;flex-wrap:wrap}
+.sw{width:96px;border:2px solid var(--line);border-radius:10px;padding:6px;cursor:pointer;text-align:center;font-size:11.5px;background:#fff}
+.sw i{display:block;height:26px;border-radius:6px;margin-bottom:4px}
+.sw.on{border-color:var(--gold)}
+dialog{border:0;border-radius:14px;padding:22px;width:min(640px,94vw);box-shadow:0 20px 60px #0006}
+dialog::backdrop{background:#14213d88}
+#cmd{padding:0;width:min(560px,94vw);margin-top:12vh}
+#cmd input{border:0;border-bottom:1px solid var(--line);border-radius:0;padding:16px 18px;font-size:16px}
+#cmd input:focus{outline:0}
+#cmdList div{padding:10px 18px;cursor:pointer;display:flex;justify-content:space-between;gap:10px}
+#cmdList div.on{background:var(--acc-soft)}#cmdList small{color:var(--mut)}
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 18px;border-radius:8px;opacity:0;pointer-events:none;transition:.3s;z-index:99;font-size:13px}
+#toast.on{opacity:1}
+#printArea{display:none}
+@media print{#app,#toast,dialog{display:none!important}#printArea{display:block}body{background:#fff}}
+</style>
+<style id="paperCss"></style>
+<style id="pageCss">@page{size:A4;margin:0}</style>
+</head>
+<body>
+<div id="app">
+  <aside id="side">
+    <div class="brand" id="brand"></div>
+    <nav class="nav" id="nav"></nav>
+    <div class="sidefoot" id="sidefoot"></div>
+  </aside>
+  <main>
+    <header id="top"></header>
+    <div id="view"></div>
+  </main>
+</div>
+<div id="dls"></div>
+<div id="printArea"></div>
+<div id="toast"></div>
+<dialog id="dlg"></dialog>
+<dialog id="cmd"><input id="cmdIn" autocomplete="off" placeholder="Search…  (Ctrl+K)"><div id="cmdList"></div></dialog>
+<input type="file" id="fileIn" accept=".json,application/json" style="display:none">
+
+<script>
+/* Logo: replaced at build time with a data: URI of tsh.png (empty = look for tsh.png next to this file) */
+const LOGO_DEFAULT = '';
+
+/* ========== Paper (document) CSS – shared by screen preview, print and exported file ========== */
+const PAPER_CSS = `
+.paper{width:var(--pw,210mm);min-height:var(--ph,297mm);background:#fff;color:#000;padding:var(--pad,12mm);padding-bottom:calc(var(--pad,12mm) + 7mm);box-sizing:border-box;font-family:Arial,"Hiragino Sans","Yu Gothic",sans-serif;font-size:calc(9.2pt*var(--k,1));line-height:1.35;margin:0 auto 14px;box-shadow:0 2px 12px #0003;position:relative;overflow:hidden}
+.paper small.ja{display:block;font-size:.76em;color:#555;font-weight:400;letter-spacing:0}
+.paper .dhead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;border-bottom:2.5px solid var(--acc,#16233f);padding-bottom:.75em;margin-bottom:1em}
+.paper .hl{display:flex;gap:10px;align-items:center}
+.paper .dlogo{display:block;width:auto;max-width:44mm;object-fit:contain}
+.paper .cname{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:1.5em;color:var(--acc,#16233f);letter-spacing:.3px}
+.paper .caddr{font-size:.84em;color:#333;margin-top:2px;max-width:104mm}
+.paper .dtitle{font-family:Georgia,serif;font-weight:700;font-size:1.85em;color:var(--acc,#16233f);text-align:right;letter-spacing:1px;white-space:nowrap}
+.paper .dtitle small.ja{text-align:right;font-family:Arial,"Hiragino Sans",sans-serif;font-size:.45em}
+.paper .ctag{display:inline-block;margin-top:3px;border:1px solid var(--acc,#16233f);color:var(--acc,#16233f);font-size:.72em;font-weight:700;letter-spacing:2px;padding:0 6px}
+.paper .two{display:grid;grid-template-columns:1.1fr 1fr;border:1px solid #222;margin-bottom:.65em}
+.paper .two>div{padding:.55em .8em}
+.paper .two>div+div{border-left:1px solid #222}
+.paper .lbl{font-size:.8em;color:#444}
+.paper .val{font-weight:700;white-space:pre-line}
+.paper .kv{display:grid;grid-template-columns:10.5em 1fr;gap:.2em .65em;margin:0}
+.paper .ship{display:grid;grid-template-columns:1fr 1fr 1fr;border:1px solid #222;margin-bottom:.65em}
+.paper .ship>div{padding:.45em .8em;border-right:1px solid #222}.paper .ship>div:last-child{border-right:0}
+.paper .ship>div:nth-child(n+4){border-top:1px solid #222}
+.paper table.it{width:100%;border-collapse:collapse;border:1px solid #222}
+.paper table.it thead{display:table-header-group}
+.paper table.it tr{break-inside:avoid;page-break-inside:avoid}
+.paper table.it th{background:var(--acc-soft,#eef0f5);font-size:.85em;border:1px solid #222;padding:.35em .45em;text-align:center}
+.paper table.it td{padding:.27em .55em;border-left:1px solid #222;border-right:1px solid #222;vertical-align:top}
+.paper.compact table.it td{padding:.08em .45em}
+.paper table.it tr.last td{border-bottom:1px solid #222}
+.paper table.it td.r{text-align:right;white-space:nowrap}.paper table.it td.c{text-align:center}
+.paper table.it td.mk{font-size:.83em;font-weight:700;white-space:pre-line;vertical-align:top;line-height:1.5}
+.paper table.it tr.tot td{border-top:1.5px solid #222;border-bottom:1.5px solid #222;font-weight:700;background:var(--acc-soft,#f4f4f4)}
+.paper .sec{border:1px solid #222;border-top:0;padding:.55em .8em}
+.paper .words{font-weight:700;font-size:.9em;margin-top:2px}
+.paper .hss{margin-top:.9em;font-size:.88em}
+.paper .hss table{border-collapse:collapse;width:100%}.paper .hss th,.paper .hss td{border:1px solid #888;padding:1px 5px;text-align:left}.paper .hss th{background:var(--acc-soft,#eee)}
+.paper .bank{margin-top:1.1em;font-size:.9em;line-height:1.4}
+.paper .bank b{display:block;margin-bottom:1px;color:var(--acc,#16233f)}
+.paper .sign{margin-top:1.2em;display:flex;justify-content:flex-end;break-inside:avoid}
+.paper .sign>div{width:78mm;text-align:center;font-size:.93em}
+.paper .sign img{max-height:calc(22mm*var(--k,1));max-width:70mm;display:block;margin:2px auto}
+.paper .sign .line{border-top:1px solid #000;margin-top:3.4em;padding-top:.2em}
+.paper .cert{margin-top:.8em;font-size:.9em;font-style:italic}
+.paper .pgfoot{position:absolute;left:var(--pad,12mm);right:var(--pad,12mm);bottom:5mm;font-size:.74em;color:#777;border-top:1px solid #ddd;padding-top:2px;display:flex;justify-content:space-between}
+.paper .wm{position:absolute;top:42%;left:0;right:0;text-align:center;font-size:92pt;font-weight:800;letter-spacing:6px;color:rgba(0,0,0,.055);transform:rotate(-28deg);pointer-events:none;z-index:0}
+.paper.lblpage .lb{border:2.5px solid #000;height:calc(var(--ph,297mm)/2 - 24mm);margin-bottom:6mm;display:flex;align-items:center;justify-content:center;break-inside:avoid;page-break-inside:avoid}
+.paper.lblpage .lb pre{font-family:Arial,sans-serif;font-weight:800;font-size:19pt;line-height:1.5;margin:0;text-align:left}
+.paper.lblpage{padding-top:10mm}
+@media print{.paper{margin:0;box-shadow:none;break-after:page;page-break-after:always}.paper:last-child{break-after:auto;page-break-after:auto}.paper .wm{position:fixed}}
+`;
+document.getElementById('paperCss').textContent = PAPER_CSS;
+
+/* ========== Helpers ========== */
+const $=(s,e=document)=>e.querySelector(s);
+const $$=(s,e=document)=>[...e.querySelectorAll(s)];
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const num=v=>{const n=parseFloat(String(v).replace(/,/g,''));return isNaN(n)?0:n};
+const fmt=(n,d=2)=>num(n).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+const fmtP=n=>num(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4});
+const r2=x=>Math.round((x+Number.EPSILON)*100)/100;
+const uid=()=>Math.random().toString(36).slice(2,9);
+const pad2=n=>String(n).padStart(2,'0');
+const isoOf=d=>d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate());
+const todayISO=()=>isoOf(new Date());
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function ord(n){const s=['th','st','nd','rd'],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0])}
+function dLong(iso){if(!iso)return '';const [y,m,d]=iso.split('-').map(Number);return `${ord(d)} ${MONTHS[m-1]} ${y}`}
+function addDays(iso,n){if(!iso)return '';const d=new Date(iso+'T00:00:00');d.setDate(d.getDate()+num(n));return isoOf(d)}
+function diffDays(a,b){return Math.round((new Date(a+'T00:00:00')-new Date(b+'T00:00:00'))/864e5)}
+function fiscal(iso){if(!iso)return null;const y=+iso.slice(0,4),m=+iso.slice(5,7);return m>=6?y:y-1}
+const CUR={EUR:['€','EURO','CENTS'],USD:['$','U.S. DOLLARS','CENTS'],JPY:['¥','JAPANESE YEN',''],GBP:['£','POUNDS STERLING','PENCE'],CNY:['¥','CHINESE YUAN','FEN'],SGD:['S$','SINGAPORE DOLLARS','CENTS'],THB:['฿','THAI BAHT','SATANG'],IDR:['Rp','INDONESIAN RUPIAH','SEN']};
+const sym=c=>(CUR[c]||[c])[0];
+const ONES=['','ONE','TWO','THREE','FOUR','FIVE','SIX','SEVEN','EIGHT','NINE','TEN','ELEVEN','TWELVE','THIRTEEN','FOURTEEN','FIFTEEN','SIXTEEN','SEVENTEEN','EIGHTEEN','NINETEEN'];
+const TENS=['','','TWENTY','THIRTY','FORTY','FIFTY','SIXTY','SEVENTY','EIGHTY','NINETY'];
+function w999(n){let s='';if(n>=100){s+=ONES[Math.floor(n/100)]+' HUNDRED';n%=100;if(n)s+=' AND '}if(n>=20){s+=TENS[Math.floor(n/10)];if(n%10)s+='-'+ONES[n%10]}else if(n)s+=ONES[n];return s}
+function words(n){n=Math.floor(n);if(n===0)return 'ZERO';const u=['',' THOUSAND',' MILLION',' BILLION'];const p=[];let i=0;while(n>0){const x=n%1000;if(x)p.unshift(w999(x)+u[i]);n=Math.floor(n/1000);i++}return p.join(' ')}
+function amountWords(total,cur){const info=CUR[cur]||[cur,cur,'CENTS'];const whole=Math.floor(total+1e-9);const cents=Math.round((total-whole)*100);let s=`SAY ${info[1]} ${words(whole)}`;if(cents&&info[2])s+=` AND ${words(cents)} ${info[2]}`;return s+' ONLY.'}
+const rate=c=>c==='JPY'?1:(S.rates[c]||0);
+
+/* ========== i18n ========== */
+const J={
+'Dashboard':'ダッシュボード','Shipment':'案件・出荷','Documents':'書類出力','Masters':'マスタ','Tools':'ツール','Settings':'設定',
+'New':'新規','Duplicate':'複製','Delete':'削除','Backup':'バックアップ','Restore':'復元','Print':'印刷','Add':'追加','Close':'閉じる','Cancel':'キャンセル','Import':'取り込み','Copy':'コピー','Load':'読込',
+'Info':'基本情報','Items':'明細','Packing':'梱包','Payments':'入金','Checklist':'チェックリスト','Check':'整合チェック',
+'Overview of all shipments':'全案件の一覧','Shipments':'案件数','Sales this fiscal year':'今期売上','Outstanding (unpaid)':'未入金残高','Next sailing':'次回出港','Search':'検索',
+'Invoice No.':'請求書番号','Customer':'顧客','Date':'日付','Sailing':'出港日','Total':'合計','Status':'状況','Progress':'進捗','Payment due':'支払期日',
+'Quotation':'見積','Order':'受注','Production':'製造中','Shipped':'出荷済','Paid':'入金済','Quotation / Order':'見積・受注',
+'Fiscal year (Jun–May)':'会計年度（6月〜5月）','Monthly sales (≈ JPY at your rates)':'月別売上（為替換算・円）','Top customers':'主要顧客','Coming up':'今後の予定','Nothing scheduled':'予定なし','Export calendar (.ics)':'カレンダー出力(.ics)','Quick actions':'クイック操作','Search everything':'全体検索',
+'Backup recommended':'バックアップ推奨','never':'なし','Fit to one page (auto)':'1ページに自動調整',
+'Document numbers':'書類番号','Quotation / Proforma No.':'見積・PI番号','Quotation date':'見積日','Validity (days)':'有効期間（日）','Invoice date':'請求書日付','Contract No.':'契約番号','Order No.':'受注番号',
+"Customer's Order No.":'客先注文番号','Customer (sold to)':'顧客（売り先）','Load from customer master':'顧客マスタから読込','Company name':'会社名','Country':'国','Address':'住所','Attn.':'担当者','Tel':'電話','Fax':'FAX','E-mail':'メール','VAT / Tax ID':'VAT・税番号',
+'Consignee same as customer':'荷受人は顧客と同じ','Consignee':'荷受人','Notify party':'通知先','Payment':'支払条件','Method':'方法','Days after invoice':'請求書日付から（日）','Custom wording (optional)':'文言を上書き（任意）','Currency':'通貨','Incoterm':'インコタームズ','Named place':'指定場所',
+'L/C No.':'L/C番号','L/C date':'L/C日付','Issuing bank':'発行銀行','L/C expiry':'L/C有効期限',
+'Shipping':'輸送','Ocean vessel / Voyage':'船名・便','Port of loading':'積込港','Port of discharge':'揚地港','Final destination':'最終仕向地','Sailing on or about (ETD)':'出港予定日（ETD）','Arrival (ETA)':'到着予定日（ETA）','Forwarder':'フォワーダー','Freight':'運賃','Freight prepaid':'運賃前払い','Freight collect':'運賃着払い','B/L type':'B/Lタイプ',
+'Goods':'貨物','Goods title (Re:)':'品名（Re:）','HS code':'HSコード','Default HS code':'標準HSコード','Country of origin':'原産国','Include "non-Russian iron & steel" certification':'「非ロシア産鉄鋼」証明文を記載','Remarks (printed)':'備考（書類に印字）','Internal notes (not printed)':'社内メモ（印字なし）',
+'Description':'品名','Qty':'数量','Unit':'単位','Unit price':'単価','Amount':'金額','Case':'ケース','Add item':'明細追加','Paste from Excel':'Excelから貼付','Export CSV':'CSV出力','Save new items to product master':'新規品名を製品マスタへ',
+'Show cost & margin (internal)':'原価・利益を表示（社内用）','Cost ¥/unit':'原価¥/個','Margin':'利益率','Revenue (JPY)':'売上（円）','Cost (JPY total)':'原価合計（円）','Gross profit (JPY)':'粗利（円）','Items without cost: {0}':'原価未入力の明細：{0}','vs last order {0}':'前回比 {0}',
+'Additional charges / discounts':'追加費用・値引','Label':'名称','Add line':'行追加','Subtotal':'小計','Total pcs':'総数量','Net wt':'正味重量','Gross wt':'総重量','Volume':'容積',
+'Cases / cartons':'ケース','Case No.':'ケース番号','L (cm)':'長さ(cm)','W (cm)':'幅(cm)','H (cm)':'高さ(cm)','N/W (kg)':'正味(kg)','G/W (kg)':'総重量(kg)','Pieces':'数量',
+'Assign all items to case 1':'全明細をケース1へ','Calculate N/W from product weights':'製品マスタの重量から正味を計算','Shipping marks':'シッピングマーク','Auto-generate':'自動生成','Case number line is added automatically.':'ケース番号の行は自動で追加されます。',
+'Payment tracker':'入金管理','Received':'入金額','Reference':'参照','Record full balance today':'残高全額を本日入金として記録','Mark shipment as paid':'入金済にする','Balance':'残高','Invoice total':'請求額','Add payment':'入金追加',
+'Document checklist':'書類・手配チェックリスト','Pre-flight check':'出荷前チェック',
+'Quotation sent':'見積送付','Customer PO received':'客先注文書受領','Order confirmation sent':'注文請書送付','Proforma / advance payment':'プロフォーマ・前払い','Production completed':'製造完了','Shipping inspection report (検査成績書)':'出荷検査成績書','Packing done':'梱包完了','Booking with forwarder':'フォワーダー手配','Commercial invoice issued':'インボイス発行','Packing list issued':'パッキングリスト発行','Shipping instruction sent':'船積依頼書送付','Export declaration / permit':'輸出申告・許可','Certificate of origin (if requested)':'原産地証明（要求時）','Non-Russian steel certificate (EU)':'非ロシア産鉄鋼証明（EU向け）','Insurance (if CIF/CIP)':'保険（CIF/CIP時）','B/L or sea waybill received':'B/L・SWB受領','Shipping advice + docs sent to customer':'出荷案内・書類送付','Payment received':'入金確認',
+'Document':'書類','Commercial Invoice':'商業送り状（インボイス）','Packing List':'梱包明細書','Shipping Instruction':'船積依頼書','Case Marks':'ケースマーク','Proforma Invoice':'プロフォーマ・インボイス','Order Confirmation':'注文請書',
+'Print studio':'印刷設定','Paper size':'用紙サイズ','Scale (%)':'倍率（%）','Margin (mm)':'余白（mm）','Density':'密度','Normal':'標準','Compact':'コンパクト','Show logo':'ロゴを表示','Logo height (mm)':'ロゴ高さ(mm)','Watermark':'透かし','None':'なし','Copy label':'原本・副本表記','Footer line':'フッター行','Bank block':'銀行情報','Show signature / stamp':'署名・社印を表示','HS code summary (when several HS)':'HSコード別集計（複数HS時）','Japanese subtitles on documents':'書類に日本語サブタイトルを表示',
+'Print this document':'この書類を印刷','Print all documents':'全書類を印刷','Printable file':'印刷用ファイル','Measurement':'寸法',
+'If printing is blocked in this view, use "Printable file", then open it and press Ctrl+P.':'この画面で印刷できない場合は「印刷用ファイル」を保存し、開いて Ctrl+P を押してください。',
+'Customers':'顧客','Products':'製品','HS codes':'HSコード','Add customer':'顧客追加','Add product':'製品追加','Add HS code':'HSコード追加','Name':'名称','Default Incoterm':'標準インコタームズ','Default days':'標準支払日数','Default discharge port':'標準揚地港','Cost (JPY)':'原価（円）','Price':'単価','Weight/pc (kg)':'重量/個(kg)','Steel cert.':'鉄鋼証明','Default remarks':'標準備考','Sales':'売上','English description':'英語品名','Japanese name':'和名','JP stat. no.':'輸出統計品目番号','Note':'備考',
+'HS codes are reference data. Always confirm classification with your customs broker or past export permits (輸出許可書).':'HSコードは参考情報です。分類は必ず通関業者または過去の輸出許可書で確認してください。',
+'Price calculator':'価格計算','Cost in JPY':'原価（円）','Margin on selling price (%)':'売価ベース利益率（%）','Rate: JPY per 1 foreign unit':'為替：外貨1あたり円','Selling price (foreign)':'販売価格（外貨）','If you sell at (foreign)':'この価格で売ると','Resulting margin':'利益率','Profit (JPY)':'利益（円）',
+'Volume & container':'容積・コンテナ','Cartons':'箱数','Volume (m³)':'容積(m³)','Volumetric weight – air (kg)':'容積重量・航空(kg)','Freight ton – LCL (R/T)':'運賃トン・LCL','Fill 20ft':'20ft充填','Fill 40ft':'40ft充填','Fill 40ft HC':'40HC充填','Approximate usable volume: 20ft 33 / 40ft 67 / 40HC 76 m³.':'概算有効容積：20ft 33 / 40ft 67 / 40HC 76 m³',
+'Exchange rates (JPY per 1 unit)':'為替レート（1単位あたり円）','Incoterms 2020':'インコタームズ2020','Term':'条件','Mode':'輸送','Risk passes':'危険移転','Export clearance':'輸出通関','Main carriage':'主要運賃','Insurance':'保険','Email templates':'メール文例','Shipping advice':'出荷案内','Quotation cover':'見積送付','Payment reminder':'支払依頼',
+'Company':'自社情報','Bank (beneficiary)':'銀行口座','Signer':'署名者','Signature / stamp image':'署名・社印画像','Company logo':'会社ロゴ','Remove image':'画像削除','Theme':'テーマ','Numbering':'採番','Invoice prefix':'接頭辞','Next number':'次の番号','Data':'データ','Download backup (.json)':'バックアップ保存(.json)','Restore from backup':'バックアップから復元','Reset to sample data':'サンプルに初期化','Start clean (remove sample data)':'サンプルを消して空から開始','Bank name':'銀行名','Branch':'支店','Bank address':'銀行住所','SWIFT BIC':'SWIFT BIC','Account No.':'口座番号','Account type':'口座種別','Beneficiary':'受取人','Beneficiary address':'受取人住所',
+'Post code':'郵便番号','Interface language':'表示言語',
+'Missing: {0}':'未入力：{0}','No line items.':'明細がありません。','Line {0}: quantity or unit price is zero.':'明細{0}：数量または単価が0です。','Line {0}: description is empty.':'明細{0}：品名が空です。','No cases defined in Packing tab.':'梱包タブにケースがありません。','Case {0}: gross weight is lower than net weight.':'ケース{0}：総重量が正味重量より小さいです。','Case {0}: dimensions missing.':'ケース{0}：寸法が未入力です。','Line {0} is not assigned to a valid case.':'明細{0}が有効なケースに割り当てられていません。','HS code is missing (needed for customs).':'HSコードが未入力です（通関で必要）。','HS code "{0}" has an unusual format (expected like 8207.20).':'HSコード「{0}」の形式が不自然です（例：8207.20）。','Several HS codes in use ({0}): HS column and summary are printed.':'複数のHSコードを使用中（{0}）：HS列と集計を印字します。','Sailing date is earlier than the invoice date.':'出港日が請求書日付より前です。','Invoice No. {0} is also used by another shipment.':'請求書番号{0}が他の案件と重複しています。','Payment due {0} ({1} days after invoice date).':'支払期日 {0}（請求書日付から{1}日）。','Payment is overdue by {0} days.':'入金が{0}日遅延しています。','Incoterm {0} needs a named place.':'{0} には指定場所が必要です。','Port of loading ({0}) differs from the Incoterm place ({1}). Make sure all documents agree.':'積込港（{0}）とインコターム指定場所（{1}）が異なります。全書類で一致しているか確認してください。','Customer order number is empty.':'客先注文番号が空です。','Destination is in the EU: customers often ask for the non-Russian iron & steel statement.':'EU向けです。非ロシア産鉄鋼の証明文を求められることがあります。','Weights: net {0} kg / gross {1} kg / {2} m³ across {3} case(s).':'重量：正味{0}kg／総重量{1}kg／{2}m³（{3}ケース）。','Balance outstanding: {0}.':'未入金残高：{0}。','All checks passed. Documents are generated from one data source, so Invoice and Packing List always agree.':'全項目OK。書類は同一データから生成されるため、インボイスとパッキングリストは常に一致します。',
+'Saved':'保存済み','Copied':'コピーしました','Printing is blocked here. Use "Printable file".':'この画面では印刷できません。「印刷用ファイル」を使ってください。','Not persisted in this browser. Please use Backup.':'このブラウザに保存できません。バックアップを使ってください。','Restored':'復元しました','Invalid backup file':'バックアップファイルが不正です','Added to product master':'製品マスタに追加しました','Delete this shipment?':'この案件を削除しますか？','Reset everything to sample data?':'サンプルデータに初期化しますか？','Remove all sample shipments, customers and products?':'サンプルの案件・顧客・製品をすべて削除しますか？','Updated':'更新しました',
+'Paste rows copied from Excel. Columns: Description, Qty, Unit price (optional: HS code).':'Excelからコピーした行を貼り付けてください。列：品名、数量、単価（任意：HSコード）。',
+'Sample data: invoice TSH-30099 (UKB-Uwe Krumm GmbH).':'サンプル：TSH-30099（UKB-Uwe Krumm GmbH）','Data is stored only in this browser. Make backups regularly.':'データはこのブラウザ内のみに保存。定期的にバックアップを。','Go to':'移動'
+};
+function t(s,...a){let j=J[s];let e=s;if(a.length){a.forEach((x,i)=>{e=e.split('{'+i+'}').join(x);if(j)j=j.split('{'+i+'}').join(x)})}
+  if(S.lang==='en'||!j)return esc(e);if(S.lang==='ja')return esc(j);return esc(e)+'<span class="jp">'+esc(j)+'</span>'}
+function tt(s){const j=J[s];if(S.lang==='en'||!j)return s;if(S.lang==='ja')return j;return s+' / '+j}
+function L(s){const j=J[s];return esc(s)+(S&&S.print&&S.print.docJa&&j?`<small class="ja">${esc(j)}</small>`:'')}
+
+/* ========== Seed / migrate ========== */
+function seedHS(){return [
+ {code:'8207.20',en:'Dies for drawing or extruding metal, and parts thereof',ja:'金属の引抜き用又は押出し用のダイス',jp:'',note:'Used on invoice TSH-30099. Some sources list interchangeable press-brake tooling under 8207.30 – please confirm with your customs broker / past 輸出許可書.'},
+ {code:'8207.30',en:'Tools for pressing, stamping or punching, and parts thereof',ja:'プレス用・型打ち用・打抜き用の工具',jp:'',note:'Reference only – verify.'},
+ {code:'7320.20',en:'Helical springs of iron or steel',ja:'つる巻ばね',jp:'',note:'Reference only – verify.'},
+ {code:'7318.15',en:'Threaded screws and bolts (other), with or without nuts/washers',ja:'ねじ及びボルト（その他）',jp:'',note:'Reference only – verify.'}]}
+function seed(){
+  const raw=[
+['WING BEND Plus WBP120 L=500mm',5,994.65],['WING BEND Plus WBP120 L=200mm',5,513],['WING BEND Plus WBP120 L=100mm',5,368.6],['WING BEND Plus WBP120 L=50mm',5,201.4],['WING BEND Plus WBP120 90mm set',5,780.9],
+['WING BEND Plus WBP230 L=500mm',10,1085.85],['WING BEND Plus WBP230 L=200mm',10,527.25],['WING BEND Plus WBP230 L=100mm',5,376.2],['WING BEND Plus WBP230 L=50mm',10,211.85],['WING BEND Plus WBP230 90mm set',5,824.6],
+['WING BEND Plus WBP350 L=100mm',15,490.2],['WING BEND Plus WBP350 L=200mm',15,678.3],['WING BEND Plus WBP350 L=500mm',15,1175.15],['WING BEND Plus WBP350 L=50mm',10,265.05],
+['WING BEND Plus WBP650S L=100mm',5,503.5],['WING BEND Plus WBP650S L=200mm',5,716.3],['WING BEND Plus WBP650S L=500mm',5,1681.5],['WING BEND Plus WBP650S L=50mm',5,278.35],
+['SPRING WB350-00-04 100pcs/1 pck',1,76.95],['SPRING WB650S-00-04 100pcs/1 pck',1,76.95],['SCREW WB650S-00-03 100pcs/1 pck',1,113.05],
+['SLIDER SLP120-2000',20,15.96],['SLIDER SLP230-3000',30,31.825],['SLIDER SLP350-3000',30,41.61],
+['SLIDER HOLDER WBP120 L=100mm',10,4],['SLIDER HOLDER WBP350 L=100mm',12,4.4],['SLIDER HOLDER WBP650S L=100mm',10,4.5]];
+  const cust={name:'UKB-Uwe Krumm GmbH',country:'GERMANY',addr:'Struthwiese 1, 57299 Burbach',attn:'Mr. Holger Oehm',tel:'49-(0)2736-4442-0',fax:'49-(0)2736-4442-22',email:'',vat:''};
+  const sh={id:uid(),status:'paid',invoiceNo:'TSH-30099',date:'2024-10-21',quoteNo:'',quoteDate:'',validity:30,contractNo:'',orderNo:'',
+    custPO:"2024-34747 (Transaction Key 62092),\n2025-35029 (Transaction Key 62374)",lcNo:'',lcDate:'',lcBank:'',lcExpiry:'',
+    cust:{...cust},consigneeSame:true,consignee:'',notify:'',payMethod:'tt',payDays:45,payText:'',currency:'EUR',incoterm:'FOB',incotermPlace:'YOKOHAMA',
+    vessel:'"ONE OLYMPUS" V.075W',pol:'YOKOHAMA, JAPAN',pod:'HAMBURG, GERMANY',finalDest:'UKB-Uwe Krumm GmbH',etd:'2024-12-02',eta:'',forwarder:'',freightTerms:'prepaid',blType:'Original B/L',
+    goodsTitle:'PRESS BRAKE TOOLS',hs:'8207.20',origin:'MADE IN JAPAN',steelCert:true,remarks:'',notes:'',
+    marks:"TO UKB-UWE KRUMM\nGMBH GERMANY\nPRESS BRAKE TOOLS\nINVOICE NO.TSH-30099\nTOKYO SEIMITSU HATSUJO CO.,LTD.\nMADE IN JAPAN",
+    items:raw.map(r=>({desc:r[0],hs:'',qty:r[1],unit:'pcs',price:r[2],cost:0,cs:1})),
+    cases:[{no:1,l:327,w:57,h:92,nw:610,gw:680}],adds:[],payments:[],checks:{}};
+  ['Quotation sent','Customer PO received','Order confirmation sent','Production completed','Packing done','Booking with forwarder','Commercial invoice issued','Packing list issued','Shipping instruction sent','Export declaration / permit','B/L or sea waybill received','Shipping advice + docs sent to customer','Payment received'].forEach(k=>sh.checks[k]=true);
+  return {v:2,lang:'bi',cur:sh.id,lastBackup:'',ui:{cost:false},
+    print:{size:'A4',scale:100,margin:12,density:'normal',logo:true,logoH:14,wm:'',copy:'',footer:true,bank:true,sig:true,hsSum:true,docJa:false,fit:true},
+    settings:{company:{name:'TOKYO SEIMITSU HATSUJO CO.,LTD.',addr:'134, Higashikata-Cho, Tsuzuki-Ku, Yokohama-City, Kanagawa-Pref.,',post:'224-0045',tel:'+81-(0)45-624-9841',fax:'+81-(0)45-624-9840',signer:'Masakazu Tsukamoto'},
+      bank:{name:'MUFG BANK LTD.',branch:'JIYUGAOKA EKIMAE BRANCH',addr:'1-30-3, Jiyugaoka, Meguro-Ku, Tokyo-Pref., 152-0035 JAPAN',swift:'BOTKJPJT',acct:'No.9005229',type:'Checking Account',benef:'Tokyo Seimitsu Hatsujo Co.,Ltd.',benefAddr:'134,Higashikata-Cho,Tsuzuki-Ku, Yokohama-City,Kanagawa-Pref., 224-0045, Japan'},
+      sigImg:'',logo:'',theme:'navy',prefix:'TSH-',nextNo:30100},
+    rates:{EUR:165,USD:150,GBP:190,CNY:21},
+    hsList:seedHS(),
+    customers:[{id:uid(),...cust,currency:'EUR',incoterm:'FOB',payDays:45,pod:'HAMBURG, GERMANY',steel:true,remarks:''}],
+    products:raw.map(r=>({id:uid(),desc:r[0],hs:'8207.20',unit:'pcs',price:r[2],cost:0,wt:0})),
+    shipments:[sh]};
+}
+function migrate(o){const d=seed();o.v=2;o.print=Object.assign({},d.print,o.print||{});o.ui=o.ui||{cost:false};o.hsList=o.hsList||d.hsList;o.rates=o.rates||d.rates;o.lastBackup=o.lastBackup||'';
+  o.settings.theme=o.settings.theme||'navy';o.settings.logo=o.settings.logo||'';
+  o.shipments.forEach(s=>{s.payments=s.payments||[];s.adds=s.adds||[];s.checks=s.checks||{};s.items.forEach(i=>{if(i.cost==null)i.cost=0})});
+  o.customers.forEach(c=>{if(c.steel==null)c.steel=false;c.remarks=c.remarks||''});return o}
+function blankShipment(){const s=S.settings;const n=s.prefix+s.nextNo;
+  return {id:uid(),status:'quote',invoiceNo:n,date:todayISO(),quoteNo:'',quoteDate:todayISO(),validity:30,contractNo:'',orderNo:'',custPO:'',lcNo:'',lcDate:'',lcBank:'',lcExpiry:'',
+   cust:{name:'',country:'',addr:'',attn:'',tel:'',fax:'',email:'',vat:''},consigneeSame:true,consignee:'',notify:'',payMethod:'tt',payDays:45,payText:'',currency:'EUR',incoterm:'FOB',incotermPlace:'YOKOHAMA',
+   vessel:'',pol:'YOKOHAMA, JAPAN',pod:'',finalDest:'',etd:'',eta:'',forwarder:'',freightTerms:'prepaid',blType:'Original B/L',goodsTitle:'',hs:'8207.20',origin:'MADE IN JAPAN',steelCert:false,remarks:'',notes:'',marks:'',
+   items:[],cases:[{no:1,l:0,w:0,h:0,nw:0,gw:0}],adds:[],payments:[],checks:{}}}
+
+/* ========== State ========== */
+const KEY='tsh_kaigai_eigyou_v1';
+let memOnly=false;
+function load(){try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r);if(o&&o.shipments&&o.settings)return migrate(o)}}catch(e){memOnly=true}return null}
+let S=load()||seed();
+let view='dash',tab='info',docTab='ci',mtab='cust',saveTimer=null,filter='',fyView=null,cmdIdx=0;
+function cur(){return S.shipments.find(s=>s.id===S.cur)||S.shipments[0]}
+function save(){clearTimeout(saveTimer);saveTimer=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(S));memOnly=false}catch(e){memOnly=true}stamp()},250)}
+function stamp(){const e=$('#saved');if(!e)return;const d=new Date();e.textContent=memOnly?tt('Not persisted in this browser. Please use Backup.'):tt('Saved')+' '+pad2(d.getHours())+':'+pad2(d.getMinutes())}
+function toast(m){const e=$('#toast');e.textContent=m;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),2200)}
+function ref(path){const p=path.split('.');let o;if(p[0]==='cur'){o=cur();p.shift()}else o=S;while(p.length>1)o=o[p.shift()];return [o,p[0]]}
+function getv(path){try{const [o,k]=ref(path);return o[k]}catch(e){return ''}}
+function setv(path,v){const [o,k]=ref(path);o[k]=v}
+const THEMES=[['navy','Navy & Gold','#16233f','#b8935a'],['forest','Forest & Brass','#173a2e','#b59a5a'],['bordeaux','Bordeaux & Rose','#44202e','#c2977f'],['slate','Slate & Copper','#272b33','#b97a52']];
+function applyTheme(){document.documentElement.dataset.theme=S.settings.theme||'navy'}
+function applyPage(){const l=S.print.size==='Letter';$('#pageCss').textContent=`@page{size:${l?'letter':'A4'};margin:0}`}
+function logoSrc(){return S.settings.logo||LOGO_DEFAULT||'tsh.png'}
+
+/* ========== Calculations ========== */
+const lineAmt=it=>r2(num(it.qty)*num(it.price));
+const caseVol=c=>Math.round(num(c.l)*num(c.w)*num(c.h)/1e6*1000)/1000;
+function totals(sh){
+  const qty=sh.items.reduce((a,i)=>a+num(i.qty),0);
+  const sub=r2(sh.items.reduce((a,i)=>a+lineAmt(i),0));
+  const adds=r2(sh.adds.reduce((a,x)=>a+num(x.amount),0));
+  return {qty,sub,adds,total:r2(sub+adds),nw:sh.cases.reduce((a,c)=>a+num(c.nw),0),gw:sh.cases.reduce((a,c)=>a+num(c.gw),0),vol:Math.round(sh.cases.reduce((a,c)=>a+caseVol(c),0)*1000)/1000,cases:sh.cases.length};
+}
+const paidAmt=sh=>r2((sh.payments||[]).reduce((a,p)=>a+num(p.amount),0));
+const balance=sh=>r2(totals(sh).total-paidAmt(sh));
+const jpyOf=sh=>totals(sh).total*rate(sh.currency);
+function payText(sh){if(sh.payText&&sh.payText.trim())return sh.payText.trim();
+  switch(sh.payMethod){case 'adv':return 'T/T in advance (100% prior to shipment).';case 'lc':return 'By irrevocable L/C at sight.';case 'dp':return 'D/P at sight.';
+   default:return `T/T remittance within ${sh.payDays} days after invoice date.`}}
+const payLabel=sh=>({tt:'T/T REMITTANCE',adv:'T/T IN ADVANCE',lc:'L/C AT SIGHT',dp:'D/P',other:'AS AGREED'}[sh.payMethod]||'T/T REMITTANCE');
+const dueDate=sh=>sh.payMethod==='tt'&&sh.date?addDays(sh.date,sh.payDays):'';
+const ITERM={FOB:'F.O.B.',CIF:'C.I.F.',CFR:'C&F',FCA:'F.C.A.',EXW:'EX WORKS',FAS:'F.A.S.',CPT:'C.P.T.',CIP:'C.I.P.',DAP:'D.A.P.',DPU:'D.P.U.',DDP:'D.D.P.'};
+function genMarks(sh){const c=S.settings.company;const name=(sh.cust.name||'').toUpperCase();
+  const w=name.split(' ').filter(Boolean);const half=Math.ceil(w.length/2);const a=w.slice(0,half).join(' '),b=w.slice(half).join(' ');
+  return [`TO ${a}`.trim(),(b+' '+(sh.cust.country||'').toUpperCase()).trim(),(sh.goodsTitle||'').toUpperCase(),`INVOICE NO.${sh.invoiceNo}`,c.name,sh.origin||'MADE IN JAPAN'].filter(Boolean).join('\n')}
+function caseOf(it,sh){return sh.cases.find(c=>num(c.no)===num(it.cs))}
+const effHS=(it,sh)=>String(it.hs||sh.hs||'').trim();
+const hsUniq=sh=>[...new Set(sh.items.map(i=>effHS(i,sh)).filter(Boolean))];
+const hsInfo=code=>S.hsList.find(h=>h.code===code);
+function lastPrice(sh,it){let best=null;S.shipments.forEach(o=>{if(o.id===sh.id||o.cust.name!==sh.cust.name||!sh.cust.name)return;const m=o.items.find(x=>x.desc===it.desc);if(m&&num(m.price)&&(!best||o.date>best.d))best={d:o.date,p:num(m.price)}});return best}
+function prodOf(desc){return S.products.find(p=>p.desc===desc)}
+
+/* ========== Form helpers ========== */
+function F(label,path,o={}){const v=getv(path);let h;
+  if(o.area)h=`<textarea data-p="${path}" rows="${o.rows||2}" placeholder="${esc(o.ph||'')}">${esc(v)}</textarea>`;
+  else if(o.opts)h=`<select data-p="${path}" ${o.re?'data-r="1"':''}>${o.opts.map(x=>{const [a,b]=Array.isArray(x)?x:[x,x];return `<option value="${esc(a)}" ${a==v?'selected':''}>${esc(b)}</option>`}).join('')}</select>`;
+  else h=`<input data-p="${path}" type="${o.type||'text'}" value="${esc(v)}" ${o.n?'data-n="1" step="any"':''} ${o.list?`list="${o.list}"`:''} ${o.min!=null?`min="${o.min}" max="${o.max}"`:''} placeholder="${esc(o.ph||'')}">`;
+  return `<label class="f ${o.cls||''}"><span>${t(label)}</span>${h}</label>`}
+function C(label,path,re){return `<label class="chk"><input type="checkbox" data-p="${path}" ${re?'data-r="1"':''} ${getv(path)?'checked':''}><span>${t(label)}</span></label>`}
+
+/* ========== Chrome ========== */
+const NAV=[['dash','Dashboard'],['ship','Shipment'],['docs','Documents'],['masters','Masters'],['tools','Tools'],['set','Settings']];
+function renderChrome(){
+  $('#brand').innerHTML=`<div class="logoplate"><img src="${esc(logoSrc())}" alt="TSH" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="mono" style="display:none">TSH</div></div><div><b>Export Desk</b><small>海外営業デスク</small></div>`;
+  $('#nav').innerHTML=NAV.map(([k,l])=>`<button data-a="nav" data-v="${k}" class="${view===k?'on':''}">${t(l)}</button>`).join('');
+  $('#sidefoot').innerHTML=`<span class="kbd">Ctrl</span>+<span class="kbd">K</span> ${esc(tt('Search'))}<br>${esc(tt('Data is stored only in this browser. Make backups regularly.'))}`;
+  const sh=cur();const old=!S.lastBackup||diffDays(todayISO(),S.lastBackup)>14;
+  $('#top').innerHTML=`<select id="shSel" data-a-change="selship">${S.shipments.map(s=>`<option value="${s.id}" ${s.id===sh.id?'selected':''}>${esc(s.invoiceNo)} · ${esc(s.cust.name||'—')}</option>`).join('')}</select>
+   <button class="ghost" data-a="newShip">+ ${t('New')}</button><button class="ghost" data-a="dupShip">${t('Duplicate')}</button><button class="ghost" data-a="cmd">🔍</button>
+   <span class="grow"></span>${old?`<span class="bkwarn" data-a="backup" title="${esc(S.lastBackup||tt('never'))}">⚠ ${esc(tt('Backup recommended'))}</span>`:''}<span id="saved"></span>
+   <button class="ghost" data-a="backup">${t('Backup')}</button>
+   <div class="seg">${[['bi','EN/日本語'],['en','EN'],['ja','日本語']].map(([k,l])=>`<button data-a="lang" data-v="${k}" class="${S.lang===k?'on':''}">${l}</button>`).join('')}</div>`;
+  stamp();
+}
+function render(){applyTheme();applyPage();renderChrome();
+  $('#dls').innerHTML=`<datalist id="prodList">${S.products.map(p=>`<option value="${esc(p.desc)}">`).join('')}</datalist><datalist id="hsDl">${S.hsList.map(h=>`<option value="${esc(h.code)}">${esc(h.en)}</option>`).join('')}</datalist>`;
+  $('#view').innerHTML=({dash:vDash,ship:vShip,docs:vDocs,masters:vMasters,tools:vTools,set:vSet})[view]();
+  if(view==='docs')fitPreview();
+  if(view==='tools')calcTools();
+  document.documentElement.lang=S.lang==='ja'?'ja':'en';
+}
+
+/* ---- Dashboard ---- */
+const STATUS=['quote','order','production','shipped','paid'];
+const STL={quote:'Quotation',order:'Order',production:'Production',shipped:'Shipped',paid:'Paid'};
+const CHECKS=['Quotation sent','Customer PO received','Order confirmation sent','Proforma / advance payment','Production completed','Shipping inspection report (検査成績書)','Packing done','Booking with forwarder','Commercial invoice issued','Packing list issued','Shipping instruction sent','Export declaration / permit','Certificate of origin (if requested)','Non-Russian steel certificate (EU)','Insurance (if CIF/CIP)','B/L or sea waybill received','Shipping advice + docs sent to customer','Payment received'];
+const progress=sh=>Math.round(CHECKS.filter(k=>sh.checks[k]).length/CHECKS.length*100);
+function events(){const now=todayISO(),ev=[];
+  S.shipments.forEach(s=>{if(s.status==='paid')return;
+    if(s.etd&&s.status!=='shipped')ev.push({d:s.etd,k:'ETD',s});
+    if(s.eta)ev.push({d:s.eta,k:'ETA',s});
+    const du=dueDate(s);if(du&&['order','production','shipped'].includes(s.status)&&balance(s)>0)ev.push({d:du,k:'Payment due',s});
+    if(s.lcExpiry)ev.push({d:s.lcExpiry,k:'L/C expiry',s})});
+  return ev.sort((a,b)=>a.d<b.d?-1:1)}
+function vDash(){
+  const now=todayISO(),fy0=fiscal(now);
+  const fys=[...new Set([fy0,...S.shipments.map(s=>fiscal(s.date)).filter(Boolean)])].sort((a,b)=>b-a);
+  const fyData=S.shipments.filter(s=>s.status!=='quote'&&s.date).map(s=>fiscal(s.date));
+  const fyDef=fyData.includes(fy0)?fy0:(fyData.length?Math.max(...fyData):fy0);
+  const fy=fyView&&fys.includes(fyView)?fyView:fyDef;
+  const mine=S.shipments.filter(s=>fiscal(s.date)===fy&&s.status!=='quote');
+  const sales={};mine.forEach(s=>{sales[s.currency]=(sales[s.currency]||0)+totals(s).total});
+  const open={};S.shipments.filter(s=>['order','production','shipped'].includes(s.status)).forEach(s=>{const b=balance(s);if(b>0)open[s.currency]=(open[s.currency]||0)+b});
+  const money=o=>Object.keys(o).length?Object.entries(o).map(([c,v])=>`${sym(c)}${fmt(v,0)}`).join(' · '):'—';
+  const ev=events();const late=ev.filter(e=>e.k==='Payment due'&&e.d<now);
+  /* monthly chart */
+  const mo=Array.from({length:12},(_,i)=>({l:MONTHS[(5+i)%12].slice(0,3),v:0}));
+  mine.forEach(s=>{const m=+s.date.slice(5,7);mo[m>=6?m-6:m+6].v+=jpyOf(s)});
+  const mx=Math.max(...mo.map(m=>m.v),1),W=620,H=170,bw=(W-30)/12;
+  const svg=`<svg viewBox="0 0 ${W} ${H+24}" width="100%" role="img" aria-label="monthly sales">${mo.map((m,i)=>{const h=m.v/mx*(H-20);return `<rect x="${24+i*bw+5}" y="${H-h}" width="${bw-10}" height="${Math.max(h,m.v?2:0)}" rx="3" style="fill:var(--${i%2?'navy':'navy'})"/><text x="${24+i*bw+bw/2}" y="${H+16}" font-size="10.5" text-anchor="middle" style="fill:var(--mut)">${m.l}</text>${m.v?`<text x="${24+i*bw+bw/2}" y="${H-h-4}" font-size="9.5" text-anchor="middle" style="fill:var(--ink)">${fmt(m.v/1e6,1)}M</text>`:''}`}).join('')}<line x1="22" y1="${H}" x2="${W}" y2="${H}" style="stroke:var(--line)"/></svg>`;
+  const byC={};mine.forEach(s=>{byC[s.cust.name||'—']=(byC[s.cust.name||'—']||0)+jpyOf(s)});
+  const top=Object.entries(byC).sort((a,b)=>b[1]-a[1]).slice(0,5),tm=Math.max(...top.map(x=>x[1]),1);
+  const q=filter.toLowerCase();
+  const rows=S.shipments.filter(s=>!q||(s.invoiceNo+s.cust.name+s.custPO).toLowerCase().includes(q)).sort((a,b)=>(b.date||'')<(a.date||'')?-1:1);
+  return `<h1>${t('Dashboard')}</h1><p class="sub">${t('Overview of all shipments')}</p>
+  <div class="row" style="margin-bottom:14px"><button data-a="newShip">+ ${t('New')}</button><button class="ghost" data-a="cmd">🔍 ${t('Search everything')}</button><button class="ghost" data-a="ics">📅 ${t('Export calendar (.ics)')}</button>
+   <span class="grow"></span><select style="width:auto" data-a-change="fy">${fys.map(y=>`<option value="${y}" ${y===fy?'selected':''}>FY${y} (Jun ${y} – May ${y+1})</option>`).join('')}</select></div>
+  <div class="grid g4" style="margin-bottom:16px">
+   <div class="card kpi"><small>${t('Shipments')}</small><b>${S.shipments.length}</b></div>
+   <div class="card kpi"><small>${t('Sales this fiscal year')} · FY${fy}</small><b>${money(sales)}</b></div>
+   <div class="card kpi"><small>${t('Outstanding (unpaid)')}</small><b>${money(open)}</b>${late.length?`<div class="note" style="color:var(--err)">⚠ ${late.length} ${t('Payment due')}</div>`:''}</div>
+   <div class="card kpi"><small>${t('Next sailing')}</small><b>${(ev.find(e=>e.k==='ETD'&&e.d>=now)||{d:'—'}).d}</b></div>
+  </div>
+  <div class="gdash"><div class="card"><h2>${t('Monthly sales (≈ JPY at your rates)')} · FY${fy}</h2>${svg}</div>
+   <div><div class="card"><h2>${t('Coming up')}</h2>${ev.slice(0,7).map(e=>{const dd=diffDays(e.d,now);return `<div class="ev ${dd<0&&e.k==='Payment due'?'late':''}"><span class="d">${e.d.slice(5)}</span><span class="k">${esc(e.k)}</span><span>${esc(e.s.invoiceNo)}</span><span class="grow"></span><span class="note">${dd<0?dd:'+'+dd}d</span></div>`}).join('')||`<div class="note">${t('Nothing scheduled')}</div>`}</div>
+   <div class="card"><h2>${t('Top customers')}</h2>${top.map(([n,v])=>`<div class="hbar"><span>${esc(n)}</span><div class="bar"><i style="width:${v/tm*100}%"></i></div><em>¥${fmt(v/1e6,2)}M</em></div>`).join('')||'—'}</div></div></div>
+  <div class="card"><div class="row" style="margin-bottom:10px"><input id="flt" style="max-width:280px" placeholder="${esc(tt('Search'))}" value="${esc(filter)}" data-a-input="flt"></div>
+  <div style="overflow:auto"><table class="t"><thead><tr><th>${t('Invoice No.')}</th><th>${t('Customer')}</th><th>${t('Date')}</th><th>${t('Sailing')}</th><th class="r">${t('Total')}</th><th class="r">${t('Balance')}</th><th>${t('Status')}</th><th>${t('Progress')}</th><th>${t('Payment due')}</th></tr></thead><tbody>
+  ${rows.map(s=>{const T=totals(s),due=dueDate(s),lt=due&&['order','production','shipped'].includes(s.status)&&due<now&&balance(s)>0;
+   return `<tr class="click" data-a="open" data-id="${s.id}"><td><b>${esc(s.invoiceNo)}</b></td><td>${esc(s.cust.name)}</td><td>${esc(s.date)}</td><td>${esc(s.etd)}</td><td class="r">${sym(s.currency)} ${fmt(T.total)}</td><td class="r">${s.status==='paid'?'—':sym(s.currency)+' '+fmt(balance(s))}</td><td><span class="pill ${s.status}">${esc(tt(STL[s.status]))}</span></td><td><div class="bar"><i style="width:${progress(s)}%"></i></div></td><td style="${lt?'color:var(--err);font-weight:600':''}">${esc(due)}</td></tr>`}).join('')}
+  </tbody></table></div></div>`;
+}
+
+/* ---- Shipment ---- */
+function vShip(){
+  const tabs=[['info','Info'],['items','Items'],['pack','Packing'],['pay','Payments'],['chk','Checklist'],['verify','Check']];const sh=cur();const si=STATUS.indexOf(sh.status);
+  return `<h1>${t('Shipment')} · ${esc(sh.invoiceNo)}</h1><p class="sub">${esc(sh.cust.name)}</p>
+  <div class="steps">${STATUS.map((s,i)=>`<button data-a="setStatus" data-v="${s}" class="${i<si?'done':''} ${i===si?'on':''}">${esc(tt(STL[s]))}</button>`).join('')}</div>
+  <div class="tabs">${tabs.map(([k,l])=>`<button data-a="tab" data-v="${k}" class="${tab===k?'on':''}">${t(l)}</button>`).join('')}</div>
+  ${({info:tInfo,items:tItems,pack:tPack,pay:tPay,chk:tChk,verify:tVerify})[tab]()}`;
+}
+function incoHint(sh){const r=INC.find(x=>x[0]===sh.incoterm);return r?`${r[0]} ${r[1]} — ${r[3]} · ${tt('Export clearance')}: ${r[4]} · ${tt('Main carriage')}: ${r[5]}`:''}
+function tInfo(){const sh=cur();const ccy=['EUR','USD','JPY','GBP','CNY','SGD','THB','IDR'];
+  return `
+  <div class="card"><h2>${t('Quotation / Order')}</h2><div class="grid g4">
+   ${F('Invoice No.','cur.invoiceNo')}${F('Invoice date','cur.date',{type:'date'})}
+   <label class="f"><span>${t('Status')}</span><select data-p="cur.status" data-r="1">${STATUS.map(s=>`<option value="${s}" ${sh.status===s?'selected':''}>${esc(tt(STL[s]))}</option>`).join('')}</select></label>
+   ${F('Currency','cur.currency',{opts:ccy})}
+   ${F('Quotation / Proforma No.','cur.quoteNo')}${F('Quotation date','cur.quoteDate',{type:'date'})}${F('Validity (days)','cur.validity',{type:'number',n:1})}${F('Contract No.','cur.contractNo')}
+   ${F("Customer's Order No.",'cur.custPO',{area:1,rows:2,cls:'span2'})}${F('Order No.','cur.orderNo')}</div></div>
+  <div class="card"><h2>${t('Customer (sold to)')}</h2>
+   <div class="row" style="margin-bottom:12px"><select id="custPick" style="max-width:320px"><option value="">${esc(tt('Load from customer master'))}</option>${S.customers.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select><button class="ghost" data-a="loadCust">${t('Load')}</button></div>
+   <div class="grid g3">${F('Company name','cur.cust.name')}${F('Country','cur.cust.country')}${F('Attn.','cur.cust.attn')}
+   ${F('Address','cur.cust.addr',{area:1,cls:'span2'})}${F('VAT / Tax ID','cur.cust.vat')}${F('Tel','cur.cust.tel')}${F('Fax','cur.cust.fax')}${F('E-mail','cur.cust.email')}</div>
+   <div style="margin-top:12px">${C('Consignee same as customer','cur.consigneeSame',1)}</div>
+   ${sh.consigneeSame?'':`<div class="grid g2" style="margin-top:10px">${F('Consignee','cur.consignee',{area:1,rows:3})}${F('Notify party','cur.notify',{area:1,rows:3})}</div>`}</div>
+  <div class="card"><h2>${t('Payment')}</h2><div class="grid g4">
+   ${F('Method','cur.payMethod',{opts:[['tt','T/T remittance'],['adv','T/T in advance'],['lc','L/C at sight'],['dp','D/P'],['other','Other']]})}${F('Days after invoice','cur.payDays',{type:'number',n:1})}
+   ${F('Incoterm','cur.incoterm',{opts:Object.keys(ITERM),re:1})}${F('Named place','cur.incotermPlace')}
+   <div class="note span4">${esc(incoHint(sh))}</div>
+   ${F('Custom wording (optional)','cur.payText',{cls:'span4',ph:payText({...sh,payText:''})})}
+   ${F('L/C No.','cur.lcNo')}${F('L/C date','cur.lcDate',{type:'date'})}${F('Issuing bank','cur.lcBank')}${F('L/C expiry','cur.lcExpiry',{type:'date'})}</div></div>
+  <div class="card"><h2>${t('Shipping')}</h2><div class="grid g3">
+   ${F('Ocean vessel / Voyage','cur.vessel')}${F('Port of loading','cur.pol')}${F('Port of discharge','cur.pod')}
+   ${F('Final destination','cur.finalDest')}${F('Sailing on or about (ETD)','cur.etd',{type:'date'})}${F('Arrival (ETA)','cur.eta',{type:'date'})}
+   ${F('Forwarder','cur.forwarder',{area:1})}${F('Freight','cur.freightTerms',{opts:[['prepaid',tt('Freight prepaid')],['collect',tt('Freight collect')]]})}${F('B/L type','cur.blType',{opts:['Original B/L','Sea Waybill','Surrender B/L','Air Waybill']})}</div></div>
+  <div class="card"><h2>${t('Goods')}</h2><div class="grid g4">
+   ${F('Goods title (Re:)','cur.goodsTitle')}${F('Default HS code','cur.hs',{list:'hsDl'})}${F('Country of origin','cur.origin')}
+   <div style="align-self:end">${C('Include "non-Russian iron & steel" certification','cur.steelCert')}</div>
+   <div class="note span4">${hsInfo(sh.hs)?esc(sh.hs+' — '+hsInfo(sh.hs).en):''}</div>
+   ${F('Remarks (printed)','cur.remarks',{area:1,cls:'span2'})}${F('Internal notes (not printed)','cur.notes',{area:1,cls:'span2'})}</div></div>
+  <div class="row"><button class="danger" data-a="delShip">${t('Delete')}</button></div>`;
+}
+function itemRows(sh){const cost=S.ui.cost,rt=rate(sh.currency);return sh.items.map((it,i)=>{
+  const lp=lastPrice(sh,it);let hint='';if(lp&&num(it.price)&&Math.abs(lp.p-num(it.price))>1e-9){const pc=(num(it.price)/lp.p-1)*100;hint=`<div class="hint ${pc>0?'dn':'up'}" title="${esc(lp.d)}: ${lp.p}">${esc(tt('vs last order {0}').replace('{0}',(pc>0?'+':'')+fmt(pc,1)+'%'))}</div>`}
+  const rev=num(it.price)*rt,mg=rev&&num(it.cost)?(rev-num(it.cost))/rev*100:null;
+  return `<tr>
+  <td style="width:30px;text-align:center;color:var(--mut)">${i+1}</td>
+  <td><input data-p="cur.items.${i}.desc" data-desc="1" list="prodList" value="${esc(it.desc)}"></td>
+  <td style="width:96px"><input data-p="cur.items.${i}.hs" list="hsDl" value="${esc(it.hs)}" placeholder="${esc(sh.hs)}"></td>
+  <td style="width:80px"><input data-p="cur.items.${i}.qty" type="number" step="any" data-n="1" value="${esc(it.qty)}"></td>
+  <td style="width:62px"><input data-p="cur.items.${i}.unit" value="${esc(it.unit)}"></td>
+  <td style="width:104px"><input data-p="cur.items.${i}.price" type="number" step="any" data-n="1" value="${esc(it.price)}">${hint}</td>
+  <td class="r" style="width:100px" id="amt${i}">${fmt(lineAmt(it))}</td>
+  ${cost?`<td style="width:92px"><input data-p="cur.items.${i}.cost" type="number" step="any" data-n="1" value="${esc(it.cost)}"></td><td class="r" style="width:64px" id="mg${i}">${mg==null?'—':fmt(mg,1)+'%'}</td>`:''}
+  <td style="width:56px"><input data-p="cur.items.${i}.cs" type="number" data-n="1" value="${esc(it.cs)}"></td>
+  <td style="white-space:nowrap"><button class="ghost sm" data-a="mv" data-i="${i}" data-d="-1">↑</button> <button class="ghost sm" data-a="mv" data-i="${i}" data-d="1">↓</button> <button class="ghost sm" data-a="dupItem" data-i="${i}">⧉</button> <button class="danger sm" data-a="delItem" data-i="${i}">✕</button></td></tr>`}).join('')}
+function totBox(){const sh=cur(),T=totals(sh),s=sym(sh.currency),rt=rate(sh.currency);
+  let h=`<div><small>${t('Total pcs')}</small><b>${fmt(T.qty,0)}</b></div><div><small>${t('Subtotal')}</small><b>${s} ${fmt(T.sub)}</b></div><div><small>${t('Total')}</small><b>${s} ${fmt(T.total)}</b>${sh.currency!=='JPY'&&rt?`<small>≈ ¥${fmt(T.total*rt,0)}</small>`:''}</div>`;
+  if(S.ui.cost){const revJ=T.total*rt;let cost=0,miss=0;sh.items.forEach(i=>{cost+=num(i.cost)*num(i.qty);if(!num(i.cost))miss++});cost+=0;const gp=revJ-cost;
+    h+=`<div><small>${t('Cost (JPY total)')}</small><b>¥${fmt(cost,0)}</b></div><div><small>${t('Gross profit (JPY)')}</small><b>¥${fmt(gp,0)}</b><small>${revJ?fmt(gp/revJ*100,1):0}%${miss?' · '+esc(tt('Items without cost: {0}').replace('{0}',miss)):''}</small></div>`}
+  return h}
+function packTot(){const T=totals(cur());return `<div><small>${t('Net wt')}</small><b>${fmt(T.nw,1)} kg</b></div><div><small>${t('Gross wt')}</small><b>${fmt(T.gw,1)} kg</b></div><div><small>${t('Volume')}</small><b>${fmt(T.vol,3)} m³</b></div>`}
+function tItems(){const sh=cur(),cost=S.ui.cost;
+  return `<div class="card"><div class="row" style="margin-bottom:10px"><button data-a="addItem">+ ${t('Add item')}</button><button class="ghost" data-a="pasteDlg">${t('Paste from Excel')}</button><button class="ghost" data-a="toMaster">${t('Save new items to product master')}</button><button class="ghost" data-a="csv">${t('Export CSV')}</button><span class="grow"></span>${C('Show cost & margin (internal)','ui.cost',1)}</div>
+  <div style="overflow:auto"><table class="t"><thead><tr><th>#</th><th>${t('Description')}</th><th>${t('HS code')}</th><th>${t('Qty')}</th><th>${t('Unit')}</th><th>${t('Unit price')} (${sym(sh.currency)})</th><th class="r">${t('Amount')}</th>${cost?`<th>${t('Cost ¥/unit')}</th><th class="r">${t('Margin')}</th>`:''}<th>${t('Case')}</th><th></th></tr></thead><tbody id="itemBody">${itemRows(sh)}</tbody></table></div></div>
+  <div class="card"><h2>${t('Additional charges / discounts')}</h2>
+   ${sh.adds.map((a,i)=>`<div class="row" style="margin-bottom:6px"><input style="max-width:320px" data-p="cur.adds.${i}.label" value="${esc(a.label)}" placeholder="Freight / Insurance / Discount"><input style="max-width:140px" type="number" step="any" data-n="1" data-p="cur.adds.${i}.amount" value="${esc(a.amount)}"><button class="danger sm" data-a="delAdd" data-i="${i}">✕</button></div>`).join('')}
+   <button class="ghost sm" data-a="addAdd">+ ${t('Add line')}</button>
+   <div class="totbox" id="totbox">${totBox()}</div></div>`;
+}
+function tPack(){const sh=cur();
+  return `<div class="card"><h2>${t('Cases / cartons')}</h2><div style="overflow:auto"><table class="t"><thead><tr><th>${t('Case No.')}</th><th>${t('L (cm)')}</th><th>${t('W (cm)')}</th><th>${t('H (cm)')}</th><th>${t('N/W (kg)')}</th><th>${t('G/W (kg)')}</th><th>${t('Volume')} m³</th><th>${t('Pieces')}</th><th></th></tr></thead><tbody>
+  ${sh.cases.map((c,i)=>`<tr>${['no','l','w','h','nw','gw'].map(k=>`<td style="width:90px"><input type="number" step="any" data-n="1" data-p="cur.cases.${i}.${k}" value="${esc(c[k])}"></td>`).join('')}<td id="vol${i}" style="width:90px">${fmt(caseVol(c),3)}</td><td id="cpcs${i}">${fmt(sh.items.filter(it=>num(it.cs)===num(c.no)).reduce((a,it)=>a+num(it.qty),0),0)}</td><td><button class="danger sm" data-a="delCase" data-i="${i}">✕</button></td></tr>`).join('')}</tbody></table></div>
+  <div class="row" style="margin-top:10px"><button class="ghost" data-a="addCase">+ ${t('Add')}</button><button class="ghost" data-a="allCase1">${t('Assign all items to case 1')}</button><button class="ghost" data-a="nwCalc">${t('Calculate N/W from product weights')}</button></div>
+  <div class="totbox" id="packtot">${packTot()}</div></div>
+  <div class="card"><h2>${t('Shipping marks')}</h2>${F('Shipping marks','cur.marks',{area:1,rows:7})}<div class="row" style="margin-top:8px"><button class="ghost" data-a="genMarks">${t('Auto-generate')}</button><span class="note">${t('Case number line is added automatically.')}</span></div></div>`;
+}
+function tPay(){const sh=cur(),T=totals(sh),s=sym(sh.currency),bal=balance(sh),du=dueDate(sh);
+  return `<div class="card"><h2>${t('Payment tracker')}</h2>
+  <div class="grid g4" style="margin-bottom:12px"><div class="kpi card"><small>${t('Invoice total')}</small><b>${s} ${fmt(T.total)}</b></div><div class="kpi card"><small>${t('Received')}</small><b>${s} ${fmt(paidAmt(sh))}</b></div><div class="kpi card"><small>${t('Balance')}</small><b>${s} ${fmt(bal)}</b></div><div class="kpi card"><small>${t('Payment due')}</small><b>${esc(du||'—')}</b></div></div>
+  ${sh.payments.map((p,i)=>`<div class="row" style="margin-bottom:6px"><input type="date" style="max-width:160px" data-p="cur.payments.${i}.date" value="${esc(p.date)}"><input type="number" step="any" data-n="1" style="max-width:150px" data-p="cur.payments.${i}.amount" value="${esc(p.amount)}"><input style="max-width:260px" placeholder="${esc(tt('Reference'))}" data-p="cur.payments.${i}.ref" value="${esc(p.ref)}"><button class="danger sm" data-a="delPay" data-i="${i}">✕</button></div>`).join('')}
+  <div class="row"><button class="ghost" data-a="addPay">+ ${t('Add payment')}</button>${bal>0?`<button class="ghost" data-a="payFull">${t('Record full balance today')}</button>`:''}${bal<=0&&T.total>0&&sh.status!=='paid'?`<button class="gold" data-a="markPaid">${t('Mark shipment as paid')}</button>`:''}</div></div>`}
+function tChk(){const sh=cur();const p=progress(sh);
+  return `<div class="card"><h2>${t('Document checklist')} · ${p}%</h2><div class="bar" style="height:9px;margin-bottom:10px"><i style="width:${p}%"></i></div>
+  ${CHECKS.map(k=>`<div class="chkrow ${sh.checks[k]?'done':''}"><label class="chk"><input type="checkbox" data-chk="${esc(k)}" ${sh.checks[k]?'checked':''}><span>${t(k)}</span></label></div>`).join('')}</div>`}
+const EU=['AUSTRIA','BELGIUM','BULGARIA','CROATIA','CYPRUS','CZECHIA','CZECH REPUBLIC','DENMARK','ESTONIA','FINLAND','FRANCE','GERMANY','GREECE','HUNGARY','IRELAND','ITALY','LATVIA','LITHUANIA','LUXEMBOURG','MALTA','NETHERLANDS','POLAND','PORTUGAL','ROMANIA','SLOVAKIA','SLOVENIA','SPAIN','SWEDEN'];
+function runChecks(sh){const r=[];const add=(l,m,...a)=>r.push({l,m,a});const T=totals(sh);
+  [['invoiceNo','Invoice No.'],['date','Invoice date'],['cust.name','Company name'],['cust.addr','Address'],['pol','Port of loading'],['pod','Port of discharge'],['etd','Sailing on or about (ETD)'],['currency','Currency']].forEach(([k,lab])=>{const v=k.includes('.')?sh[k.split('.')[0]][k.split('.')[1]]:sh[k];if(!String(v||'').trim())add('err','Missing: {0}',tt(lab))});
+  if(!sh.items.length)add('err','No line items.');
+  sh.items.forEach((it,i)=>{if(!String(it.desc).trim())add('err','Line {0}: description is empty.',i+1);if(!num(it.qty)||!num(it.price))add('warn','Line {0}: quantity or unit price is zero.',i+1);
+    if(sh.cases.length&&!caseOf(it,sh))add('err','Line {0} is not assigned to a valid case.',i+1)});
+  if(!sh.cases.length)add('err','No cases defined in Packing tab.');
+  sh.cases.forEach(c=>{if(!num(c.l)||!num(c.w)||!num(c.h))add('warn','Case {0}: dimensions missing.',c.no);if(num(c.gw)<num(c.nw))add('err','Case {0}: gross weight is lower than net weight.',c.no)});
+  const hs=hsUniq(sh);if(!hs.length)add('warn','HS code is missing (needed for customs).');
+  hs.forEach(h=>{if(!/^\d{4}(\.\d{2}){1,3}$/.test(h))add('warn','HS code "{0}" has an unusual format (expected like 8207.20).',h)});
+  if(hs.length>1)add('info','Several HS codes in use ({0}): HS column and summary are printed.',hs.join(', '));
+  if(!String(sh.custPO).trim())add('warn','Customer order number is empty.');
+  if(sh.etd&&sh.date&&sh.etd<sh.date)add('warn','Sailing date is earlier than the invoice date.');
+  if(S.shipments.some(s=>s.id!==sh.id&&s.invoiceNo===sh.invoiceNo))add('err','Invoice No. {0} is also used by another shipment.',sh.invoiceNo);
+  if(['FOB','CIF','CFR','FAS','FCA','CPT','CIP','DAP','DPU','DDP'].includes(sh.incoterm)){if(!String(sh.incotermPlace).trim())add('err','Incoterm {0} needs a named place.',sh.incoterm);
+    else if(['FOB','CIF','CFR','FAS'].includes(sh.incoterm)&&sh.pol&&!sh.pol.toUpperCase().includes(sh.incotermPlace.toUpperCase().trim()))add('warn','Port of loading ({0}) differs from the Incoterm place ({1}). Make sure all documents agree.',sh.pol,sh.incotermPlace)}
+  if(EU.includes((sh.cust.country||'').toUpperCase().trim())&&!sh.steelCert)add('info','Destination is in the EU: customers often ask for the non-Russian iron & steel statement.');
+  const due=dueDate(sh);if(due){add('info','Payment due {0} ({1} days after invoice date).',due,sh.payDays);if(['order','production','shipped'].includes(sh.status)&&balance(sh)>0&&due<todayISO())add('err','Payment is overdue by {0} days.',diffDays(todayISO(),due))}
+  if(['order','production','shipped'].includes(sh.status)&&balance(sh)>0&&T.total>0)add('info','Balance outstanding: {0}.',sym(sh.currency)+' '+fmt(balance(sh)));
+  add('info','Weights: net {0} kg / gross {1} kg / {2} m³ across {3} case(s).',fmt(T.nw,1),fmt(T.gw,1),fmt(T.vol,3),T.cases);
+  if(!r.some(x=>x.l==='err'||x.l==='warn'))r.unshift({l:'ok',m:'All checks passed. Documents are generated from one data source, so Invoice and Packing List always agree.',a:[]});
+  return r}
+function tVerify(){const r=runChecks(cur());const ord={err:0,warn:1,ok:2,info:3};r.sort((a,b)=>ord[a.l]-ord[b.l]);
+  return `<div class="card"><h2>${t('Pre-flight check')}</h2>${r.map(x=>`<div class="msg ${x.l}">${t(x.m,...x.a)}</div>`).join('')}</div>`}
+
+/* ---- Documents ---- */
+const DOCS=[['ci','Commercial Invoice'],['pl','Packing List'],['si','Shipping Instruction'],['cm','Case Marks'],['qt','Quotation'],['pi','Proforma Invoice'],['oc','Order Confirmation']];
+function vDocs(){const p=S.print;
+  return `<h1>${t('Documents')}</h1><p class="sub">${esc(cur().invoiceNo)} · ${esc(cur().cust.name)}</p>
+  <div class="docs"><div class="doclist">${DOCS.map(([k,l])=>`<button data-a="doc" data-v="${k}" class="${docTab===k?'on':''}">${t(l)}</button>`).join('')}
+   <button class="gold" data-a="printOne" style="margin-top:6px">🖨 ${t('Print this document')}</button>
+   <button data-a="printAll">${t('Print all documents')}</button>
+   <button class="ghost" data-a="dlPrintable">${t('Printable file')}</button>
+   <div class="note">${esc(tt('If printing is blocked in this view, use "Printable file", then open it and press Ctrl+P.'))}</div>
+   <div class="card"><details open><summary>${t('Print studio')}</summary><div class="grid">
+    ${F('Paper size','print.size',{opts:['A4','Letter'],re:1})}
+    ${F('Scale (%)','print.scale',{type:'range',n:1,min:85,max:115})}
+    ${F('Margin (mm)','print.margin',{type:'range',n:1,min:6,max:20})}
+    ${C('Fit to one page (auto)','print.fit',1)}
+    ${F('Density','print.density',{opts:[['normal',tt('Normal')],['compact',tt('Compact')]],re:1})}
+    ${C('Show logo','print.logo',1)}
+    ${F('Logo height (mm)','print.logoH',{type:'range',n:1,min:8,max:26})}
+    ${F('Watermark','print.wm',{opts:[['',tt('None')],'DRAFT','COPY','SAMPLE','PAID'],re:1})}
+    ${F('Copy label','print.copy',{opts:[['',tt('None')],'ORIGINAL','DUPLICATE','COPY'],re:1})}
+    ${C('Footer line','print.footer',1)}${C('Bank block','print.bank',1)}${C('Show signature / stamp','print.sig',1)}${C('HS code summary (when several HS)','print.hsSum',1)}${C('Japanese subtitles on documents','print.docJa',1)}
+   </div></details></div></div>
+  <div class="pvwrap" id="pvwrap"><div class="pv" id="pv">${renderDoc(docTab)}</div></div></div>`}
+function fitPreview(){const w=$('#pvwrap'),p=$('#pv');if(!w||!p)return;const pw=S.print.size==='Letter'?816:794;p.style.zoom=1;fitPapers(p,S.print.fit,pagePx());p.style.zoom=Math.min(1,(w.clientWidth-40)/pw)}
+window.addEventListener('resize',fitPreview);
+
+function paperOpen(extra=''){const p=S.print,l=p.size==='Letter';
+  return `<div class="paper ${p.density==='compact'?'compact':''} ${extra}" style="--k:${num(p.scale)/100};--pad:${num(p.margin)}mm;--pw:${l?'215.9mm':'210mm'};--ph:${l?'279.4mm':'297mm'}">${p.wm?`<div class="wm">${esc(p.wm)}</div>`:''}`}
+function paperClose(title,refNo){const p=S.print;return `${p.footer?`<div class="pgfoot"><span>${esc(S.settings.company.name)}</span><span>${esc(title)} · ${esc(refNo)}</span><span>${esc(dLong(todayISO()))}</span></div>`:''}</div>`}
+function head(title){const c=S.settings.company,p=S.print;
+  const logo=p.logo?`<img class="dlogo" src="${esc(logoSrc())}" style="height:calc(${num(p.logoH)}mm*var(--k,1))" onerror="this.style.display='none'">`:'';
+  return `<div class="dhead"><div class="hl">${logo}<div><div class="cname">${esc(c.name)}</div><div class="caddr">${esc(c.addr)}<br>Post Code ${esc(c.post)} &nbsp; Tel ${esc(c.tel)} &nbsp; Fax ${esc(c.fax)}</div></div></div><div style="text-align:right"><div class="dtitle">${esc(title)}${p.docJa&&J[title]?`<small class="ja">${esc(J[title])}</small>`:''}</div>${p.copy?`<div class="ctag">${esc(p.copy)}</div>`:''}</div></div>`}
+function custBlock(sh){const c=sh.cust;return `<div class="val">${esc(c.name)}\n${esc(c.addr)}${c.country?'\n'+esc(c.country):''}${c.vat?'\nVAT: '+esc(c.vat):''}</div>${c.attn?`<div style="margin-top:4px">Attn.: ${esc(c.attn)}</div>`:''}${c.tel?`<div>Tel: ${esc(c.tel)}</div>`:''}${c.fax?`<div>Fax: ${esc(c.fax)}</div>`:''}`}
+const kv=(l,v)=>v?`<span class="lbl">${L(l)}</span><span class="val">${esc(v)}</span>`:'';
+function shipBox(sh,kind){const cells=[['Ocean vessel / Voyage',sh.vessel],['Port of loading',sh.pol],['Sailing on or about (ETD)',dLong(sh.etd)],['Port of discharge',sh.pod],['Final destination',sh.finalDest],[kind==='ci'||kind==='pl'?'Country of origin':'Arrival (ETA)',kind==='ci'||kind==='pl'?sh.origin:dLong(sh.eta)]];
+  return `<div class="ship">${cells.map(([l,v])=>`<div><div class="lbl">${L(l)}</div><div class="val">${esc(v)}</div></div>`).join('')}</div>`}
+function signBlock(){const s=S.settings;return `<div class="sign"><div>${esc(s.company.name)}${S.print.sig&&s.sigImg?`<img src="${s.sigImg}">`:''}<div class="line">${esc(s.company.signer)}</div></div></div>`}
+function bankBlock(){if(!S.print.bank)return '';const b=S.settings.bank;return `<div class="bank"><b>BANK ACCOUNT${S.print.docJa?' / 振込先':''}</b>${esc(b.name)}<br>${esc(b.branch)}<br>${esc(b.addr)}<br>SWIFT BIC : ${esc(b.swift)}<br>Account Number : ${esc(b.acct)} (${esc(b.type)})<br>Beneficiary Name : ${esc(b.benef)}<br>${esc(b.benefAddr)}</div>`}
+function marksFor(sh,c){const base=(sh.marks&&sh.marks.trim())||genMarks(sh);return base+(c?`\nCASE NO. ${c.no}/${sh.cases.length}`:'')}
+function hsSummary(sh,withAmt){const u=hsUniq(sh);if(!S.print.hsSum||u.length<2)return '';
+  const rows=u.map(h=>{const its=sh.items.filter(i=>effHS(i,sh)===h);const q=its.reduce((a,i)=>a+num(i.qty),0),am=its.reduce((a,i)=>a+lineAmt(i),0);const inf=hsInfo(h);
+    return `<tr><td>${esc(h)}</td><td>${esc(inf?inf.en:'')}</td><td style="text-align:right">${fmt(q,0)}</td>${withAmt?`<td style="text-align:right">${sym(sh.currency)} ${fmt(am)}</td>`:''}</tr>`}).join('');
+  return `<div class="hss"><b>${L('HS code')}</b><table><thead><tr><th>HS</th><th>${L('Description')}</th><th>${L('Qty')}</th>${withAmt?`<th>${L('Amount')}</th>`:''}</tr></thead><tbody>${rows}</tbody></table></div>`}
+
+function docInvoice(kind){
+  const sh=cur(),T=totals(sh),s=sym(sh.currency),ci=kind==='ci';
+  const hsu=hsUniq(sh),multi=hsu.length>1;
+  const title={ci:'COMMERCIAL INVOICE',qt:'QUOTATION',pi:'PROFORMA INVOICE',oc:'ORDER CONFIRMATION'}[kind];
+  const dnum=ci?sh.invoiceNo:(sh.quoteNo||sh.invoiceNo),ddate=ci?sh.date:(sh.quoteDate||sh.date);
+  const nolbl={ci:'Invoice No.',qt:'Quotation No.',pi:'Proforma Invoice No.',oc:'Order Confirmation No.'}[kind];
+  const lc=sh.payMethod==='lc'||sh.lcNo;
+  const right=[kv(nolbl,dnum),kv('Date',dLong(ddate)),kv('Contract No.',sh.contractNo),kv("Customer's Order No.",sh.custPO),
+    kv('HS code',hsu.join(' / ')),lc?kv('L/C No.',sh.lcNo+(sh.lcDate?' ('+dLong(sh.lcDate)+')':'')):'',lc?kv('Issuing bank',sh.lcBank):'',lc?kv('L/C expiry',dLong(sh.lcExpiry)):'',
+    kv('Terms/Method of Payment',payLabel(sh)+' — '+payText(sh)),(!ci&&sh.quoteDate&&sh.validity)?kv('Validity',dLong(addDays(sh.quoteDate,sh.validity))):''].join('');
+  const adds=sh.adds.filter(a=>a.label||num(a.amount));
+  const rowspan=sh.items.length+1+adds.length;
+  const rows=sh.items.map((it,i)=>`<tr>${ci&&i===0?`<td class="mk" rowspan="${rowspan}" style="width:38mm">${esc(marksFor(sh,sh.cases.length===1?sh.cases[0]:null))}</td>`:''}<td class="c" style="width:8mm">${i+1}.</td>${multi?`<td class="c" style="width:17mm">${esc(effHS(it,sh))}</td>`:''}<td>${esc(it.desc)}</td><td class="r" style="width:16mm">${fmt(it.qty,0)}</td><td class="r" style="width:22mm">${fmtP(it.price)}</td><td class="r" style="width:26mm">${fmt(lineAmt(it))}</td></tr>`).join('');
+  const filler=`<tr class="last">${ci&&!sh.items.length?'<td class="mk"></td>':''}<td colspan="${5+(multi?1:0)}">&nbsp;</td></tr>`;
+  const addRows=adds.map(a=>`<tr><td></td>${multi?'<td></td>':''}<td>${esc(a.label)}</td><td></td><td></td><td class="r">${fmt(a.amount)}</td></tr>`).join('');
+  const inco=`(${ITERM[sh.incoterm]||sh.incoterm} ${sh.incotermPlace})`;
+  const lead=(ci?1:0)+1+(multi?1:0)+1;
+  return `${paperOpen()}${head(title)}
+  <div class="two"><div><div class="lbl">${L('Sold by order and for account and risk of Messrs.')}</div>${custBlock(sh)}${!sh.consigneeSame&&sh.consignee?`<div style="margin-top:6px"><span class="lbl">${L('Consignee')}</span><div class="val">${esc(sh.consignee)}</div></div>`:''}</div><div><div class="kv">${right}</div></div></div>
+  ${shipBox(sh,kind)}
+  <table class="it"><thead><tr>${ci?`<th>${L('Marks & Nos.')}</th>`:''}<th>No.</th>${multi?'<th>HS</th>':''}<th>${L('Description')}${sh.goodsTitle?` — Re: ${esc(sh.goodsTitle)}`:''}</th><th>${L('Qty')}</th><th>${L('Unit price')} ${s}</th><th>${L('Amount')} ${s}</th></tr></thead><tbody>
+   ${rows}${filler}${addRows}
+   <tr class="tot"><td colspan="${lead}">${L('Total')}: ${esc(inco)}</td><td class="r">${fmt(T.qty,0)} PCS</td><td class="r">${sh.currency}</td><td class="r">${fmt(T.total)}</td></tr></tbody></table>
+  <div class="sec"><div class="words">${esc(amountWords(T.total,sh.currency))}</div><div style="margin-top:3px">COUNTRY OF ORIGIN : ${esc(sh.origin)}</div></div>
+  ${hsSummary(sh,true)}
+  ${sh.steelCert?`<div class="cert">"We certify, that the iron and steel primary products used in the goods covered by this invoice are of non-russian origin."</div>`:''}
+  ${sh.remarks?`<div style="margin-top:6px;white-space:pre-line"><b>${L('Remarks (printed)')}:</b> ${esc(sh.remarks)}</div>`:''}
+  ${bankBlock()}${signBlock()}${paperClose(title,dnum)}`;
+}
+function docPL(){
+  const sh=cur(),T=totals(sh);const lcmark=sh.cases.length===1?sh.cases[0]:null;const hsu=hsUniq(sh),multi=hsu.length>1,mc=sh.cases.length>1;
+  const right=[kv('Invoice No.',sh.invoiceNo),kv('Date',dLong(sh.date)),kv('Contract No.',sh.contractNo),kv("Customer's Order No.",sh.custPO),kv('HS code',hsu.join(' / ')),kv('Terms/Method of Payment',payText(sh))].join('');
+  const rows=sh.items.map((it,i)=>`<tr${i===sh.items.length-1?' class="last"':''}>${i===0?`<td class="mk" rowspan="${sh.items.length}" style="width:38mm">${esc(marksFor(sh,lcmark))}</td>`:''}<td class="c" style="width:8mm">${i+1}.</td>${multi?`<td class="c" style="width:17mm">${esc(effHS(it,sh))}</td>`:''}<td>${esc(it.desc)}</td><td class="r" style="width:18mm">${fmt(it.qty,0)}</td>${mc?`<td class="c" style="width:14mm">${esc(it.cs)}</td>`:''}</tr>`).join('');
+  const cw=n=>`${n}(${words(n)})`+(n===1?' CASE':' CASES');
+  return `${paperOpen()}${head('PACKING LIST')}
+  <div class="two"><div><div class="lbl">${L('Consignee')}</div>${custBlock(sh)}</div><div><div class="kv">${right}</div></div></div>
+  ${shipBox(sh,'pl')}
+  <table class="it"><thead><tr><th>${L('Marks & Nos.')}</th><th>No.</th>${multi?'<th>HS</th>':''}<th>${L('Description')}</th><th>${L('Qty')}</th>${mc?`<th>${L('Case')}</th>`:''}</tr></thead><tbody>${rows}
+   <tr class="tot"><td colspan="${2+(multi?1:0)+1}">TOTAL (pcs)</td><td class="r">${fmt(T.qty,0)} PCS</td>${mc?'<td></td>':''}</tr></tbody></table>
+  <table class="it" style="margin-top:8px"><thead><tr><th>${L('Case No.')}</th><th>M'MENT (cm)${S.print.docJa?`<small class="ja">${esc(J['Measurement'])}</small>`:''}</th><th>N/W KGS</th><th>G/W KGS</th><th>M³</th></tr></thead><tbody>
+   ${sh.cases.map(c=>`<tr class="last"><td class="c">${c.no}/${sh.cases.length}</td><td class="c">${fmt(c.l,0)} x ${fmt(c.w,0)} x ${fmt(c.h,0)}</td><td class="r">${fmt(c.nw,1)}</td><td class="r">${fmt(c.gw,1)}</td><td class="r">${fmt(caseVol(c),3)}</td></tr>`).join('')}
+   <tr class="tot"><td>TOTAL: ${esc(cw(T.cases))}</td><td></td><td class="r">${fmt(T.nw,1)} KGS</td><td class="r">${fmt(T.gw,1)} KGS</td><td class="r">${fmt(T.vol,3)} M3</td></tr></tbody></table>
+  ${hsSummary(sh,false)}${signBlock()}${paperClose('PACKING LIST',sh.invoiceNo)}`;
+}
+function docSI(){
+  const sh=cur(),T=totals(sh),c=S.settings.company;const cons=sh.consigneeSame?`${sh.cust.name}\n${sh.cust.addr}\n${sh.cust.country}`:sh.consignee;
+  const row=(l,v)=>`<tr class="last"><td style="width:48mm;background:var(--acc-soft,#f4f4f4);font-weight:700">${L(l)}</td><td style="white-space:pre-line">${esc(v)}</td></tr>`;
+  return `${paperOpen()}${head('SHIPPING INSTRUCTION')}
+  <div class="two"><div><div class="lbl">TO (Forwarder)</div><div class="val">${esc(sh.forwarder)}</div></div><div><div class="kv">${kv('Date',dLong(todayISO()))}${kv('Invoice No.',sh.invoiceNo)}${kv('Contract No.',sh.contractNo)}</div></div></div>
+  <table class="it"><tbody>
+  ${row('Shipper',`${c.name}\n${c.addr} ${c.post}\nTel ${c.tel} / Fax ${c.fax}`)}${row('Consignee',cons)}${row('Notify party',sh.notify||'SAME AS CONSIGNEE')}
+  ${row('Ocean vessel / Voyage',sh.vessel)}${row('Port of loading',sh.pol)}${row('Port of discharge',sh.pod)}${row('Final destination',sh.finalDest)}${row('Sailing on or about (ETD)',dLong(sh.etd))}
+  ${row('Goods',(sh.goodsTitle||'')+'\nHS code: '+hsUniq(sh).join(' / ')+'\nCountry of origin: '+sh.origin)}
+  ${row('Marks & Nos.',marksFor(sh,null))}
+  ${row('Case',`${T.cases} CASE(S) / ${fmt(T.qty,0)} PCS`)}${row('Gross wt',`${fmt(T.gw,1)} KGS (N/W ${fmt(T.nw,1)} KGS)`)}${row('Volume',`${fmt(T.vol,3)} M3\n`+sh.cases.map(x=>`Case ${x.no}: ${fmt(x.l,0)} x ${fmt(x.w,0)} x ${fmt(x.h,0)} cm`).join('\n'))}
+  ${row('Freight',(sh.freightTerms==='collect'?'FREIGHT COLLECT':'FREIGHT PREPAID')+' — '+(ITERM[sh.incoterm]||sh.incoterm)+' '+sh.incotermPlace)}${row('B/L type',sh.blType)}
+  ${row('Amount',`${sh.currency} ${fmt(T.total)}`)}${sh.remarks?row('Remarks (printed)',sh.remarks):''}
+  </tbody></table>${signBlock()}${paperClose('SHIPPING INSTRUCTION',sh.invoiceNo)}`;
+}
+function docCM(){const sh=cur();return `${paperOpen('lblpage')}${sh.cases.map(c=>`<div class="lb"><pre>${esc(marksFor(sh,c))}</pre></div>`).join('')}</div>`}
+function renderDoc(k){return ({ci:()=>docInvoice('ci'),qt:()=>docInvoice('qt'),pi:()=>docInvoice('pi'),oc:()=>docInvoice('oc'),pl:docPL,si:docSI,cm:docCM})[k]()}
+
+/* ---- Masters ---- */
+function custStats(c){let n=0,v=0;S.shipments.forEach(s=>{if(s.cust.name===c.name&&s.status!=='quote'){n++;v+=jpyOf(s)}});return {n,v}}
+function vMasters(){
+  const tabs=[['cust','Customers'],['prod','Products'],['hs','HS codes']];let body='';
+  if(mtab==='cust')body=`<div class="card" style="overflow:auto"><table class="t"><thead><tr><th>${t('Name')}</th><th>${t('Country')}</th><th>${t('Address')}</th><th>${t('Attn.')}</th><th>${t('Tel')}</th><th>${t('Fax')}</th><th>${t('Currency')}</th><th>${t('Default Incoterm')}</th><th>${t('Default days')}</th><th>${t('Default discharge port')}</th><th>${t('Steel cert.')}</th><th>${t('Default remarks')}</th><th>${t('Sales')}</th><th></th></tr></thead><tbody>
+  ${S.customers.map((c,i)=>{const st=custStats(c);return `<tr>${['name','country'].map(k=>`<td><input data-p="customers.${i}.${k}" value="${esc(c[k])}"></td>`).join('')}<td><textarea rows="2" data-p="customers.${i}.addr">${esc(c.addr)}</textarea></td>${['attn','tel','fax'].map(k=>`<td><input data-p="customers.${i}.${k}" value="${esc(c[k])}"></td>`).join('')}
+   <td style="width:76px"><input data-p="customers.${i}.currency" value="${esc(c.currency)}"></td><td style="width:76px"><input data-p="customers.${i}.incoterm" value="${esc(c.incoterm)}"></td><td style="width:66px"><input type="number" data-n="1" data-p="customers.${i}.payDays" value="${esc(c.payDays)}"></td><td><input data-p="customers.${i}.pod" value="${esc(c.pod)}"></td>
+   <td style="text-align:center"><input type="checkbox" style="width:auto" data-p="customers.${i}.steel" ${c.steel?'checked':''}></td><td><textarea rows="2" data-p="customers.${i}.remarks">${esc(c.remarks)}</textarea></td><td class="r" style="white-space:nowrap">${st.n} · ¥${fmt(st.v/1e6,2)}M</td><td><button class="danger sm" data-a="delCust" data-i="${i}">✕</button></td></tr>`}).join('')}</tbody></table><div style="margin-top:10px"><button data-a="addCust">+ ${t('Add customer')}</button></div></div>`;
+  if(mtab==='prod')body=`<div class="card" style="overflow:auto"><table class="t"><thead><tr><th>${t('Description')}</th><th>${t('HS code')}</th><th>${t('Unit')}</th><th>${t('Price')}</th><th>${t('Cost (JPY)')}</th><th>${t('Weight/pc (kg)')}</th><th></th></tr></thead><tbody>
+  ${S.products.map((p,i)=>`<tr><td><input data-p="products.${i}.desc" value="${esc(p.desc)}"></td><td style="width:110px"><input list="hsDl" data-p="products.${i}.hs" value="${esc(p.hs)}"></td><td style="width:70px"><input data-p="products.${i}.unit" value="${esc(p.unit)}"></td><td style="width:100px"><input type="number" step="any" data-n="1" data-p="products.${i}.price" value="${esc(p.price)}"></td><td style="width:100px"><input type="number" step="any" data-n="1" data-p="products.${i}.cost" value="${esc(p.cost)}"></td><td style="width:100px"><input type="number" step="any" data-n="1" data-p="products.${i}.wt" value="${esc(p.wt)}"></td><td><button class="danger sm" data-a="delProd" data-i="${i}">✕</button></td></tr>`).join('')}</tbody></table><div style="margin-top:10px"><button data-a="addProd">+ ${t('Add product')}</button></div></div>`;
+  if(mtab==='hs')body=`<div class="msg warn">${esc(tt('HS codes are reference data. Always confirm classification with your customs broker or past export permits (輸出許可書).'))}</div><div class="card" style="overflow:auto"><table class="t"><thead><tr><th>${t('HS code')}</th><th>${t('English description')}</th><th>${t('Japanese name')}</th><th>${t('JP stat. no.')}</th><th>${t('Note')}</th><th></th></tr></thead><tbody>
+  ${S.hsList.map((h,i)=>`<tr><td style="width:100px"><input data-p="hsList.${i}.code" value="${esc(h.code)}"></td><td><input data-p="hsList.${i}.en" value="${esc(h.en)}"></td><td><input data-p="hsList.${i}.ja" value="${esc(h.ja)}"></td><td style="width:120px"><input data-p="hsList.${i}.jp" value="${esc(h.jp)}"></td><td><textarea rows="2" data-p="hsList.${i}.note">${esc(h.note)}</textarea></td><td><button class="danger sm" data-a="delHS" data-i="${i}">✕</button></td></tr>`).join('')}</tbody></table><div style="margin-top:10px"><button data-a="addHS">+ ${t('Add HS code')}</button></div></div>`;
+  return `<h1>${t('Masters')}</h1><p class="sub"></p><div class="tabs">${tabs.map(([k,l])=>`<button data-a="mtab" data-v="${k}" class="${mtab===k?'on':''}">${t(l)}</button>`).join('')}</div>${body}`}
+
+/* ---- Tools ---- */
+const INC=[['EXW','工場渡し','Any','Seller premises','Buyer','Buyer','—'],['FCA','運送人渡し','Any','Handed to buyer\'s carrier','Seller','Buyer','—'],['CPT','輸送費込み','Any','Handed to first carrier','Seller','Seller','—'],['CIP','輸送費保険料込み','Any','Handed to first carrier','Seller','Seller','Seller (ICC A)'],['DAP','仕向地持込渡し','Any','At destination, ready to unload','Seller','Seller','—'],['DPU','荷卸込持込渡し','Any','Unloaded at destination','Seller','Seller','—'],['DDP','関税込持込渡し','Any','At destination, import cleared','Seller (+import)','Seller','—'],['FAS','船側渡し','Sea','Alongside vessel, port of shipment','Seller','Buyer','—'],['FOB','本船渡し','Sea','On board vessel, port of shipment','Seller','Buyer','—'],['CFR','運賃込み','Sea','On board vessel, port of shipment','Seller','Seller','—'],['CIF','運賃保険料込み','Sea','On board vessel, port of shipment','Seller','Seller','Seller (ICC C)']];
+function vTools(){
+  return `<h1>${t('Tools')}</h1><p class="sub"></p>
+  <div class="grid g2"><div class="card"><h2>${t('Price calculator')}</h2><div class="grid g2">
+   <label class="f"><span>${t('Cost in JPY')}</span><input id="pc_cost" type="number" data-calc="1" value="50000"></label>
+   <label class="f"><span>${t('Margin on selling price (%)')}</span><input id="pc_m" type="number" data-calc="1" value="30"></label>
+   <label class="f"><span>${t('Currency')}</span><select id="pc_c" data-calc="1">${Object.keys(S.rates).map(c=>`<option>${c}</option>`).join('')}</select></label>
+   <label class="f"><span>${t('Rate: JPY per 1 foreign unit')}</span><input id="pc_r" type="number" step="any" data-calc="1" value="${S.rates.EUR}"></label>
+   <label class="f"><span>${t('If you sell at (foreign)')}</span><input id="pc_p" type="number" step="any" data-calc="1" placeholder="0"></label></div>
+   <div class="totbox" style="justify-content:flex-start" id="pc_out"></div></div>
+  <div class="card"><h2>${t('Volume & container')}</h2><div class="grid g3">
+   <label class="f"><span>${t('L (cm)')}</span><input id="v_l" type="number" data-calc="2" value="100"></label><label class="f"><span>${t('W (cm)')}</span><input id="v_w" type="number" data-calc="2" value="60"></label><label class="f"><span>${t('H (cm)')}</span><input id="v_h" type="number" data-calc="2" value="50"></label>
+   <label class="f"><span>${t('Cartons')}</span><input id="v_n" type="number" data-calc="2" value="1"></label><label class="f"><span>${t('G/W (kg)')} / ${t('Cartons')}</span><input id="v_k" type="number" data-calc="2" value="50"></label></div>
+   <div class="totbox" style="justify-content:flex-start" id="v_out"></div><div class="note">${t('Approximate usable volume: 20ft 33 / 40ft 67 / 40HC 76 m³.')}</div></div></div>
+  <div class="card"><h2>${t('Exchange rates (JPY per 1 unit)')}</h2><div class="row">${Object.keys(S.rates).map(c=>`<label class="f" style="width:110px"><span>${c}</span><input type="number" step="any" data-n="1" data-p="rates.${c}" value="${S.rates[c]}"></label>`).join('')}</div></div>
+  <div class="card"><h2>${t('Email templates')}</h2><div class="row" style="margin-bottom:8px">${[['ship','Shipping advice'],['quote','Quotation cover'],['pay','Payment reminder']].map(([k,l])=>`<button class="ghost" data-a="mail" data-v="${k}">${t(l)}</button>`).join('')}<button data-a="copyMail">${t('Copy')}</button></div><textarea class="mail" id="mailTx">${esc(mailText('ship'))}</textarea></div>
+  <div class="card" style="overflow:auto"><h2>${t('Incoterms 2020')}</h2><table class="t"><thead><tr><th>${t('Term')}</th><th>${t('Mode')}</th><th>${t('Risk passes')}</th><th>${t('Export clearance')}</th><th>${t('Main carriage')}</th><th>${t('Insurance')}</th></tr></thead><tbody>
+  ${INC.map(r=>`<tr><td><b>${r[0]}</b><div class="note">${r[1]}</div></td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td></tr>`).join('')}</tbody></table></div>`}
+function calcTools(){
+  if($('#pc_out')){const cost=num($('#pc_cost').value),m=num($('#pc_m').value)/100,r=num($('#pc_r').value)||1,p=num($('#pc_p').value);
+    const price=m<1?cost/(1-m)/r:0;let out=`<div><small>${t('Selling price (foreign)')}</small><b>${fmt(price)}</b></div>`;
+    if(p>0){const rev=p*r,mg=(rev-cost)/rev*100;out+=`<div><small>${t('Resulting margin')}</small><b>${fmt(mg,1)}%</b></div><div><small>${t('Profit (JPY)')}</small><b>¥${fmt(rev-cost,0)}</b></div>`}
+    $('#pc_out').innerHTML=out}
+  if($('#v_out')){const l=num($('#v_l').value),w=num($('#v_w').value),h=num($('#v_h').value),n=num($('#v_n').value)||1,k=num($('#v_k').value);
+    const cbm=l*w*h/1e6*n,vw=l*w*h/6000*n,rt=Math.max(cbm,k*n/1000);
+    $('#v_out').innerHTML=`<div><small>${t('Volume (m³)')}</small><b>${fmt(cbm,3)}</b></div><div><small>${t('Volumetric weight – air (kg)')}</small><b>${fmt(vw,1)}</b></div><div><small>${t('Freight ton – LCL (R/T)')}</small><b>${fmt(rt,3)}</b></div><div><small>${t('Fill 20ft')}</small><b>${fmt(cbm/33*100,1)}%</b></div><div><small>${t('Fill 40ft')}</small><b>${fmt(cbm/67*100,1)}%</b></div><div><small>${t('Fill 40ft HC')}</small><b>${fmt(cbm/76*100,1)}%</b></div>`}}
+function mailText(k){const sh=cur(),T=totals(sh),c=S.settings.company;const to=(sh.cust.attn||'Sir or Madam').replace(/^(Mr|Ms|Mrs)\.?\s*/,'$1. ');const greet=`Dear ${to},\n\n`;const sig=`\n\nBest regards,\n${c.signer}\n${c.name}\nTel ${c.tel}`;
+  if(k==='quote')return `Subject: Quotation ${sh.quoteNo||sh.invoiceNo} – ${sh.goodsTitle||'Our products'}\n\n${greet}Thank you for your inquiry. Please find our quotation attached.\n\nTotal: ${sh.currency} ${fmt(T.total)} (${ITERM[sh.incoterm]||sh.incoterm} ${sh.incotermPlace})\nPayment: ${payText(sh)}\n${sh.quoteDate&&sh.validity?'Valid until: '+dLong(addDays(sh.quoteDate,sh.validity))+'\n':''}\nPlease let us know if you have any questions.${sig}`;
+  if(k==='pay')return `Subject: Payment reminder – Invoice ${sh.invoiceNo}\n\n${greet}This is a friendly reminder regarding invoice ${sh.invoiceNo} dated ${dLong(sh.date)}.\nInvoice amount: ${sh.currency} ${fmt(T.total)}\nOutstanding balance: ${sh.currency} ${fmt(balance(sh))}\n${dueDate(sh)?'The payment was due on '+dLong(dueDate(sh))+'.\n':''}Kindly arrange the T/T remittance to the account stated on the invoice and send us the remittance advice.${sig}`;
+  return `Subject: Shipping advice – Invoice ${sh.invoiceNo} / ${sh.vessel||''}\n\n${greet}We are pleased to inform you that your order has been shipped.\n\nInvoice No.: ${sh.invoiceNo}\nYour Order No.: ${(sh.custPO||'').replace(/\n/g,' ')}\nVessel: ${sh.vessel}\nETD: ${dLong(sh.etd)}${sh.eta?'\nETA: '+dLong(sh.eta):''}\nPort of loading: ${sh.pol}\nPort of discharge: ${sh.pod}\nPackages: ${T.cases} case(s), N/W ${fmt(T.nw,1)} kg, G/W ${fmt(T.gw,1)} kg, ${fmt(T.vol,3)} m3\nInvoice amount: ${sh.currency} ${fmt(T.total)}\nPayment: ${payText(sh)}${dueDate(sh)?' (due '+dLong(dueDate(sh))+')':''}\n\nCommercial invoice and packing list are attached.${sig}`}
+
+/* ---- Settings ---- */
+function vSet(){const s=S.settings;
+  return `<h1>${t('Settings')}</h1><p class="sub"></p>
+  <div class="card"><h2>${t('Theme')}</h2><div class="swatches">${THEMES.map(([k,n,a,b])=>`<div class="sw ${s.theme===k?'on':''}" data-a="theme" data-v="${k}"><i style="background:linear-gradient(90deg,${a} 70%,${b} 70%)"></i>${n}</div>`).join('')}</div></div>
+  <div class="card"><h2>${t('Company')}</h2><div class="grid g3">${F('Company name','settings.company.name')}${F('Address','settings.company.addr')}${F('Post code','settings.company.post')}${F('Tel','settings.company.tel')}${F('Fax','settings.company.fax')}${F('Signer','settings.company.signer')}</div>
+   <div class="grid g2" style="margin-top:14px"><div><span class="note">${t('Company logo')} <span class="note">(tsh.png)</span></span><div class="row"><input type="file" id="logoIn" accept="image/*" style="max-width:260px"><img src="${esc(logoSrc())}" style="height:42px;border:1px solid var(--line);border-radius:6px;padding:3px;background:#fff" onerror="this.style.display='none'">${s.logo?`<button class="danger sm" data-a="rmLogo">${t('Remove image')}</button>`:''}</div></div>
+   <div><span class="note">${t('Signature / stamp image')}</span><div class="row"><input type="file" id="sigIn" accept="image/*" style="max-width:260px">${s.sigImg?`<img src="${s.sigImg}" style="height:42px;border:1px solid var(--line)"><button class="danger sm" data-a="rmSig">${t('Remove image')}</button>`:''}</div></div></div></div>
+  <div class="card"><h2>${t('Bank (beneficiary)')}</h2><div class="grid g3">${F('Bank name','settings.bank.name')}${F('Branch','settings.bank.branch')}${F('Bank address','settings.bank.addr')}${F('SWIFT BIC','settings.bank.swift')}${F('Account No.','settings.bank.acct')}${F('Account type','settings.bank.type')}${F('Beneficiary','settings.bank.benef')}${F('Beneficiary address','settings.bank.benefAddr',{cls:'span2'})}</div></div>
+  <div class="card"><h2>${t('Numbering')}</h2><div class="grid g4">${F('Invoice prefix','settings.prefix')}${F('Next number','settings.nextNo',{type:'number',n:1})}</div></div>
+  <div class="card"><h2>${t('Data')}</h2><div class="row"><button data-a="backup">${t('Download backup (.json)')}</button><button class="ghost" data-a="copyBackup">${t('Copy')} JSON</button><button class="ghost" data-a="restore">${t('Restore from backup')}</button><button class="danger" data-a="clean">${t('Start clean (remove sample data)')}</button><button class="danger" data-a="reset">${t('Reset to sample data')}</button></div><p class="note">${esc(tt('Sample data: invoice TSH-30099 (UKB-Uwe Krumm GmbH).'))}</p></div>`}
+
+/* ---- Command palette ---- */
+function cmdItems(q){q=q.toLowerCase().trim();const out=[];
+  NAV.forEach(([k,l])=>out.push({t:tt(l),s:tt('Go to'),f:()=>{view=k;render()}}));
+  out.push({t:'+ '+tt('New'),s:tt('Shipment'),f:()=>A.newShip()});
+  S.shipments.forEach(s=>out.push({t:`${s.invoiceNo} · ${s.cust.name}`,s:tt('Shipment'),f:()=>A.open({id:s.id})}));
+  S.customers.forEach(c=>out.push({t:c.name,s:tt('Customers'),f:()=>{view='masters';mtab='cust';render()}}));
+  S.products.forEach(p=>out.push({t:p.desc,s:tt('Products'),f:()=>{view='masters';mtab='prod';render()}}));
+  S.hsList.forEach(h=>out.push({t:h.code+' '+h.en,s:'HS',f:()=>{view='masters';mtab='hs';render()}}));
+  THEMES.forEach(h=>out.push({t:h[1],s:tt('Theme'),f:()=>{S.settings.theme=h[0];save();render()}}));
+  DOCS.forEach(([k,l])=>out.push({t:tt(l),s:tt('Documents'),f:()=>{docTab=k;view='docs';render()}}));
+  return out.filter(x=>!q||(x.t+' '+x.s).toLowerCase().includes(q)).slice(0,10)}
+function cmdRender(){const q=$('#cmdIn').value;const it=cmdItems(q);cmdIdx=Math.min(cmdIdx,Math.max(it.length-1,0));
+  $('#cmdList').innerHTML=it.map((x,i)=>`<div class="${i===cmdIdx?'on':''}" data-cmd="${i}"><span>${esc(x.t)}</span><small>${esc(x.s)}</small></div>`).join('')||'<div><small>—</small></div>';cmdRender.items=it}
+function cmdOpen(){const d=$('#cmd');if(!d.open)d.showModal();$('#cmdIn').value='';cmdIdx=0;cmdRender();setTimeout(()=>$('#cmdIn').focus(),0)}
+function cmdRun(i){const x=(cmdRender.items||[])[i];if(!x)return;$('#cmd').close();x.f()}
+
+/* ========== Events ========== */
+function refreshDerived(){const sh=cur();
+  sh.items.forEach((it,i)=>{const e=$('#amt'+i);if(e)e.textContent=fmt(lineAmt(it));const m=$('#mg'+i);if(m){const rev=num(it.price)*rate(sh.currency);m.textContent=rev&&num(it.cost)?fmt((rev-num(it.cost))/rev*100,1)+'%':'—'}});
+  sh.cases.forEach((c,i)=>{const e=$('#vol'+i);if(e)e.textContent=fmt(caseVol(c),3);const p=$('#cpcs'+i);if(p)p.textContent=fmt(sh.items.filter(it=>num(it.cs)===num(c.no)).reduce((a,it)=>a+num(it.qty),0),0)});
+  const tb=$('#totbox');if(tb)tb.innerHTML=totBox();const pt=$('#packtot');if(pt)pt.innerHTML=packTot();
+  if(view==='docs'&&$('#pv')){$('#pv').innerHTML=renderDoc(docTab);applyPage();fitPreview()}}
+document.addEventListener('input',e=>{const el=e.target;
+  if(el.id==='cmdIn'){cmdIdx=0;cmdRender();return}
+  if(el.dataset.calc){calcTools();if(el.id==='pc_c'){$('#pc_r').value=S.rates[el.value];calcTools()}return}
+  if(el.dataset.aInput==='flt'){filter=el.value;const pos=el.selectionStart;render();const f=$('#flt');f.focus();f.setSelectionRange(pos,pos);return}
+  const p=el.dataset.p;if(!p||el.type==='checkbox'||el.type==='file')return;
+  let v=el.value;if(el.dataset.n)v=v===''?'':parseFloat(v);setv(p,v);save();refreshDerived()});
+document.addEventListener('change',e=>{const el=e.target;
+  if(el.dataset.aChange==='selship'){S.cur=el.value;save();render();return}
+  if(el.dataset.aChange==='fy'){fyView=+el.value;render();return}
+  if(el.id==='fileIn'){doRestore(el.files[0]);el.value='';return}
+  if(el.id==='sigIn'||el.id==='logoIn'){const f=el.files[0];if(!f)return;const isLogo=el.id==='logoIn';const rd=new FileReader();rd.onload=()=>{
+      const img=new Image();img.onload=()=>{const k=Math.min(1,700/img.width);const cv=document.createElement('canvas');cv.width=Math.round(img.width*k);cv.height=Math.round(img.height*k);cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);
+        S.settings[isLogo?'logo':'sigImg']=cv.toDataURL('image/png');save();render()};img.onerror=()=>{S.settings[isLogo?'logo':'sigImg']=rd.result;save();render()};img.src=rd.result};rd.readAsDataURL(f);return}
+  if(el.dataset.chk){cur().checks[el.dataset.chk]=el.checked;save();render();return}
+  const p=el.dataset.p;if(!p)return;
+  if(el.type==='checkbox'){setv(p,el.checked);save();if(el.dataset.r)render();else refreshDerived();return}
+  if(el.tagName==='SELECT')setv(p,el.dataset.n?parseFloat(el.value):el.value);
+  if(el.dataset.desc){const i=+p.split('.')[2];const pr=prodOf(el.value);const it=cur().items[i];if(pr&&it){if(!num(it.price))it.price=pr.price;if(!num(it.cost))it.cost=pr.cost||0;if(!it.hs&&pr.hs&&pr.hs!==cur().hs)it.hs=pr.hs;if(pr.unit)it.unit=pr.unit;save();render();return}}
+  if(el.dataset.r){save();render();return}
+  if(p==='cur.invoiceNo'||p==='cur.cust.name'){save();renderChrome()}
+  if(p.startsWith('cur.items.')&&p.endsWith('.hs')){save()}
+});
+function doBackup(){S.lastBackup=todayISO();save();const b=new Blob([JSON.stringify(S,null,1)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`tsh-export-desk-${todayISO()}.json`;document.body.appendChild(a);a.click();a.remove();toast(tt('Backup'));renderChrome()}
+function doRestore(f){if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const o=JSON.parse(rd.result);if(!o.shipments||!o.settings)throw 0;S=migrate(o);save();render();toast(tt('Restored'))}catch(e){toast(tt('Invalid backup file'))}};rd.readAsText(f)}
+function fitPapers(root,on,ph){if(!on)return;[].forEach.call(root.querySelectorAll('.paper:not(.lblpage)'),function(p){var k=parseFloat(getComputedStyle(p).getPropertyValue('--k'))||1,n=0;while(p.scrollHeight>ph+2&&k>0.68&&n<30){k=Math.round((k-0.02)*100)/100;p.style.setProperty('--k',k);n++}})}
+const pagePx=()=>S.print.size==='Letter'?1056:1122;
+function printDocs(list){const pa=$('#printArea');pa.innerHTML=list.map(renderDoc).join('');pa.style.cssText='display:block;position:absolute;left:-99999px;top:0';fitPapers(pa,S.print.fit,pagePx());pa.style.cssText='';try{window.print()}catch(e){toast(tt('Printing is blocked here. Use "Printable file".'))}}
+function themeVars(){const cs=getComputedStyle(document.documentElement),n=cs.getPropertyValue('--navy').trim();return `:root{--acc:${n};--acc-soft:color-mix(in srgb,${n} 8%,#fff)}`}
+function downloadPrintable(list){const l=S.print.size==='Letter';const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>${esc(cur().invoiceNo)}</title><style>${themeVars()}@page{size:${l?'letter':'A4'};margin:0}body{background:#e5e1d6;margin:0;padding:12px}${PAPER_CSS}@media print{body{background:#fff;padding:0}}</style></head><body>${list.map(renderDoc).join('')}<script>(${fitPapers.toString()})(document,${!!S.print.fit},${pagePx()})<\/script></body></html>`;
+  const b=new Blob([html],{type:'text/html'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`${cur().invoiceNo}-documents.html`;document.body.appendChild(a);a.click();a.remove()}
+function parsePaste(txt){const out=[];txt.split(/\r?\n/).forEach(line=>{if(!line.trim())return;let c=line.split('\t');if(c.length<2)c=line.split(/[;,](?=\s*[\d€$])/);c=c.map(x=>x.trim());
+  if(c.length>=4&&/^\d+\.?$/.test(c[0]))c.shift();if(c.length<2)return;out.push({desc:c[0],qty:num(c[1]),price:num(c[2]||0),hs:c[3]||'',unit:'pcs',cost:0,cs:1})});return out}
+function icsFor(list){const ev=[];const stamp=new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z';
+  list.forEach(s=>[['ETD',s.etd],['ETA',s.eta],['Payment due',dueDate(s)]].forEach(([n,d])=>{if(!d)return;const a=d.replace(/-/g,''),b=addDays(d,1).replace(/-/g,'');
+    ev.push(`BEGIN:VEVENT\r\nUID:${s.id}-${n.replace(/\s/g,'')}@tsh-export-desk\r\nDTSTAMP:${stamp}\r\nDTSTART;VALUE=DATE:${a}\r\nDTEND;VALUE=DATE:${b}\r\nSUMMARY:${n} ${s.invoiceNo} ${s.cust.name}\r\nEND:VEVENT`)}));
+  return `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//TSH Export Desk//EN\r\n${ev.join('\r\n')}\r\nEND:VCALENDAR`}
+function dl(name,mime,data){const b=new Blob([data],{type:mime});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();a.remove()}
+function ask(msg,fn){const d=$('#dlg');d.innerHTML=`<h2>${esc(msg)}</h2><div class="row" style="margin-top:14px;justify-content:flex-end"><button class="ghost" data-a="dlgClose">${t('Cancel')}</button><button class="danger" id="askOk">OK</button></div>`;d.showModal();$('#askOk').onclick=()=>{d.close();fn()}}
+const A={
+ nav:d=>{view=d.v;render()},tab:d=>{tab=d.v;render()},doc:d=>{docTab=d.v;render()},mtab:d=>{mtab=d.v;render()},lang:d=>{S.lang=d.v;save();render()},
+ theme:d=>{S.settings.theme=d.v;save();render()},cmd:()=>cmdOpen(),
+ setStatus:d=>{cur().status=d.v;save();render()},
+ open:d=>{S.cur=d.id;view='ship';tab='info';save();render()},
+ newShip:()=>{const s=blankShipment();S.settings.nextNo=num(S.settings.nextNo)+1;S.shipments.push(s);S.cur=s.id;view='ship';tab='info';save();render()},
+ dupShip:()=>{const s=JSON.parse(JSON.stringify(cur()));s.id=uid();s.invoiceNo=S.settings.prefix+S.settings.nextNo;S.settings.nextNo=num(S.settings.nextNo)+1;s.status='quote';s.checks={};s.payments=[];s.date=todayISO();s.marks=s.marks.replace(/INVOICE NO\.\S+/,'INVOICE NO.'+s.invoiceNo);S.shipments.push(s);S.cur=s.id;view='ship';save();render()},
+ delShip:()=>{if(S.shipments.length<2)return;ask(tt('Delete this shipment?'),()=>{S.shipments=S.shipments.filter(s=>s.id!==cur().id);S.cur=S.shipments[0].id;view='dash';save();render()})},
+ addItem:()=>{cur().items.push({desc:'',hs:'',qty:1,unit:'pcs',price:0,cost:0,cs:1});save();render()},
+ delItem:d=>{cur().items.splice(+d.i,1);save();render()},
+ dupItem:d=>{const a=cur().items;a.splice(+d.i+1,0,{...a[+d.i]});save();render()},
+ mv:d=>{const a=cur().items,i=+d.i,j=i+ +d.d;if(j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];save();render()},
+ addAdd:()=>{cur().adds.push({label:'',amount:0});save();render()},delAdd:d=>{cur().adds.splice(+d.i,1);save();render()},
+ addPay:()=>{cur().payments.push({date:todayISO(),amount:0,ref:''});save();render()},delPay:d=>{cur().payments.splice(+d.i,1);save();render()},
+ payFull:()=>{const sh=cur();sh.payments.push({date:todayISO(),amount:balance(sh),ref:'T/T'});save();render()},
+ markPaid:()=>{const sh=cur();sh.status='paid';sh.checks['Payment received']=true;save();render()},
+ addCase:()=>{const c=cur().cases;c.push({no:(c.length?Math.max(...c.map(x=>num(x.no))):0)+1,l:0,w:0,h:0,nw:0,gw:0});save();render()},
+ delCase:d=>{cur().cases.splice(+d.i,1);save();render()},
+ allCase1:()=>{cur().items.forEach(i=>i.cs=1);save();render()},
+ nwCalc:()=>{const sh=cur();let any=false;sh.cases.forEach(c=>{let w=0;sh.items.forEach(it=>{if(num(it.cs)===num(c.no)){const p=prodOf(it.desc);if(p&&num(p.wt))w+=num(p.wt)*num(it.qty)}});if(w>0){c.nw=Math.round(w*10)/10;any=true}});save();render();if(any)toast(tt('Updated'))},
+ genMarks:()=>{cur().marks=genMarks(cur());save();render()},
+ loadCust:()=>{const id=$('#custPick').value;const c=S.customers.find(x=>x.id===id);if(!c)return;const sh=cur();sh.cust={name:c.name,country:c.country,addr:c.addr,attn:c.attn,tel:c.tel,fax:c.fax,email:c.email||'',vat:c.vat||''};
+   if(c.currency)sh.currency=c.currency;if(c.incoterm)sh.incoterm=c.incoterm;if(c.payDays!=='')sh.payDays=c.payDays;if(c.pod){sh.pod=c.pod}if(!sh.finalDest)sh.finalDest=c.name;sh.steelCert=!!c.steel;if(c.remarks)sh.remarks=c.remarks;save();render()},
+ pasteDlg:()=>{const d=$('#dlg');d.innerHTML=`<h2>${t('Paste from Excel')}</h2><p class="note">${esc(tt('Paste rows copied from Excel. Columns: Description, Qty, Unit price (optional: HS code).'))}</p><textarea id="pasteTx" rows="10" style="font-family:monospace"></textarea><div class="row" style="margin-top:12px;justify-content:flex-end"><button class="ghost" data-a="dlgClose">${t('Cancel')}</button><button data-a="pasteGo">${t('Import')}</button></div>`;d.showModal()},
+ dlgClose:()=>$('#dlg').close(),
+ pasteGo:()=>{const rows=parsePaste($('#pasteTx').value);rows.forEach(r=>{const p=prodOf(r.desc);if(p){if(!r.price)r.price=p.price;r.cost=p.cost||0;if(!r.hs&&p.hs&&p.hs!==cur().hs)r.hs=p.hs}});cur().items.push(...rows);$('#dlg').close();save();render()},
+ toMaster:()=>{let n=0;cur().items.forEach(i=>{if(i.desc.trim()&&!prodOf(i.desc)){S.products.push({id:uid(),desc:i.desc,hs:i.hs||cur().hs,unit:i.unit,price:i.price,cost:i.cost||0,wt:0});n++}});save();render();toast(tt('Added to product master')+' ('+n+')')},
+ csv:()=>{const sh=cur();const rows=[['No','Description','HS','Qty','Unit','Unit price','Amount','Case'],...sh.items.map((i,k)=>[k+1,i.desc,effHS(i,sh),i.qty,i.unit,i.price,lineAmt(i),i.cs])];
+   dl(sh.invoiceNo+'-items.csv','text/csv','﻿'+rows.map(r=>r.map(x=>`"${String(x).replace(/"/g,'""')}"`).join(',')).join('\n'))},
+ ics:()=>dl('tsh-export-calendar.ics','text/calendar',icsFor(S.shipments.filter(s=>s.status!=='paid'))),
+ addCust:()=>{S.customers.push({id:uid(),name:'',country:'',addr:'',attn:'',tel:'',fax:'',currency:'EUR',incoterm:'FOB',payDays:45,pod:'',steel:false,remarks:''});save();render()},
+ delCust:d=>{S.customers.splice(+d.i,1);save();render()},
+ addProd:()=>{S.products.push({id:uid(),desc:'',hs:'',unit:'pcs',price:0,cost:0,wt:0});save();render()},
+ delProd:d=>{S.products.splice(+d.i,1);save();render()},
+ addHS:()=>{S.hsList.push({code:'',en:'',ja:'',jp:'',note:''});save();render()},delHS:d=>{S.hsList.splice(+d.i,1);save();render()},
+ printOne:()=>printDocs([docTab]),printAll:()=>printDocs(['ci','pl','si','cm']),
+ dlPrintable:()=>downloadPrintable(['ci','pl','si','cm']),
+ backup:doBackup,restore:()=>$('#fileIn').click(),
+ reset:()=>ask(tt('Reset everything to sample data?'),()=>{const keep=S.settings.theme;S=seed();S.settings.theme=keep;save();view='dash';render()}),
+ clean:()=>ask(tt('Remove all sample shipments, customers and products?'),()=>{const b=blankShipment();S.shipments=[b];S.cur=b.id;S.customers=[];S.products=[];S.settings.nextNo=num(S.settings.nextNo)+1;save();view='dash';render()}),
+ copyBackup:()=>{const tx=document.createElement('textarea');tx.value=JSON.stringify(S);document.body.appendChild(tx);tx.select();try{document.execCommand('copy')}catch(e){}try{navigator.clipboard.writeText(tx.value)}catch(e){}tx.remove();toast(tt('Copied'))},
+ rmSig:()=>{S.settings.sigImg='';save();render()},rmLogo:()=>{S.settings.logo='';save();render()},
+ mail:d=>{$('#mailTx').value=mailText(d.v)},
+ copyMail:()=>{const tx=$('#mailTx');tx.select();try{document.execCommand('copy')}catch(e){}try{navigator.clipboard.writeText(tx.value)}catch(e){}toast(tt('Copied'))}
+};
+document.addEventListener('click',e=>{
+  const cm=e.target.closest('[data-cmd]');if(cm){cmdRun(+cm.dataset.cmd);return}
+  const b=e.target.closest('[data-a]');if(!b||b.tagName==='INPUT'||b.tagName==='SELECT')return;const f=A[b.dataset.a];if(f)f(b.dataset,b)});
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();cmdOpen();return}
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();doBackup();return}
+  if(e.target.id==='cmdIn'){const n=(cmdRender.items||[]).length;
+    if(e.key==='ArrowDown'){e.preventDefault();cmdIdx=(cmdIdx+1)%Math.max(n,1);cmdRender()}
+    else if(e.key==='ArrowUp'){e.preventDefault();cmdIdx=(cmdIdx-1+n)%Math.max(n,1);cmdRender()}
+    else if(e.key==='Enter'){e.preventDefault();cmdRun(cmdIdx)}}});
+render();
+</script>
+</body>
+</html>
