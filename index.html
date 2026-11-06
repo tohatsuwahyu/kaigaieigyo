@@ -131,6 +131,45 @@ dialog::backdrop{background:#14213d88}
 #toast.on{opacity:1}
 #printArea{display:none}
 @media print{#app,#toast,dialog{display:none!important}#printArea{display:block}body{background:#fff}}
+
+/* ---- refinements: plain, flat business-tool look ---- */
+body{line-height:1.5}
+#side{background:#fff;color:var(--ink);border-right:1px solid var(--line)}
+.brand{border-bottom:1px solid var(--line)}
+.brand b{font-family:inherit;color:var(--navy);font-size:15px}
+.brand small{color:var(--mut)}
+.logoplate{background:none;padding:0;min-width:0}
+.nav button{color:#3a4458;border-radius:6px}
+.nav button:hover{background:var(--w2)}
+.nav button.on{background:var(--acc-soft);color:var(--navy);font-weight:600;box-shadow:none}
+.sidefoot{color:var(--mut)}
+.kbd{border-color:var(--line2)}
+h1{font-family:inherit;font-size:22px;font-weight:700}
+h2{font-family:inherit;font-size:15px;font-weight:700;color:var(--ink)}
+h2:after{display:none}
+.card{border-radius:8px;box-shadow:none}
+button,.btn,input,select,textarea{border-radius:6px}
+.kpi{border-left:0}.kpi b,.totbox b{font-family:inherit;font-weight:700}
+.steps button{clip-path:none;margin:0 6px 0 0;border-radius:99px;min-width:0;padding:5px 14px}
+.steps button:first-child{clip-path:none}
+.pvwrap{background:#e3e7ee;border-radius:8px}
+.dochead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 14px}
+.chips button{background:#fff;color:var(--ink);border:1px solid var(--line2);border-radius:99px;padding:5px 13px}
+.chips button:hover{background:var(--w2)}
+.chips button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.split{display:grid;grid-template-columns:minmax(380px,46%) 1fr;gap:16px;align-items:start}
+.split .editor{max-height:calc(100vh - 140px);overflow:auto;position:sticky;top:64px;padding-right:4px}
+.split .pvwrap{position:sticky;top:64px;max-height:calc(100vh - 140px)}
+.editor .g3,.editor .g4{grid-template-columns:repeat(2,1fr)}
+.editor .span3,.editor .span4{grid-column:1/-1}
+@media(max-width:1000px){.split{grid-template-columns:1fr}.split .editor,.split .pvwrap{position:static;max-height:none}}
+#pv{cursor:pointer}.split #pv{cursor:default}
+.hintbar{font-size:12.5px;color:var(--mut);margin:-6px 0 10px}
+.next{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--acc-soft);border:1px solid var(--line2);border-radius:8px;padding:12px 16px;margin-bottom:14px}
+.next b{display:block;color:var(--navy);margin-bottom:2px}
+details.admin>summary{cursor:pointer;font-weight:600;color:var(--mut)}
+details.admin[open]>summary{margin-bottom:12px}
 </style>
 <style id="paperCss"></style>
 <style id="pageCss">@page{size:A4;margin:0}</style>
@@ -280,6 +319,8 @@ const J={
 'Cloud sync (Google Sheets)':'クラウド同期（Googleスプレッドシート）','Web app URL':'ウェブアプリURL','Secret token':'秘密トークン','Auto-sync':'自動同期','Connect & sync now':'接続して今すぐ同期','Set URL and token first':'先にURLとトークンを入力してください','Server already has data. Replace local data with it?':'サーバーにデータがあります。ローカルをサーバーのデータで置き換えますか？','Synced':'同期済み','Syncing…':'同期中…','Not connected':'未接続','Sync error':'同期エラー','Cloud updated – data refreshed':'クラウドの更新を反映しました',
 'Reminder rules':'リマインダー設定','Send reminders to (e-mail)':'送信先メール','ETD – days before':'ETD：何日前','Payment due – days before':'入金期日：何日前','L/C expiry – days before':'L/C期限：何日前','Quotation expiry – days before':'見積期限：何日前','ETA – days before':'ETA：何日前','Warn about missing documents – days before ETD':'書類未完了の警告：ETDの何日前','Daily time (JST, hour)':'毎日の実行時刻（JST・時）','Add to Google Calendar':'Googleカレンダーに登録','Browser notification when opening the app':'アプリを開いた時にブラウザ通知','Save & install daily trigger':'保存して毎日の自動実行を設定','Send test e-mail':'テストメール送信','Sync calendar now':'カレンダーを今すぐ同期','Done':'完了','Test e-mail sent':'テストメールを送信しました','Calendar events created: {0}':'カレンダー登録数：{0}','Daily trigger installed':'毎日の自動実行を設定しました','The server sends the digest every day, even when the app is closed. Overdue items are repeated daily.':'サーバーが毎日ダイジェストを送信します（アプリを閉じていても動作）。遅延項目は毎日再送されます。'
 };
+Object.assign(J,{'Preview':'プレビュー','Edit':'編集','Print all':'すべて印刷','Print settings':'印刷設定','Details':'詳細','Packing':'梱包','Payments':'入金','PO received':'注文書受領','Register PO':'注文を登録','Customer':'顧客','Items (optional)':'明細（任意）','PO date':'注文日','Requested ship date (ETD)':'希望出荷日(ETD)','Search':'検索','Administrator':'管理者向け','Server connection (Google Sheets)':'サーバー接続(Google Sheets)','Copy connect link for another PC':'他のPC用の接続リンクをコピー','Sample data':'サンプルデータ','Save & activate':'保存して有効化','Next step':'次の作業','Mark as':'次へ進める：'});
+Object.assign(J,{"Click the document to edit its contents.":"書類をクリックすると内容を編集できます。","Not synced – saved on this PC (click to retry)":"未同期（このPCに保存済み・クリックで再試行）","Waiting for the customer's order. When the PO arrives, register it here.":"お客様の注文待ちです。注文書が届いたらここで登録してください。","PO registered. Send the Order Confirmation to the customer, then start production.":"注文を登録しました。注文請書を送付し、生産を開始してください。","In production. When the goods are ready, enter the cases and prepare the shipping documents.":"生産中です。出来上がったら梱包情報を入力し、船積書類を準備します。","Shipped. Send the Commercial Invoice and watch for payment.":"出荷済み。インボイスを送付し、入金を確認します。","Payment received. This shipment is complete.":"入金済み。この案件は完了です。","Open Order Confirmation":"注文請書を開く","Open Packing List":"梱包明細書を開く","Open Commercial Invoice":"インボイスを開く","Register the customer's purchase order for this shipment.":"この案件のお客様注文書を登録します。","Register a purchase order from a customer. A new shipment is created at the \"Order\" stage.":"お客様の注文書を登録します。「受注」段階で新しい案件が作成されます。","Choose from customer master":"顧客マスタから選択","Enter the PO number":"注文番号を入力してください","PO registered.":"注文を登録しました。","Enter the web app URL and token first":"先にURLとトークンを入力してください","Link copied. Open it on the other PC (share privately).":"リンクをコピーしました。他のPCで開いてください（他人に共有しないでください）。","E-mail reminders need the server connection. Ask the administrator to connect it (Settings → Administrator).":"メール通知にはサーバー接続が必要です。管理者に接続を依頼してください（設定→管理者向け）。"});
 function t(s,...a){let j=J[s];let e=s;if(a.length){a.forEach((x,i)=>{e=e.split('{'+i+'}').join(x);if(j)j=j.split('{'+i+'}').join(x)})}
   if(S.lang==='en'||!j)return esc(e);if(S.lang==='ja')return esc(j);return esc(e)+'<span class="jp">'+esc(j)+'</span>'}
 function tt(s){const j=J[s];if(S.lang==='en'||!j)return s;if(S.lang==='ja')return j;return s+' / '+j}
@@ -328,7 +369,7 @@ function migrate(o){const d=seed();const pv=o.v||0;o.v=3;o.print=Object.assign({
   o.shipments.forEach(s=>{s.payments=s.payments||[];s.adds=s.adds||[];s.checks=s.checks||{};s.items.forEach(i=>{if(i.cost==null)i.cost=0})});
   o.customers.forEach(c=>{if(c.steel==null)c.steel=false;c.remarks=c.remarks||''});return o}
 function blankShipment(){const s=S.settings;const n=s.prefix+s.nextNo;
-  return {id:uid(),status:'quote',invoiceNo:n,date:todayISO(),quoteNo:'',quoteDate:todayISO(),validity:30,contractNo:'',orderNo:'',custPO:'',lcNo:'',lcDate:'',lcBank:'',lcExpiry:'',
+  return {id:uid(),status:'quote',invoiceNo:n,date:todayISO(),quoteNo:'',quoteDate:todayISO(),validity:30,contractNo:'',orderNo:'',custPO:'',poDate:'',lcNo:'',lcDate:'',lcBank:'',lcExpiry:'',
    cust:{name:'',country:'',addr:'',attn:'',tel:'',fax:'',email:'',vat:''},consigneeSame:true,consignee:'',notify:'',payMethod:'tt',payDays:45,payText:'',currency:'EUR',incoterm:'FOB',incotermPlace:'YOKOHAMA',
    vessel:'',pol:'YOKOHAMA, JAPAN',pod:'',finalDest:'',etd:'',eta:'',forwarder:'',freightTerms:'prepaid',blType:'Original B/L',goodsTitle:'',hs:'8207.20',origin:'MADE IN JAPAN',steelCert:false,remarks:'',notes:'',marks:'',
    items:[],cases:[{no:1,l:0,w:0,h:0,nw:0,gw:0}],adds:[],payments:[],checks:{}}}
@@ -393,19 +434,19 @@ const NAV=[['dash','Dashboard'],['ship','Shipment'],['docs','Documents'],['maste
 function renderChrome(){
   $('#brand').innerHTML=`<div class="logoplate"><img src="${esc(logoSrc())}" alt="TSH" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="mono" style="display:none">TSH</div></div><div><b>Export Desk</b><small>海外営業デスク</small></div>`;
   const rn=remList().length;$('#nav').innerHTML=NAV.map(([k,l])=>`<button data-a="nav" data-v="${k}" class="${view===k?'on':''}">${t(l)}${k==='dash'&&rn?`<span class="badge">${rn}</span>`:''}</button>`).join('');
-  $('#sidefoot').innerHTML=`<span class="kbd">Ctrl</span>+<span class="kbd">K</span> ${esc(tt('Search'))}<br>${esc(tt('Data is stored only in this browser. Make backups regularly.'))}`;
-  const sh=cur();const old=!S.lastBackup||diffDays(todayISO(),S.lastBackup)>14;
+  $('#sidefoot').innerHTML=`<span class="kbd">Ctrl</span>+<span class="kbd">K</span> ${esc(tt('Search'))}<br>${(S.sync.url&&S.sync.token&&S.sync.last)?'':esc(tt('Data is stored only in this browser. Make backups regularly.'))}`;
+  const sh=cur();const old=(!S.lastBackup||diffDays(todayISO(),S.lastBackup)>14)&&!(S.sync.url&&S.sync.token&&S.sync.last);
   $('#top').innerHTML=`<select id="shSel" data-a-change="selship">${S.shipments.map(s=>`<option value="${s.id}" ${s.id===sh.id?'selected':''}>${esc(s.invoiceNo)} · ${esc(s.cust.name||'—')}</option>`).join('')}</select>
-   <button class="ghost" data-a="newShip">+ ${t('New')}</button><button class="ghost" data-a="dupShip">${t('Duplicate')}</button><button class="ghost" data-a="cmd">🔍</button>
-   <span class="grow"></span>${S.sync.url?`<span id="syncst" class="syncst ${syncUI.s}" data-a="sync">${esc(syncLabel())}</span>`:''}${old?`<span class="bkwarn" data-a="backup" title="${esc(S.lastBackup||tt('never'))}">⚠ ${esc(tt('Backup recommended'))}</span>`:''}<span id="saved"></span>
+   <button class="ghost" data-a="newShip">+ ${t('New')}</button><button class="ghost" data-a="dupShip">${t('Duplicate')}</button><button class="ghost" data-a="cmd">${t('Search')}</button>
+   <span class="grow"></span>${(S.sync.url&&S.sync.token&&syncUI.s==='err')?`<span id="syncst" class="syncst err" data-a="sync" title="${esc(syncUI.m||'')}">${esc(tt('Not synced – saved on this PC (click to retry)'))}</span>`:''}${old?`<span class="bkwarn" data-a="backup" title="${esc(S.lastBackup||tt('never'))}">${esc(tt('Backup recommended'))}</span>`:''}<span id="saved"></span>
    <button class="ghost" data-a="backup">${t('Backup')}</button>
    <div class="seg">${[['bi','EN/日本語'],['en','EN'],['ja','日本語']].map(([k,l])=>`<button data-a="lang" data-v="${k}" class="${S.lang===k?'on':''}">${l}</button>`).join('')}</div>`;
   stamp();
 }
-function render(){applyTheme();applyPage();renderChrome();
+function render(){const ed0=document.querySelector('.editor'),st0=ed0?ed0.scrollTop:0;applyTheme();applyPage();renderChrome();
   $('#dls').innerHTML=`<datalist id="prodList">${S.products.map(p=>`<option value="${esc(p.desc)}">`).join('')}</datalist><datalist id="hsDl">${S.hsList.map(h=>`<option value="${esc(h.code)}">${esc(h.en)}</option>`).join('')}</datalist>`;
   $('#view').innerHTML=({dash:vDash,ship:vShip,docs:vDocs,masters:vMasters,tools:vTools,set:vSet})[view]();
-  if(view==='docs')fitPreview();
+  if(view==='docs'){fitPreview();const e1=document.querySelector('.editor');if(e1)e1.scrollTop=st0}
   if(view==='tools')calcTools();
   document.documentElement.lang=S.lang==='ja'?'ja':'en';
 }
@@ -443,7 +484,7 @@ function vDash(){
   const q=filter.toLowerCase();
   const rows=S.shipments.filter(s=>!q||(s.invoiceNo+s.cust.name+s.custPO).toLowerCase().includes(q)).sort((a,b)=>(b.date||'')<(a.date||'')?-1:1);
   return `<h1>${t('Dashboard')}</h1><p class="sub">${t('Overview of all shipments')}</p>
-  <div class="row" style="margin-bottom:14px"><button data-a="newShip">+ ${t('New')}</button><button class="ghost" data-a="cmd">🔍 ${t('Search everything')}</button><button class="ghost" data-a="ics">📅 ${t('Export calendar (.ics)')}</button>
+  <div class="row" style="margin-bottom:14px"><button data-a="newShip">+ ${t('New')}</button><button class="ghost" data-a="poNew">${t('PO received')}</button><button class="ghost" data-a="cmd">${t('Search everything')}</button><button class="ghost" data-a="ics">${t('Export calendar (.ics)')}</button>
    <span class="grow"></span><select style="width:auto" data-a-change="fy">${fys.map(y=>`<option value="${y}" ${y===fy?'selected':''}>FY${y} (Jun ${y} – May ${y+1})</option>`).join('')}</select></div>
   ${(()=>{const rl=remList();return rl.length?`<div class="card"><h2>${t('Reminders')} · ${rl.length}</h2>${rl.slice(0,8).map(r=>`<div class="rem ${r.lvl}" data-a="open" data-id="${r.id}"><i></i><b>${esc(r.who)}</b><span>${esc(r.msg)}</span></div>`).join('')}</div>`:''})()}
   <div class="grid g4" style="margin-bottom:16px">
@@ -466,10 +507,20 @@ function vDash(){
 function vShip(){
   const tabs=[['info','Info'],['items','Items'],['pack','Packing'],['pay','Payments'],['chk','Checklist'],['verify','Check']];const sh=cur();const si=STATUS.indexOf(sh.status);
   return `<h1>${t('Shipment')} · ${esc(sh.invoiceNo)}</h1><p class="sub">${esc(sh.cust.name)}</p>
+  ${nextStep(sh)}
   <div class="steps">${STATUS.map((s,i)=>`<button data-a="setStatus" data-v="${s}" class="${i<si?'done':''} ${i===si?'on':''}">${esc(tt(STL[s]))}</button>`).join('')}</div>
   <div class="tabs">${tabs.map(([k,l])=>`<button data-a="tab" data-v="${k}" class="${tab===k?'on':''}">${t(l)}</button>`).join('')}</div>
   ${({info:tInfo,items:tItems,pack:tPack,pay:tPay,chk:tChk,verify:tVerify})[tab]()}`;
 }
+function nextStep(sh){
+  const m={quote:['Waiting for the customer\'s order. When the PO arrives, register it here.','PO received','poFor'],
+   order:['PO registered. Send the Order Confirmation to the customer, then start production.','Open Order Confirmation','goDoc:oc'],
+   production:['In production. When the goods are ready, enter the cases and prepare the shipping documents.','Open Packing List','goDoc:pl'],
+   shipped:['Shipped. Send the Commercial Invoice and watch for payment.','Open Commercial Invoice','goDoc:ci'],
+   paid:['Payment received. This shipment is complete.','','']}[sh.status];
+  const nx=STATUS[STATUS.indexOf(sh.status)+1];
+  const [a,v]=(m[2]||'').split(':');
+  return `<div class="next"><div><b>${esc(tt('Next step'))}</b><span>${esc(tt(m[0]))}</span></div><div class="row">${m[1]?`<button data-a="${a}" data-v="${v||''}">${esc(tt(m[1]))}</button>`:''}${nx?`<button class="ghost" data-a="advance">${esc(tt('Mark as'))} ${esc(tt(STL[nx]))}</button>`:''}</div></div>`}
 function incoHint(sh){const r=INC.find(x=>x[0]===sh.incoterm);return r?`${r[0]} ${r[1]} — ${r[3]} · ${tt('Export clearance')}: ${r[4]} · ${tt('Main carriage')}: ${r[5]}`:''}
 function tInfo(){const sh=cur();const ccy=['EUR','USD','JPY','GBP','CNY','SGD','THB','IDR'];
   return `
@@ -478,7 +529,7 @@ function tInfo(){const sh=cur();const ccy=['EUR','USD','JPY','GBP','CNY','SGD','
    <label class="f"><span>${t('Status')}</span><select data-p="cur.status" data-r="1">${STATUS.map(s=>`<option value="${s}" ${sh.status===s?'selected':''}>${esc(tt(STL[s]))}</option>`).join('')}</select></label>
    ${F('Currency','cur.currency',{opts:ccy})}
    ${F('Quotation / Proforma No.','cur.quoteNo')}${F('Quotation date','cur.quoteDate',{type:'date'})}${F('Validity (days)','cur.validity',{type:'number',n:1})}${F('Contract No.','cur.contractNo')}
-   ${F("Customer's Order No.",'cur.custPO',{area:1,rows:2,cls:'span2'})}${F('Order No.','cur.orderNo')}</div></div>
+   ${F("Customer's Order No.",'cur.custPO',{area:1,rows:2,cls:'span2'})}${F('Order No.','cur.orderNo')}${F('PO date','cur.poDate',{type:'date'})}</div></div>
   <div class="card"><h2>${t('Customer (sold to)')}</h2>
    <div class="row" style="margin-bottom:12px"><select id="custPick" style="max-width:320px"><option value="">${esc(tt('Load from customer master'))}</option>${S.customers.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select><button class="ghost" data-a="loadCust">${t('Load')}</button></div>
    <div class="grid g3">${F('Company name','cur.cust.name')}${F('Country','cur.cust.country')}${F('Attn.','cur.cust.attn')}
@@ -572,26 +623,29 @@ function tVerify(){const r=runChecks(cur());const ord={err:0,warn:1,ok:2,info:3}
 
 /* ---- Documents ---- */
 const DOCS=[['ci','Commercial Invoice'],['pl','Packing List'],['si','Shipping Instruction'],['cm','Case Marks'],['qt','Quotation'],['pi','Proforma Invoice'],['oc','Order Confirmation']];
-function vDocs(){const p=S.print;
-  return `<h1>${t('Documents')}</h1><p class="sub">${esc(cur().invoiceNo)} · ${esc(cur().cust.name)}</p>
-  <div class="docs"><div class="doclist">${DOCS.map(([k,l])=>`<button data-a="doc" data-v="${k}" class="${docTab===k?'on':''}">${t(l)}</button>`).join('')}
-   <button class="gold" data-a="printOne" style="margin-top:6px">🖨 ${t('Print this document')}</button>
-   <button data-a="printAll">${t('Print all documents')}</button>
-   <button class="ghost" data-a="dlPrintable">${t('Printable file')}</button>
-   <div class="note">${esc(tt('If printing is blocked in this view, use "Printable file", then open it and press Ctrl+P.'))}</div>
-   <div class="card"><details open><summary>${t('Print studio')}</summary><div class="grid">
+let docMode='view',edTab='info';
+function vDocs(){const p=S.print,sh=cur(),edit=docMode==='edit';
+  const etabs=[['info','Details'],['items','Items'],['pack','Packing'],['pay','Payments']];
+  return `<div class="dochead"><div><h1>${t('Documents')}</h1><p class="sub">${esc(sh.invoiceNo)} · ${esc(sh.cust.name)}</p></div>
+  <div class="row"><div class="seg"><button data-a="dmode" data-v="view" class="${!edit?'on':''}">${t('Preview')}</button><button data-a="dmode" data-v="edit" class="${edit?'on':''}">${t('Edit')}</button></div>
+   <button data-a="printOne">${t('Print this document')}</button><button class="ghost" data-a="printAll">${t('Print all documents')}</button><button class="ghost" data-a="dlPrintable">${t('Printable file')}</button></div></div>
+  <div class="chips">${DOCS.map(([k,l])=>`<button data-a="doc" data-v="${k}" class="${docTab===k?'on':''}">${t(l)}</button>`).join('')}</div>
+  ${edit?'':`<div class="hintbar">${esc(tt('Click the document to edit its contents.'))}</div>`}
+  <div class="${edit?'split':''}">
+   ${edit?`<div class="editor"><div class="tabs">${etabs.map(([k,l])=>`<button data-a="etab" data-v="${k}" class="${edTab===k?'on':''}">${t(l)}</button>`).join('')}</div>${({info:tInfo,items:tItems,pack:tPack,pay:tPay})[edTab]()}</div>`:''}
+   <div class="pvwrap" id="pvwrap"><div class="pv" id="pv">${renderDoc(docTab)}</div></div></div>
+  <details class="card" style="margin-top:14px"><summary style="cursor:pointer;font-weight:600">${t('Print settings')}</summary><div class="grid g4" style="margin-top:12px">
     ${F('Paper size','print.size',{opts:['A4','Letter'],re:1})}
     ${F('Scale (%)','print.scale',{type:'range',n:1,min:85,max:115})}
     ${F('Margin (mm)','print.margin',{type:'range',n:1,min:6,max:20})}
-    ${C('Fit to one page (auto)','print.fit',1)}
     ${F('Density','print.density',{opts:[['normal',tt('Normal')],['compact',tt('Compact')]],re:1})}
-    ${C('Show logo','print.logo',1)}
     ${F('Logo height (mm)','print.logoH',{type:'range',n:1,min:8,max:26})}
     ${F('Watermark','print.wm',{opts:[['',tt('None')],'DRAFT','COPY','SAMPLE','PAID'],re:1})}
     ${F('Copy label','print.copy',{opts:[['',tt('None')],'ORIGINAL','DUPLICATE','COPY'],re:1})}
-    ${C('Footer line','print.footer',1)}${C('Bank block','print.bank',1)}${C('Show signature / stamp','print.sig',1)}${C('HS code summary (when several HS)','print.hsSum',1)}${C('Japanese subtitles on documents','print.docJa',1)}
-   </div></details></div></div>
-  <div class="pvwrap" id="pvwrap"><div class="pv" id="pv">${renderDoc(docTab)}</div></div></div>`}
+    <div></div>
+    ${C('Fit to one page (auto)','print.fit',1)}${C('Show logo','print.logo',1)}${C('Footer line','print.footer',1)}${C('Bank block','print.bank',1)}${C('Show signature / stamp','print.sig',1)}${C('HS code summary (when several HS)','print.hsSum',1)}${C('Japanese subtitles on documents','print.docJa',1)}
+   </div><p class="note">${esc(tt('If printing is blocked in this view, use "Printable file", then open it and press Ctrl+P.'))}</p></details>`}
+let pvTimer=null;function livePv(){clearTimeout(pvTimer);pvTimer=setTimeout(()=>{const p=$('#pv');if(!p||view!=='docs')return;p.innerHTML=renderDoc(docTab);fitPreview()},120)}
 function fitPreview(){const w=$('#pvwrap'),p=$('#pv');if(!w||!p)return;const pw=S.print.size==='Letter'?816:794;p.style.zoom=1;fitPapers(p,S.print.fit,pagePx());p.style.zoom=Math.min(1,(w.clientWidth-40)/pw)}
 window.addEventListener('resize',fitPreview);
 
@@ -620,7 +674,7 @@ function docInvoice(kind){
   const dnum=ci?sh.invoiceNo:(sh.quoteNo||sh.invoiceNo),ddate=ci?sh.date:(sh.quoteDate||sh.date);
   const nolbl={ci:'Invoice No.',qt:'Quotation No.',pi:'Proforma Invoice No.',oc:'Order Confirmation No.'}[kind];
   const lc=sh.payMethod==='lc'||sh.lcNo;
-  const right=[kv(nolbl,dnum),kv('Date',dLong(ddate)),kv('Contract No.',sh.contractNo),kv("Customer's Order No.",sh.custPO),
+  const right=[kv(nolbl,dnum),kv('Date',dLong(ddate)),kv('Contract No.',sh.contractNo),kv("Customer's Order No.",sh.custPO+(kind==='oc'&&sh.poDate?' (dated '+dLong(sh.poDate)+')':'')),
     kv('HS code',hsu.join(' / ')),lc?kv('L/C No.',sh.lcNo+(sh.lcDate?' ('+dLong(sh.lcDate)+')':'')):'',lc?kv('Issuing bank',sh.lcBank):'',lc?kv('L/C expiry',dLong(sh.lcExpiry)):'',
     kv('Terms/Method of Payment',payLabel(sh)+' — '+payText(sh)),(!ci&&sh.quoteDate&&sh.validity)?kv('Validity',dLong(addDays(sh.quoteDate,sh.validity))):''].join('');
   const adds=sh.adds.filter(a=>a.label||num(a.amount));
@@ -730,14 +784,15 @@ function vSet(){const s=S.settings;
    <div><span class="note">${t('Signature / stamp image')}</span><div class="row"><input type="file" id="sigIn" accept="image/*" style="max-width:260px">${s.sigImg?`<img src="${s.sigImg}" style="height:42px;border:1px solid var(--line)"><button class="danger sm" data-a="rmSig">${t('Remove image')}</button>`:''}</div></div></div></div>
   <div class="card"><h2>${t('Bank (beneficiary)')}</h2><div class="grid g3">${F('Bank name','settings.bank.name')}${F('Branch','settings.bank.branch')}${F('Bank address','settings.bank.addr')}${F('SWIFT BIC','settings.bank.swift')}${F('Account No.','settings.bank.acct')}${F('Account type','settings.bank.type')}${F('Beneficiary','settings.bank.benef')}${F('Beneficiary address','settings.bank.benefAddr',{cls:'span2'})}</div></div>
   <div class="card"><h2>${t('Numbering')}</h2><div class="grid g4">${F('Invoice prefix','settings.prefix')}${F('Next number','settings.nextNo',{type:'number',n:1})}</div></div>
-  <div class="card"><h2>${t('Cloud sync (Google Sheets)')}</h2><div class="grid g3">${F('Web app URL','sync.url',{cls:'span2',ph:'https://script.google.com/macros/s/…/exec'})}${F('Secret token','sync.token',{type:'password'})}</div>
-   <div class="row" style="margin-top:12px"><button data-a="sync">${t('Connect & sync now')}</button>${C('Auto-sync','sync.auto')}<span class="note" id="syncStatus">${esc(syncLabel())}</span></div></div>
   <div class="card"><h2>${t('Reminder rules')}</h2><div class="grid g4">${F('Send reminders to (e-mail)','reminders.email',{type:'email',cls:'span2'})}${F('Daily time (JST, hour)','reminders.hour',{type:'number',n:1,min:0,max:23})}${F('Warn about missing documents – days before ETD','reminders.checkEtd',{type:'number',n:1})}
    ${F('ETD – days before','reminders.etd')}${F('Payment due – days before','reminders.due')}${F('L/C expiry – days before','reminders.lc')}${F('Quotation expiry – days before','reminders.quote')}${F('ETA – days before','reminders.eta')}</div>
    <div class="row" style="margin-top:12px">${C('Add to Google Calendar','reminders.calendar')}${C('Browser notification when opening the app','reminders.browser')}</div>
-   <div class="row" style="margin-top:12px"><button data-a="gasInstall">${t('Save & install daily trigger')}</button><button class="ghost" data-a="gasTest">${t('Send test e-mail')}</button><button class="ghost" data-a="gasCal">${t('Sync calendar now')}</button></div>
+   ${(S.sync.url&&S.sync.token)?`<div class="row" style="margin-top:12px"><button data-a="gasInstall">${t('Save & activate')}</button><button class="ghost" data-a="gasTest">${t('Send test e-mail')}</button></div>`:`<p class="note" style="margin-top:12px">${esc(tt('E-mail reminders need the server connection. Ask the administrator to connect it (Settings → Administrator).'))}</p>`}
    <p class="note">${esc(tt('The server sends the digest every day, even when the app is closed. Overdue items are repeated daily.'))}</p></div>
-  <div class="card"><h2>${t('Data')}</h2><div class="row"><button data-a="backup">${t('Download backup (.json)')}</button><button class="ghost" data-a="copyBackup">${t('Copy')} JSON</button><button class="ghost" data-a="restore">${t('Restore from backup')}</button><button class="danger" data-a="clean">${t('Start clean (remove sample data)')}</button><button class="danger" data-a="reset">${t('Reset to sample data')}</button></div><p class="note">${esc(tt('Sample data: invoice TSH-30099 (UKB-Uwe Krumm GmbH).'))}</p></div>`}
+  <div class="card"><h2>${t('Data')}</h2><div class="row"><button data-a="backup">${t('Download backup (.json)')}</button><button class="ghost" data-a="copyBackup">${t('Copy')} JSON</button><button class="ghost" data-a="restore">${t('Restore from backup')}</button></div></div>
+  <details class="card admin"><summary>${t('Administrator')}</summary>  <div class="card"><h3 style="margin:0 0 8px;font-size:14px">${t('Server connection (Google Sheets)')}</h3><div class="grid g3">${F('Web app URL','sync.url',{cls:'span2',ph:'https://script.google.com/macros/s/…/exec'})}${F('Secret token','sync.token',{type:'password'})}</div>
+   <div class="row" style="margin-top:12px"><button data-a="sync">${t('Connect & sync now')}</button>${C('Auto-sync','sync.auto')}<span class="note" id="syncStatus">${esc(syncLabel())}</span></div><button class="ghost" data-a="connLink">${t('Copy connect link for another PC')}</button></div>
+   <h3 style="margin:18px 0 8px;font-size:14px">${t('Sample data')}</h3><div class="row"><button class="danger" data-a="clean">${t('Start clean (remove sample data)')}</button><button class="danger" data-a="reset">${t('Reset to sample data')}</button></div><p class="note">${esc(tt('Sample data: invoice TSH-30099 (UKB-Uwe Krumm GmbH).'))}</p></details>`}
 
 /* ---- Command palette ---- */
 function cmdItems(q){q=q.toLowerCase().trim();const out=[];
@@ -771,7 +826,7 @@ function stampAll(){const sy=S.sync,H=sy.h;
   const sh=hash(JSON.stringify(setRec()));if(H['settings:main']===undefined)H['settings:main']=sh;else if(H['settings:main']!==sh){H['settings:main']=sh;sy.setU=Date.now()}}
 async function gas(action,payload){const sy=S.sync;const ctl=new AbortController();const to=setTimeout(()=>ctl.abort(),40000);
   try{const r=await fetch(sy.url,{method:'POST',body:JSON.stringify(Object.assign({action,token:sy.token},payload||{})),redirect:'follow',signal:ctl.signal});const j=await r.json();if(!j.ok)throw new Error(j.error||'error');return j}finally{clearTimeout(to)}}
-function syncLabel(){return syncUI.s==='busy'?'☁ '+tt('Syncing…'):syncUI.s==='ok'?'☁ '+tt('Synced')+' '+(syncUI.t||''):syncUI.s==='err'?'☁ '+tt('Sync error')+(syncUI.m?': '+syncUI.m:''):'☁ '+tt('Not connected')}
+function syncLabel(){return syncUI.s==='busy'?tt('Syncing…'):syncUI.s==='ok'?tt('Synced')+' '+(syncUI.t||''):syncUI.s==='err'?'☁ '+tt('Sync error')+(syncUI.m?': '+syncUI.m:''):'☁ '+tt('Not connected')}
 function setSyncUI(s,m){syncUI={s,m:m||'',t:s==='ok'?pad2(new Date().getHours())+':'+pad2(new Date().getMinutes()):''};['#syncst','#syncStatus'].forEach(q=>{const e=$(q);if(e){e.textContent=syncLabel();if(q==='#syncst')e.className='syncst '+s}})}
 function askAsync(msg){return new Promise(res=>{const d=$('#dlg');d.innerHTML=`<h2>${esc(msg)}</h2><div class="row" style="margin-top:14px;justify-content:flex-end"><button class="ghost" id="askNo">${t('Cancel')}</button><button id="askYes">OK</button></div>`;d.addEventListener('close',()=>res(false),{once:true});d.showModal();$('#askYes').onclick=()=>{res(true);d.close()};$('#askNo').onclick=()=>{res(false);d.close()}})}
 function mergeRemote(recs){let changed=false;const sy=S.sync,map={shipments:S.shipments,customers:S.customers,products:S.products,hs:S.hsList};
@@ -830,7 +885,7 @@ document.addEventListener('input',e=>{const el=e.target;
   if(el.dataset.calc){calcTools();if(el.id==='pc_c'){$('#pc_r').value=S.rates[el.value];calcTools()}return}
   if(el.dataset.aInput==='flt'){filter=el.value;const pos=el.selectionStart;render();const f=$('#flt');f.focus();f.setSelectionRange(pos,pos);return}
   const p=el.dataset.p;if(!p||el.type==='checkbox'||el.type==='file')return;
-  let v=el.value;if(el.dataset.n)v=v===''?'':parseFloat(v);setv(p,v);save();refreshDerived()});
+  let v=el.value;if(el.dataset.n)v=v===''?'':parseFloat(v);setv(p,v);save();refreshDerived();if(view==='docs')livePv()});
 document.addEventListener('change',e=>{const el=e.target;
   if(el.dataset.aChange==='selship'){S.cur=el.value;save();render();return}
   if(el.dataset.aChange==='fy'){fyView=+el.value;render();return}
@@ -845,7 +900,7 @@ document.addEventListener('change',e=>{const el=e.target;
   if(el.tagName==='SELECT')setv(p,el.dataset.n?parseFloat(el.value):el.value);
   if(el.dataset.desc){const i=+p.split('.')[2];const pr=prodOf(el.value);const it=cur().items[i];if(pr&&it){if(!num(it.price))it.price=pr.price;if(!num(it.cost))it.cost=pr.cost||0;if(!it.hs&&pr.hs&&pr.hs!==cur().hs)it.hs=pr.hs;if(pr.unit)it.unit=pr.unit;save();render();return}}
   if(el.dataset.r){save();render();return}
-  if(p==='cur.invoiceNo'||p==='cur.cust.name'){save();renderChrome()}
+  if(p==='cur.invoiceNo'||p==='cur.cust.name'){save();const sel=$('#shSel');if(sel){const sh=cur();sel.innerHTML=S.shipments.map(x=>`<option value="${x.id}" ${x.id===sh.id?'selected':''}>${esc(x.invoiceNo)} · ${esc(x.cust.name||'—')}</option>`).join('')}}
   if(p.startsWith('cur.items.')&&p.endsWith('.hs')){save()}
 });
 function doBackup(){S.lastBackup=todayISO();save();const b=new Blob([JSON.stringify(S,(k,v)=>k==='sync'?undefined:v,1)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`tsh-export-desk-${todayISO()}.json`;document.body.appendChild(a);a.click();a.remove();toast(tt('Backup'));renderChrome()}
@@ -864,12 +919,38 @@ function icsFor(list){const ev=[];const stamp=new Date().toISOString().replace(/
   return `BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//TSH Export Desk//EN\r\n${ev.join('\r\n')}\r\nEND:VCALENDAR`}
 function dl(name,mime,data){const b=new Blob([data],{type:mime});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();a.remove()}
 function ask(msg,fn){const d=$('#dlg');d.innerHTML=`<h2>${esc(msg)}</h2><div class="row" style="margin-top:14px;justify-content:flex-end"><button class="ghost" data-a="dlgClose">${t('Cancel')}</button><button class="danger" id="askOk">OK</button></div>`;d.showModal();$('#askOk').onclick=()=>{d.close();fn()}}
+
+/* ---- customer defaults, PO intake, connect link ---- */
+function applyCust(sh,c){sh.cust={name:c.name,country:c.country,addr:c.addr,attn:c.attn,tel:c.tel,fax:c.fax,email:c.email||'',vat:c.vat||''};
+  if(c.currency)sh.currency=c.currency;if(c.incoterm)sh.incoterm=c.incoterm;if(c.payDays!=='')sh.payDays=c.payDays;if(c.pod)sh.pod=c.pod;if(!sh.finalDest)sh.finalDest=c.name;sh.steelCert=!!c.steel;if(c.remarks)sh.remarks=c.remarks}
+function fillFromMaster(r,sh){const p=prodOf(r.desc);if(p){if(!r.price)r.price=p.price;r.cost=p.cost||0;if(!r.hs&&p.hs&&p.hs!==sh.hs)r.hs=p.hs}}
+function poDlg(mode){const d=$('#dlg'),isNew=mode==='new',sh=isNew?null:cur();
+  d.innerHTML=`<h2>${t('PO received')}</h2><p class="note">${esc(tt(isNew?'Register a purchase order from a customer. A new shipment is created at the "Order" stage.':'Register the customer\'s purchase order for this shipment.'))}</p>
+  <div class="grid g2" style="margin-top:10px">
+   ${isNew?`<label class="f"><span>${t('Customer')}</span><select id="po_c"><option value="">${esc(tt('Choose from customer master'))}</option>${S.customers.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select></label>`:`<div class="note" style="align-self:end">${esc(sh.cust.name)}</div>`}
+   <label class="f"><span>${t("Customer's Order No.")}</span><input id="po_no" value="${esc(sh?sh.custPO:'')}"></label>
+   <label class="f"><span>${t('PO date')}</span><input type="date" id="po_d" value="${todayISO()}"></label>
+   <label class="f"><span>${t('Requested ship date (ETD)')}</span><input type="date" id="po_e" value="${sh?esc(sh.etd||''):''}"></label></div>
+  ${isNew?`<label class="f" style="margin-top:10px"><span>${t('Items (optional)')}</span><textarea id="po_i" rows="7" style="font-family:monospace" placeholder="WING BEND Plus WBP120 L=500mm\t5\t994.65"></textarea></label><p class="note">${esc(tt('Paste rows copied from Excel. Columns: Description, Qty, Unit price (optional: HS code).'))}</p>`:''}
+  <div class="row" style="margin-top:12px;justify-content:flex-end"><button class="ghost" data-a="dlgClose">${t('Cancel')}</button><button data-a="poGo" data-v="${mode}">${t('Register PO')}</button></div>`;d.showModal()}
+function poGo(d){const no=$('#po_no').value.trim();if(!no){toast(tt('Enter the PO number'));return}
+  let sh,rows=[];
+  if(d.v==='new'){sh=blankShipment();S.settings.nextNo=num(S.settings.nextNo)+1;const c=S.customers.find(x=>x.id===$('#po_c').value);if(c)applyCust(sh,c);
+    rows=parsePaste($('#po_i').value);rows.forEach(r=>fillFromMaster(r,sh));sh.items=rows;S.shipments.push(sh);S.cur=sh.id}
+  else sh=cur();
+  sh.custPO=no;sh.poDate=$('#po_d').value;if($('#po_e').value)sh.etd=$('#po_e').value;sh.status='order';
+  $('#dlg').close();view='ship';tab=(d.v==='new'&&!sh.cust.name)?'info':(d.v==='new'&&!rows.length?'items':'info');save();render();toast(tt('PO registered.'))}
+function connLink(){const sy=S.sync;if(!sy.url||!sy.token){toast(tt('Enter the web app URL and token first'));return}
+  const b=btoa(unescape(encodeURIComponent(JSON.stringify({u:sy.url,t:sy.token}))));const link=location.href.split('#')[0]+'#connect='+b;
+  const tx=document.createElement('textarea');tx.value=link;document.body.appendChild(tx);tx.select();try{document.execCommand('copy')}catch(e){}try{navigator.clipboard.writeText(link)}catch(e){}tx.remove();toast(tt('Link copied. Open it on the other PC (share privately).'))}
 const A={
  sync:()=>syncNow(true),
  gasInstall:async()=>{try{await syncNow(true);await gas('install',{hour:num(S.reminders.hour)||8});toast(tt('Daily trigger installed'))}catch(e){toast(e.message)}},
  gasTest:async()=>{try{await syncNow(true);await gas('testDigest');toast(tt('Test e-mail sent'))}catch(e){toast(e.message)}},
  gasCal:async()=>{try{await syncNow(true);const r=await gas('syncCalendar');toast(tt('Calendar events created: {0}').replace('{0}',r.events))}catch(e){toast(e.message)}},
- nav:d=>{view=d.v;render()},tab:d=>{tab=d.v;render()},doc:d=>{docTab=d.v;render()},mtab:d=>{mtab=d.v;render()},lang:d=>{S.lang=d.v;save();render()},
+ nav:d=>{view=d.v;render()},tab:d=>{tab=d.v;render()},doc:d=>{docTab=d.v;if(docMode==='edit')edTab=(d.v==='pl'||d.v==='cm')?'pack':'info';render()},dmode:d=>{docMode=d.v;render()},etab:d=>{edTab=d.v;render()},
+ goDoc:d=>{view='docs';docTab=d.v;docMode='view';render()},advance:()=>{const sh=cur(),nx=STATUS[STATUS.indexOf(sh.status)+1];if(nx){sh.status=nx;save();render()}},
+ poNew:()=>poDlg('new'),poFor:()=>poDlg('cur'),poGo:poGo,connLink:connLink,mtab:d=>{mtab=d.v;render()},lang:d=>{S.lang=d.v;save();render()},
  theme:d=>{S.settings.theme=d.v;save();render()},cmd:()=>cmdOpen(),
  setStatus:d=>{cur().status=d.v;save();render()},
  open:d=>{S.cur=d.id;view='ship';tab='info';save();render()},
@@ -889,8 +970,7 @@ const A={
  allCase1:()=>{cur().items.forEach(i=>i.cs=1);save();render()},
  nwCalc:()=>{const sh=cur();let any=false;sh.cases.forEach(c=>{let w=0;sh.items.forEach(it=>{if(num(it.cs)===num(c.no)){const p=prodOf(it.desc);if(p&&num(p.wt))w+=num(p.wt)*num(it.qty)}});if(w>0){c.nw=Math.round(w*10)/10;any=true}});save();render();if(any)toast(tt('Updated'))},
  genMarks:()=>{cur().marks=genMarks(cur());save();render()},
- loadCust:()=>{const id=$('#custPick').value;const c=S.customers.find(x=>x.id===id);if(!c)return;const sh=cur();sh.cust={name:c.name,country:c.country,addr:c.addr,attn:c.attn,tel:c.tel,fax:c.fax,email:c.email||'',vat:c.vat||''};
-   if(c.currency)sh.currency=c.currency;if(c.incoterm)sh.incoterm=c.incoterm;if(c.payDays!=='')sh.payDays=c.payDays;if(c.pod){sh.pod=c.pod}if(!sh.finalDest)sh.finalDest=c.name;sh.steelCert=!!c.steel;if(c.remarks)sh.remarks=c.remarks;save();render()},
+ loadCust:()=>{const id=$('#custPick').value;const c=S.customers.find(x=>x.id===id);if(!c)return;applyCust(cur(),c);save();render()},
  pasteDlg:()=>{const d=$('#dlg');d.innerHTML=`<h2>${t('Paste from Excel')}</h2><p class="note">${esc(tt('Paste rows copied from Excel. Columns: Description, Qty, Unit price (optional: HS code).'))}</p><textarea id="pasteTx" rows="10" style="font-family:monospace"></textarea><div class="row" style="margin-top:12px;justify-content:flex-end"><button class="ghost" data-a="dlgClose">${t('Cancel')}</button><button data-a="pasteGo">${t('Import')}</button></div>`;d.showModal()},
  dlgClose:()=>$('#dlg').close(),
  pasteGo:()=>{const rows=parsePaste($('#pasteTx').value);rows.forEach(r=>{const p=prodOf(r.desc);if(p){if(!r.price)r.price=p.price;r.cost=p.cost||0;if(!r.hs&&p.hs&&p.hs!==cur().hs)r.hs=p.hs}});cur().items.push(...rows);$('#dlg').close();save();render()},
@@ -915,6 +995,7 @@ const A={
 };
 document.addEventListener('click',e=>{
   const cm=e.target.closest('[data-cmd]');if(cm){cmdRun(+cm.dataset.cmd);return}
+  if(view==='docs'&&docMode==='view'&&e.target.closest('#pv')){docMode='edit';edTab=(docTab==='pl'||docTab==='cm')?'pack':'info';render();return}
   const b=e.target.closest('[data-a]');if(!b||b.tagName==='INPUT'||b.tagName==='SELECT')return;const f=A[b.dataset.a];if(f)f(b.dataset,b)});
 document.addEventListener('keydown',e=>{
   if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();cmdOpen();return}
@@ -924,6 +1005,7 @@ document.addEventListener('keydown',e=>{
     else if(e.key==='ArrowUp'){e.preventDefault();cmdIdx=(cmdIdx-1+n)%Math.max(n,1);cmdRender()}
     else if(e.key==='Enter'){e.preventDefault();cmdRun(cmdIdx)}}});
 render();
+(function(){const m=/[#&]connect=([^&]+)/.exec(location.hash);if(!m)return;try{const o=JSON.parse(decodeURIComponent(escape(atob(m[1]))));if(o.u&&o.t){S.sync.url=o.u;S.sync.token=o.t;save();history.replaceState(null,'',location.pathname+location.search);render();syncNow(true)}}catch(e){}})();
 maybeNotify();
 if(S.sync.url&&S.sync.token&&S.sync.last&&S.sync.auto)syncNow(false);
 </script>
